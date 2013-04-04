@@ -1,0 +1,62 @@
+html, body {
+	background: #eee;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+input, textarea, select, .uneditable-input {
+	height: 28px !important;
+}
+
+.header  {
+	background-color: #eee;
+	background-image: -moz-linear-gradient(center top, #333333, #222222);
+	background-repeat: repeat-x;
+	box-shadow: 0 5px 5px rgba(0, 0, 0, 0.15);
+}
+
+header h1 {
+	padding: 0.4em 1.1em;
+	color: white;
+	font-weight: normal;
+	font-size: 24px;
+}
+
+#logo {
+	color: #FFFFFF;
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: -1.5px;
+    text-transform: uppercase;
+}
+
+#logo .my {
+	color: #5DAAD5;
+}
+
+#logo .finance {
+	color: #FFFFFF;
+}
+
+.user {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+}
+
+.user dt {
+    color: #FFFFFF;
+    font-size: 12px;
+}
+
+.user dt span {
+    font-size: 11px;
+    opacity: 0.5;
+}
+
+.user dd {
+	position: absolute;
+    right: 0;
+}

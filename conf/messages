@@ -1,0 +1,5 @@
+# Messages
+
+contas.list.title={0,choice,0#Nenhuma Conta|1#Uma Conta|1<{0,number,integer} Contas} encontradas
+
+

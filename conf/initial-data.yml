@@ -1,0 +1,29 @@
+
+# Usuários
+
+usuarios:
+
+    - !!models.Usuario
+        id:         1
+        email:      admin@myfinance.com
+        nome:       Administrador
+        senha:      admin
+    
+    - !!models.Usuario
+        id:         2
+        email:      brunnodecastro@gmail.com
+        nome:       Bruno de Castro Oliveira
+        senha:      senha
+    
+    
+# Contas
+
+contas:
+
+    - !!models.Conta
+        id:         1
+        nome:       Carteira   
+        saldo:      10
+        usuario:    !!models.Usuario
+                      id: 2
+            
