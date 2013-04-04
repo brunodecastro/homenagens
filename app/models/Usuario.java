@@ -2,6 +2,7 @@ package models;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 import play.data.format.Formats;
 import play.data.validation.Constraints;
@@ -22,6 +23,9 @@ public class Usuario extends Model {
 
 	@Constraints.Required
 	public String senha;
+	
+    @ManyToOne
+    public Homenageado homenageado;
 	
 	
 	// -- Queries
