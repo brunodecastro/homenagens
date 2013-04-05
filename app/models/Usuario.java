@@ -1,10 +1,8 @@
 package models;
 
-import java.util.List;
-
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 
 import play.data.format.Formats;
 import play.data.validation.Constraints;
@@ -26,9 +24,11 @@ public class Usuario extends Model {
 	@Constraints.Required
 	public String senha;
 	
-    @ManyToMany
-    public List<Homenageado> homenageados;
-	
+	@Enumerated
+	@Constraints.Required
+	@Formats.NonEmpty
+	public TipoUsuario tipoUsuario;
+		
 	
 	// -- Queries
 
