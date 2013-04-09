@@ -35,15 +35,11 @@ create table usuario (
   email                     varchar(255),
   nome                      varchar(255),
   senha                     varchar(255),
+  tipo_usuario              integer,
+  constraint ck_usuario_tipo_usuario check (tipo_usuario in (0,1)),
   constraint pk_usuario primary key (id))
 ;
 
-
-create table usuario_homenageado (
-  usuario_id                     bigint not null,
-  homenageado_id                 bigint not null,
-  constraint pk_usuario_homenageado primary key (usuario_id, homenageado_id))
-;
 create sequence conta_seq;
 
 create sequence homenageado_seq;
@@ -61,10 +57,6 @@ create index ix_tipo_homenagem_subTipoHomen_2 on tipo_homenagem (sub_tipo_homena
 
 
 
-alter table usuario_homenageado add constraint fk_usuario_homenageado_usuari_01 foreign key (usuario_id) references usuario (id) on delete restrict on update restrict;
-
-alter table usuario_homenageado add constraint fk_usuario_homenageado_homena_02 foreign key (homenageado_id) references homenageado (id) on delete restrict on update restrict;
-
 # --- !Downs
 
 SET REFERENTIAL_INTEGRITY FALSE;
@@ -78,8 +70,6 @@ drop table if exists picture;
 drop table if exists tipo_homenagem;
 
 drop table if exists usuario;
-
-drop table if exists usuario_homenageado;
 
 SET REFERENTIAL_INTEGRITY TRUE;
 
