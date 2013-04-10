@@ -8,7 +8,11 @@ object ApplicationBuild extends Build {
   val appVersion      = "1.0-SNAPSHOT"
 
   val appDependencies = Seq(
-    // Add your project dependencies here,
+    "commons-lang" % "commons-lang" % "2.6",
+        "commons-collections" % "commons-collections" % "3.2.1",
+        "commons-codec" % "commons-codec" % "1.4",
+        "commons-io" % "commons-io" % "2.3", 
+        "org.apache.commons" % "commons-email" % "1.1",
     javaCore,
     javaJdbc,
     javaEbean

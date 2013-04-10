@@ -16,7 +16,7 @@
 		<div class="container">
 			<div class="content">
 				<!-- The file upload form used as target for the file upload widget -->
-				@helper.form(action = routes.Application.upload, 'id ->
+				@helper.form(action = routes.ImageController.uploadImage, 'id ->
 				"fileupload", 'enctype -> "multipart/form-data") {
 
 				<!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
