@@ -70,7 +70,22 @@ $(function () {
     } else {
     	$('#fileupload').fileupload('option', {
         	url: '/image',
-            acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i
+            acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
+            process: [
+                      {
+                          action: 'load',
+                          fileTypes: /^image\/(gif|jpeg|png)$/,
+                          maxFileSize: 20000000 // 20MB
+                      },
+                      {
+                          action: 'resize',
+                          maxWidth: 800,
+                          maxHeight: 600
+                      },
+                      {
+                          action: 'save'
+                      }
+                  ]
         });
     	
         // Load existing files:
