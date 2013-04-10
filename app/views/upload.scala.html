@@ -22,20 +22,20 @@
                         <!-- The fileinput-button span is used to style the file input field as button -->
                         <span class="btn btn-success fileinput-button">
                             <i class="icon-plus icon-white"></i>
-                            <span>Add files...</span>
+                            <span>Adicionar imagens...</span>
                             <input type="file" name="files[]" multiple>
                         </span>
                         <button type="submit" class="btn btn-primary start">
                             <i class="icon-upload icon-white"></i>
-                            <span>Start upload</span>
+                            <span>Iniciar upload</span>
                         </button>
                         <button type="reset" class="btn btn-warning cancel">
                             <i class="icon-ban-circle icon-white"></i>
-                            <span>Cancel upload</span>
+                            <span>Cancelar upload</span>
                         </button>
                         <button type="button" class="btn btn-danger delete">
                             <i class="icon-trash icon-white"></i>
-                            <span>Delete</span>
+                            <span>Excluir</span>
                         </button>
                         <input type="checkbox" class="toggle">
                     </div>
@@ -100,7 +100,7 @@
             <td>{% if (!o.options.autoUpload) { %}
                 <button class="btn btn-primary start">
                     <i class="icon-upload icon-white"></i>
-                    <span>Start</span>
+                    <span>Iniciar</span>
                 </button>
             {% } %}</td>
         {% } else { %}
@@ -109,7 +109,7 @@
         <td>{% if (!i) { %}
             <button class="btn btn-warning cancel">
                 <i class="icon-ban-circle icon-white"></i>
-                <span>Cancel</span>
+                <span>Cancelar</span>
             </button>
         {% } %}</td>
     </tr>
@@ -123,7 +123,7 @@
             <td></td>
             <td class="name"><span>{%=file.name%}</span></td>
             <td class="size"><span>{%=o.formatFileSize(file.size)%}</span></td>
-            <td class="error" colspan="2"><span class="label label-important">Error</span> {%=file.error%}</td>
+            <td class="error" colspan="2"><span class="label label-important">Erro</span> {%=file.error%}</td>
         {% } else { %}
             <td class="preview">{% if (file.thumbnail_url) { %}
                 <a href="{%=file.url%}" title="{%=file.name%}" data-gallery="gallery" download="{%=file.name%}"><img src="{%=file.thumbnail_url%}"></a>
@@ -137,7 +137,7 @@
         <td>
             <button class="btn btn-danger delete" data-type="{%=file.delete_type%}" data-url="{%=file.delete_url%}"{% if (file.delete_with_credentials) { %} data-xhr-fields='{"withCredentials":true}'{% } %}>
                 <i class="icon-trash icon-white"></i>
-                <span>Delete</span>
+                <span>Excluir</span>
             </button>
             <input type="checkbox" name="delete" value="1" class="toggle">
         </td>
