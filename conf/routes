@@ -14,13 +14,12 @@ POST	/contas                  	controllers.Contas.salvar()
 GET		/contas/nova                controllers.Contas.criar()
 GET		/contas/:id              	controllers.Contas.editar(id:Long)
 
-# Map static resources from the /public folder to the /assets URL path
-GET		/assets/*file               controllers.Assets.at(path="/public", file)
 
-GET		/upload						controllers.Application.startUpload()
-POST	/upload						controllers.Application.upload()
-
-GET		/picture/:id				controllers.Application.getPicture(id:Long)
+GET		/usuarios                  	controllers.Usuarios.index()
+GET		/usuarios/list              controllers.Usuarios.listar(p:Int ?= 0, s ?= "nome", o ?= "asc", f ?= "")
+POST	/usuarios                  	controllers.Usuarios.salvar()
+GET		/usuarios/new               controllers.Usuarios.criar()
+GET		/usuarios/:id              	controllers.Usuarios.editar(id:Long)
 
 # Image Upload
 POST	/image						controllers.ImageController.uploadImage()
@@ -28,4 +27,11 @@ GET		/image/:id					controllers.ImageController.getImage(id: Long)
 DELETE	/image/:id					controllers.ImageController.deleteImage(id: Long)
 GET		/thumbnail/:id				controllers.ImageController.getThumbnail(id: Long)
 
-GET		/image					controllers.ImageController.getAllImages()
+GET		/image						controllers.ImageController.getAllImages()
+
+
+# Map static resources from the /public folder to the /assets URL path
+GET		/assets/*file               controllers.Assets.at(path="/public", file)
+
+# PDF
+GET		/jasper/:reportFile						controllers.ReportController.jasperDocument(reportFile: String)
