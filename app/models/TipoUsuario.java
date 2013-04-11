@@ -2,39 +2,18 @@ package models;
 
 public enum TipoUsuario {
 
-	ADMINISTRADOR(1, "Administrador"),
-	NORMAL(2, "Normal");
+	ADMINISTRADOR("Administrador"),
+	NORMAL("Normal");
 	
-			private Integer value;
 	private String label;
 
 	/**
 	 * Instancia um novo TipoUsuario
 	 * 
-	 * @param value
 	 * @param label
 	 */
-	private TipoUsuario(final int value, final String label) {
-		this.value = Integer.valueOf(value);
+	private TipoUsuario(final String label) {
 		this.label = label;
-	}
-
-	public static TipoUsuario getEnumFromValue(final int value) {
-		for (TipoUsuario tipoUsuario : values()) {
-			if (tipoUsuario.getValue().equals(Integer.valueOf(value))) {
-				return tipoUsuario;
-			}
-		}
-		return null;
-	}
-
-	/**
-	 * Retorna o valor do atributo value
-	 * 
-	 * @return value
-	 */
-	public Integer getValue() {
-		return this.value;
 	}
 
 	/**

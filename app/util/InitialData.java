@@ -20,14 +20,6 @@ public class InitialData {
 
             // Inseri os usuarios
             Ebean.save(all.get("usuarios"));
-
-            // Insert contas
-            Ebean.save(all.get("contas"));
-            
-            for(Object conta: all.get("contas")) {
-                // Insert the conta/usuario relation
-//                Ebean.saveManyToManyAssociations(conta, "usuario");
-            }
             
         }
     }
