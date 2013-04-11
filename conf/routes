@@ -3,12 +3,13 @@
 # ~~~~
 
 # Home page
-GET		/                           controllers.Contas.index()
+GET		/                           controllers.Usuarios.index()
 
 GET		/login                      controllers.Application.login() 
 POST	/login                      controllers.Application.autenticar() 
 GET		/logout                     controllers.Application.logout()
 
+GET		/contas/index               controllers.Contas.index()
 GET		/contas                  	controllers.Contas.listPage(p:Int ?= 0, s ?= "name", o ?= "asc", f ?= "")
 POST	/contas                  	controllers.Contas.salvar()
 GET		/contas/nova                controllers.Contas.criar()

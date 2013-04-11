@@ -12,8 +12,6 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import play.mvc.Result;
 import play.mvc.Results;
-import util.pdf.PDF;
-import views.html.document;
 
 public class ReportController {
 
