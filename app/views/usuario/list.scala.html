@@ -1,0 +1,44 @@
+@(usuario: Usuario, currentPage: com.avaje.ebean.Page[Usuario], currentSortBy: String, currentOrder: String, currentFilter: String)
+
+@****************************************
+* Helper generating navigation links    *
+****************************************@
+@link(newPage:Int, newSortBy:String) = @{
+    
+    var sortBy = currentSortBy
+    var order = currentOrder
+    
+    if(newSortBy != null) {
+        sortBy = newSortBy
+        if(currentSortBy == newSortBy) {
+            if(currentOrder == "asc") {
+                order = "desc"
+            } else {
+                order = "asc"
+            }
+        } else {
+            order = "asc"
+        }
+    }
+    
+    // Generate the link
+    routes.Usuarios.listar(newPage, sortBy, order, currentFilter)
+    
+}
+
+@**********************************
+* Helper generating table headers *
+***********************************@
+
+
+@main(usuario){
+    
+    <div id="actions">
+        
+        <a class="btn success" id="add" href="@routes.Usuarios.criar()">Nova Conta</a>
+        
+    </div>
+        
+}
+
+            

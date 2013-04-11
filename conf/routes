@@ -15,12 +15,15 @@ GET		/contas/nova                controllers.Contas.criar()
 GET		/contas/:id              	controllers.Contas.editar(id:Long)
 
 
+<<<<<<< HEAD
 GET		/usuarios                  	controllers.Usuarios.index()
 GET		/usuarios/list              controllers.Usuarios.listar(p:Int ?= 0, s ?= "nome", o ?= "asc", f ?= "")
 POST	/usuarios                  	controllers.Usuarios.salvar()
 GET		/usuarios/new               controllers.Usuarios.criar()
 GET		/usuarios/:id              	controllers.Usuarios.editar(id:Long)
 
+=======
+>>>>>>> branch 'master' of https://github.com/brunodecastro/homenagens.git
 # Image Upload
 POST	/image						controllers.ImageController.uploadImage()
 GET		/image/:id					controllers.ImageController.getImage(id: Long)
@@ -29,9 +32,12 @@ GET		/thumbnail/:id				controllers.ImageController.getThumbnail(id: Long)
 
 GET		/image						controllers.ImageController.getAllImages()
 
+<<<<<<< HEAD
 
 # Map static resources from the /public folder to the /assets URL path
 GET		/assets/*file               controllers.Assets.at(path="/public", file)
 
+=======
+>>>>>>> branch 'master' of https://github.com/brunodecastro/homenagens.git
 # PDF
 GET		/jasper/:reportFile						controllers.ReportController.jasperDocument(reportFile: String)
