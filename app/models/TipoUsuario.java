@@ -1,5 +1,6 @@
 package models;
 
+
 public enum TipoUsuario {
 
 	ADMINISTRADOR("Administrador"),
@@ -24,5 +25,5 @@ public enum TipoUsuario {
 	public String getLabel() {
 		return this.label;
 	}
-
+	
 }

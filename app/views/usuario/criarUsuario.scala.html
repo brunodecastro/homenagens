@@ -16,6 +16,13 @@
             @inputText(usuarioForm("email"), '_label -> "Email")
             @inputText(usuarioForm("senha"), '_label -> "Senha")
             @inputText(usuarioForm("confirmacaoSenha"), '_label -> "Confirmação da senha")
+            @select(
+                usuarioForm("tipoUsuario"), 
+                options = options(TipoUsuario.values().toList.map(_.toString)),
+                '_default -> "--- Tipo de usuário ---",
+                '_label -> "Tipo de usuário",
+                '_error -> usuarioForm("tipoUsuario").error.map(_.withMessage("Selecione o tipo de usuário."))
+            )
 
         </fieldset>
         
