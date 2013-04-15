@@ -8,9 +8,21 @@
     
     <h1>Usuários</h1>
     
-    @form(routes.Usuarios.salvar()) {
+    @helper.form(routes.Usuarios.salvar()) {
         
         <fieldset>
+        
+        	@if(usuarioForm.hasGlobalErrors) {
+				<div class="alert alert-error">
+					<button type="button" class="close" data-dismiss="alert">&times;</button>
+					@usuarioForm.globalError.message
+				</div>
+			} @if(flash.contains("success")) {
+				<div class="alert alert-success">
+					<button type="button" class="close" data-dismiss="alert">&times;</button>
+					@flash.get("success")
+				</div>
+			} 
         
             @inputText(usuarioForm("nome"), '_label -> "Nome")
             @inputText(usuarioForm("email"), '_label -> "Email")
