@@ -1,14 +1,17 @@
 @(usuarioForm: Form[Usuario], usuario: Usuario)
 
 @import helper._
+@import helper.twitterBootstrap._
 
 @implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) } 
 
 @main(usuario){
+
+<div class="well">
     
     <h1>Usuários</h1>
     
-    @helper.form(routes.Usuarios.salvar()) {
+    @helper.form(action = routes.Usuarios.salvar()) {
         
         <fieldset>
         
@@ -24,25 +27,26 @@
 				</div>
 			} 
         
-            @inputText(usuarioForm("nome"), '_label -> "Nome")
-            @inputText(usuarioForm("email"), '_label -> "Email")
-            @inputText(usuarioForm("senha"), '_label -> "Senha")
-            @inputText(usuarioForm("confirmacaoSenha"), '_label -> "Confirmação da senha")
-            @select(
+            @helper.inputText(usuarioForm("nome"), '_label -> "Nome")
+            @helper.inputText(usuarioForm("email"), '_label -> "Email")
+            @helper.inputPassword(usuarioForm("senha"), '_label -> "Senha")
+            @helper.inputPassword(usuarioForm("confirmacaoSenha"), '_label -> "Confirmação da senha")
+            @helper.select(
                 usuarioForm("tipoUsuario"), 
                 options = options(TipoUsuario.values().toList.map(_.toString)),
                 '_default -> "--- Tipo de usuário ---",
                 '_label -> "Tipo de usuário",
                 '_error -> usuarioForm("tipoUsuario").error.map(_.withMessage("Selecione o tipo de usuário."))
             )
-
         </fieldset>
         
-        <div class="actions">
-            <input type="submit" value="Criar" class="btn primary">  
+        <div class="well">
+            <input type="submit" value="Criar" class="btn btn-primary">  
             <a href="" class="btn">Cancelar</a> 
         </div>
         
     }
+    
+</div>    
     
 }
