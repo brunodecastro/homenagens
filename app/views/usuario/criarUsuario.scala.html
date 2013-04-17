@@ -1,7 +1,6 @@
 @(usuarioForm: Form[Usuario], usuario: Usuario)
 
 @import helper._
-@import helper.twitterBootstrap._
 
 @implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) } 
 
@@ -9,11 +8,9 @@
 
 <div class="well">
     
-    <h1>Usuários</h1>
+    @helper.form(action = routes.Usuarios.salvar(), 'class -> "form-horizontal") {
     
-    @helper.form(action = routes.Usuarios.salvar()) {
-        
-        <fieldset>
+      <div class="control-group">  
         
         	@if(usuarioForm.hasGlobalErrors) {
 				<div class="alert alert-error">
@@ -38,15 +35,17 @@
                 '_label -> "Tipo de usuário",
                 '_error -> usuarioForm("tipoUsuario").error.map(_.withMessage("Selecione o tipo de usuário."))
             )
-        </fieldset>
         
-        <div class="well">
+        <div class="form-actions">
             <input type="submit" value="Criar" class="btn btn-primary">  
             <a href="" class="btn">Cancelar</a> 
         </div>
+     </div>   
         
     }
     
-</div>    
+</div>  
+
+
     
 }
