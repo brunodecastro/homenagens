@@ -1,17 +1,17 @@
 # Messages
 
-save=Save
-cancel=Cancel
-delete=Delete
-back=Back
+save=Salvar
+cancel=Cancelar
+delete=Excluir
+back=Voltar
 
-nothingToShow=Nothing to show
-doFilter=Filter
-filterBy=Filter by {0}...
+nothingToShow=Nada a exibir
+doFilter=Filtrar
+filterBy=Filtrar por {0}...
 
 
 # TipoHomenagem
-tipoHomenagem.name.label=Name
+tipoHomenagem.name.label=Nome
 
 tipoHomenagem.create.title=Criar novo Tipo de Homenagem
 tipoHomenagem.create.lead=

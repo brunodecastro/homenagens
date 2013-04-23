@@ -1,39 +1,79 @@
-@(usuario: Usuario)(content: Html)
+@(usuario: Usuario, title: String, nav: String = "", lead: String = "")(content: Html)
 
 <!DOCTYPE html>
 
 <html>
-    <head>
-        @views.html.head()
-    </head>
+<head>
+	<title>@title</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" media="screen" href="@routes.Assets.at("css/bootstrap.css")">
+	<link rel="stylesheet" media="screen" href="@routes.Assets.at("css/bootstrap-responsive.css")">
+	<link rel="stylesheet" media="screen" href="@routes.Assets.at("css/main.css")">
+	<link rel="shortcut icon" type="image/png" href="@routes.Assets.at("img/favicon.png")">
+	<script src="@routes.Assets.at("js/jquery-1.9.0.min.js")" type="text/javascript"></script>
+</head>
+<body>
 
-    <body>
-    	
-    	<div class="header">
-	    	<header class="topbar">
-	    		<h1 class="fill">
-	            	<a href="@routes.Usuarios.index" id="logo"> <span class="my">Homenagens</span>
-					<!-- <span class="finance">Finance</span> -->
-				</a>
-	            </h1>
-	            <dl class="user">
-	                <dt>@usuario.nome <span>(@usuario.email)</span></dt>
-	                <dd>
-	                    @helper.form(routes.Application.logout) {
-	                    	<button class="btn btn-mini btn-primary" type="submit">Sair</button>
-	                    }
-	                </dd>
-	            </dl>
-	        </header>
-        </div>
-    	
-    	<section id="main">
-        	@content
-        </section>
-        
-        <!-- SCRIPTS --> 
-        <script type="text/javascript" src="@routes.Assets.at("js/jquery-1.9.0.min.js")"></script>
-        <script type="text/javascript" src="@routes.Assets.at("js/bootstrap.js")"></script>
-        
-    </body>
+	<div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<div class="pull-right">
+					@usuario.nome <span>(@usuario.email)</span>
+					@helper.form(routes.Application.logout) {
+						<button class="btn btn-small btn-primary" type="submit">Sair</button>
+					}
+				</div>
+				<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+					<span class="icon-bar"></span>
+		            <span class="icon-bar"></span>
+		            <span class="icon-bar"></span>
+				</button>
+				<a class="brand" href="@routes.Usuarios.index()">Minhas Homenagens</a>
+				<div class="nav-collapse collapse">
+					<ul class="nav">
+						<li class="@(" active".when(nav=="homenagens"))">
+							<a href="routes.Homenagens.list()">Homenagens</a>
+						</li>
+						<li class="@(" active".when(nav=="homenageados"))">
+							<a href="routes.Homenageados.list()">Homenageados</a>
+						</li>
+						<li class="@(" active".when(nav=="tipoHomenagem"))">
+							<a href="@routes.TipoHomenagens.list()">Tipos de Homenagem</a>
+						</li>
+					</ul>
+				</div>
+				<!--/.nav-collapse -->
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="page-header">
+			<h2>@title</h2>
+			@if(lead != null && !lead.isEmpty) {
+				<p class="lead">@lead</p>
+			}
+			@if(flash.containsKey("success")) {
+        		<div class="alert alert-success">
+		        	<button type="button" class="close" data-dismiss="alert">&times;</button>
+		            <strong>Sucesso!</strong> @flash.get("success")
+		        </div>
+		    }
+		</div>
+
+		<div class="row">
+			<div class="span12">@content</div>
+		</div>
+	</div>
+
+	<footer class="footer">
+		<p>
+			<a href="http://www.playframework.org">www.playframework.org</a>
+		</p>
+	</footer>
+
+
+	
+	<script src="@routes.Assets.at("js/bootstrap.min.js")" type="text/javascript"></script>
+</body>
 </html>

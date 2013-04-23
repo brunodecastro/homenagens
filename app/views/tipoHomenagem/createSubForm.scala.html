@@ -1,0 +1,29 @@
+@(usuario: Usuario, parentId: Long, tipoHomenagemForm: Form[TipoHomenagem])
+
+@import helper._
+
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) }
+
+@main(usuario, Messages("tipoHomenagem.create.title"), "tipoHomenagem", Messages("tipoHomenagem.create.lead")) {
+
+	<div class="well">
+		@form(routes.TipoHomenagens.saveSub(parentId), 'class -> "form-horizontal") {
+			
+			@inputText(tipoHomenagemForm("name"),
+				'_label -> Messages("tipoHomenagem.name.label"))
+			
+			@defining(tipoHomenagemForm("parent.id")) { parentIdField =>
+				<input type="hidden" name="@parentIdField.name" id="@parentIdField.id" value="@parentIdField.value">
+			}
+			@inputText(tipoHomenagemForm("parent.name"),
+				'_label -> "Pertencente ao", 'readonly -> true)
+            
+			<div class="form-actions">
+				<button type="submit" class="btn btn-primary">@Messages("save")</button>
+				<a href="@routes.TipoHomenagens.edit(parentId)" class="btn">@Messages("back")</a>
+			</div>
+			
+		}
+	</div>
+
+}

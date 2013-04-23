@@ -1,0 +1,28 @@
+@(usuario: Usuario, tipoHomenagemForm: Form[TipoHomenagem])
+
+@import helper._
+
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) }
+
+@header(key:String, title:String) = {
+    <th class="@key.replace(".","_") header">
+        @title
+    </th>
+}
+
+@main(usuario, Messages("tipoHomenagem.create.title"), "tipoHomenagem", Messages("tipoHomenagem.create.lead")) {
+    
+	<div class="well">
+		@form(routes.TipoHomenagens.save(), 'class -> "form-horizontal") {
+			
+			@inputText(tipoHomenagemForm("name"),
+				'_label -> Messages("tipoHomenagem.name.label"))
+            
+			<div class="form-actions">
+				<button type="submit" class="btn btn-primary">@Messages("save")</button>
+				<a href="@routes.TipoHomenagens.list()" class="btn">@Messages("cancel")</a>
+			</div>
+			
+		}
+	</div>
+}

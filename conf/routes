@@ -22,6 +22,20 @@ POST	/usuarios                  	controllers.Usuarios.salvar()
 GET		/usuarios/new               controllers.Usuarios.criar()
 GET		/usuarios/:id              	controllers.Usuarios.editar(id:Long)
 
+# TipoHomenagem
+GET		/tipoHomenagens							controllers.TipoHomenagens.list(p:Int ?= 0, s ?= "name", o ?= "asc", f ?= "")
+GET		/tipoHomenagens/new						controllers.TipoHomenagens.create()
+POST	/tipoHomenagens							controllers.TipoHomenagens.save()
+GET		/tipoHomenagens/:id						controllers.TipoHomenagens.edit(id:Long)
+POST	/tipoHomenagens/:id						controllers.TipoHomenagens.update(id:Long)
+POST	/tipoHomenagens/:id/delete				controllers.TipoHomenagens.delete(id:Long)
+
+GET		/tipoHomenagens/:parentId/sub/new				controllers.TipoHomenagens.createSub(parentId:Long)
+POST	/tipoHomenagens/:parentId/sub					controllers.TipoHomenagens.saveSub(parentId:Long)
+GET		/tipoHomenagens/sub/:id							controllers.TipoHomenagens.editSub(id:Long)
+POST	/tipoHomenagens/:parentId/sub/:id				controllers.TipoHomenagens.updateSub(parentId:Long, id:Long)
+POST	/tipoHomenagens/sub/:id/delete					controllers.TipoHomenagens.deleteSub(id:Long)
+
 # Image Upload
 POST	/image						controllers.ImageController.uploadImage()
 GET		/image/:id					controllers.ImageController.getImage(id: Long)

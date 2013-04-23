@@ -1,0 +1,51 @@
+@(usuario: Usuario, id: Long, tipoHomenagemForm: Form[TipoHomenagem], subs:List[TipoHomenagem])
+
+@import helper._
+
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) }
+
+
+@main(usuario, Messages("tipoHomenagem.edit.title"), "tipoHomenagem", Messages("tipoHomenagem.edit.lead")) {
+
+	<div class="well">
+		@form(routes.TipoHomenagens.update(id), 'class -> "form-horizontal") {
+			
+			@inputText(tipoHomenagemForm("name"),
+				'_label -> Messages("tipoHomenagem.name.label"))
+		
+			<div class="form-actions">
+				<button type="submit" class="btn btn-primary">@Messages("save")</button>
+				<a href="@routes.TipoHomenagens.list()" class="btn">@Messages("cancel")</a>
+			</div>
+			
+		}
+		
+		@form(routes.TipoHomenagens.delete(id), 'class -> "topRight") {
+        	<button type="submit" class="btn btn-danger">
+        		<i class="icon-trash icon-white"></i> @Messages("delete")
+        	</button>
+    	}
+    	
+	</div>
+	
+	<a class="btn btn-success" href="@routes.TipoHomenagens.createSub(id)">Novo subtipo</a>
+    	<table class="table table-striped table-bordered table-hover">
+            <thead>
+                <tr>
+                	<th class="header">
+				        @Messages("tipoHomenagem.name.label")
+				    </th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @for(subtipoHomenagem <- subs) {
+                    <tr>
+                        <td><a href="@routes.TipoHomenagens.editSub(subtipoHomenagem.id)">@subtipoHomenagem.name</a></td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+
+}

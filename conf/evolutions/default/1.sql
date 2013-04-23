@@ -43,8 +43,8 @@ create table raw_image (
 
 create table tipo_homenagem (
   id                        bigint not null,
-  descricao                 varchar(255),
-  sub_tipo_homenagem_id     bigint,
+  name                      varchar(255),
+  parent_id                 bigint,
   constraint pk_tipo_homenagem primary key (id))
 ;
 
@@ -78,8 +78,8 @@ alter table db_image add constraint fk_db_image_image_2 foreign key (image_id) r
 create index ix_db_image_image_2 on db_image (image_id);
 alter table db_image add constraint fk_db_image_thumbnail_3 foreign key (thumbnail_id) references raw_image (id) on delete restrict on update restrict;
 create index ix_db_image_thumbnail_3 on db_image (thumbnail_id);
-alter table tipo_homenagem add constraint fk_tipo_homenagem_subTipoHomen_4 foreign key (sub_tipo_homenagem_id) references tipo_homenagem (id) on delete restrict on update restrict;
-create index ix_tipo_homenagem_subTipoHomen_4 on tipo_homenagem (sub_tipo_homenagem_id);
+alter table tipo_homenagem add constraint fk_tipo_homenagem_parent_4 foreign key (parent_id) references tipo_homenagem (id) on delete restrict on update restrict;
+create index ix_tipo_homenagem_parent_4 on tipo_homenagem (parent_id);
 
 
 
