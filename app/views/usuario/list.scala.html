@@ -1,4 +1,4 @@
-@(usuario: Usuario, currentPage: com.avaje.ebean.Page[Usuario], currentSortBy: String, currentOrder: String, currentFilter: String)
+@(usuarioLogado: Usuario, currentPage: com.avaje.ebean.Page[Usuario], currentSortBy: String, currentOrder: String, currentFilter: String)
 
 @****************************************
 * Helper generating navigation links    *
@@ -36,7 +36,7 @@
 }
 
 
-@main(usuario, Messages("usuario.list.title"), "usuario", Messages("usuario.list.lead", currentPage.getTotalRowCount)) {
+@main(usuarioLogado, Messages("usuario.list.title"), "usuario", Messages("usuario.list.lead", currentPage.getTotalRowCount)) {
     
     <div id="actions" class="well">
         
@@ -66,7 +66,7 @@
             </thead>
             <tbody>
 
-                @for(usuaio <- currentPage.getList) {
+                @for(usuario <- currentPage.getList) {
                     <tr>
                         <td><a href="@routes.Usuarios.editar(usuario.id)">@usuario.nome</a></td>
                     </tr>
