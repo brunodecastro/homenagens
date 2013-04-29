@@ -1,11 +1,14 @@
 package controllers;
 
 import static play.data.Form.form;
+import models.TipoHomenagem;
 import models.Usuario;
 import play.data.Form;
+import play.i18n.Messages;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
+import views.html.tipoHomenagem.editForm;
 import views.html.usuario.criarUsuario;
 import views.html.usuario.list;
 
@@ -38,7 +41,13 @@ public class Usuarios extends Controller {
 	 *            Id of the computer to edit
 	 */
 	public static Result editar(Long id) {
-		return ok();
+//		Usuario usuario = Usuario.find.byId(id);
+//        Form<Usuario> usuarioForm = form(Usuario.class).fill(
+//        		usuario
+//        );
+        return ok(
+//            editForm.render(Usuario.consultarPorEmail(request().username()), id, usuarioForm)
+        );
 	}
 
 	/**
@@ -59,7 +68,7 @@ public class Usuarios extends Controller {
 		}
 
 		usuarioForm.get().save();
-		flash("success", "Usuario " + usuarioForm.get().nome + " foi criado com sucesso.");
+		flash("success", Messages.get("usuario.create.success", usuarioForm.get().nome));
 		return GO_HOME;
 	}
 
