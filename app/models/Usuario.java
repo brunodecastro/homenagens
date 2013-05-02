@@ -2,18 +2,21 @@ package models;
 
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
-import com.avaje.ebean.Page;
 
 import play.data.format.Formats;
 import play.data.validation.Constraints;
 import play.db.ebean.Model;
 
+import com.avaje.ebean.Page;
+
 @Entity
 public class Usuario extends Model {
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	public Long id;
 
 	@Constraints.Required
@@ -34,7 +37,7 @@ public class Usuario extends Model {
 	
 	// -- Queries
 
-	public static Finder<String, Usuario> find = new Finder<String, Usuario>(String.class, Usuario.class);
+	public static Finder<Long, Usuario> find = new Finder<Long, Usuario>(Long.class, Usuario.class);
 	
 	public static Usuario consultarPorEmail(String email) {
 		return find.where().eq("email", email).findUnique();

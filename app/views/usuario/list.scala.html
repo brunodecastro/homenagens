@@ -22,7 +22,7 @@
     }
     
     // Generate the link
-    routes.Usuarios.listar(newPage, sortBy, order, currentFilter)
+    routes.Usuarios.list(newPage, sortBy, order, currentFilter)
     
 }
 
@@ -45,7 +45,7 @@
             <input type="submit" id="searchsubmit" value="@Messages("doFilter")" class="btn btn-primary">
         </form>
         <div class="span2">
-       		<a class="btn btn-success" id="add" href="@routes.Usuarios.criar()"> <i class="icon-plus-sign icon-white"></i> Novo Usuário</a>
+       		<a class="btn btn-success" id="add" href="@routes.Usuarios.create()"> <i class="icon-plus-sign icon-white"></i> Novo Usuário</a>
         </div>
         
     </div>
@@ -68,7 +68,7 @@
 
                 @for(usuario <- currentPage.getList) {
                     <tr>
-                        <td><a href="@routes.Usuarios.editar(usuario.id)">@usuario.nome</a></td>
+                        <td><a href="@routes.Usuarios.edit(usuario.id)">@usuario.nome</a></td>
                     </tr>
                     
                 }
@@ -78,8 +78,6 @@
 
         <div id="pagination" class="pagination">
             <ul>
-            	
-            
             
                 @if(currentPage.hasPrev) {
                     <li class="prev">
