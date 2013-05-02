@@ -31,5 +31,5 @@ usuario.create.success=Usuário "{0}" criado com sucesso.
 usuario.nome.label=Nome
 usuario.list.title=Usuários
 usuario.list.lead={0,choice,0#Nenhum usuário encontrado|1#Um usuário encontrado|1<{0,number,integer} usuários encontrados}
-tipoHomenagem.edit.title=Editar Usuário
-tipoHomenagem.edit.lead=
+usuario.edit.title=Editar Usuário
+usuario.edit.lead=
