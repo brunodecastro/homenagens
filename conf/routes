@@ -17,10 +17,12 @@ GET		/contas/:id              	controllers.Contas.editar(id:Long)
 
 
 GET		/usuarios                  	controllers.Usuarios.index()
-GET		/usuarios/list              controllers.Usuarios.listar(p:Int ?= 0, s ?= "nome", o ?= "asc", f ?= "")
-POST	/usuarios                  	controllers.Usuarios.salvar()
-GET		/usuarios/new               controllers.Usuarios.criar()
-GET		/usuarios/:id              	controllers.Usuarios.editar(id:Long)
+GET		/usuarios/list              controllers.Usuarios.list(p:Int ?= 0, s ?= "nome", o ?= "asc", f ?= "")
+GET		/usuarios/new               controllers.Usuarios.create()
+POST	/usuarios                  	controllers.Usuarios.save()
+GET		/usuarios/:id              	controllers.Usuarios.edit(id:Long)
+POST	/usuarios/:id              	controllers.Usuarios.update(id:Long)
+POST	/usuarios/:id/delete		controllers.Usuarios.delete(id:Long)
 
 # TipoHomenagem
 GET		/tipoHomenagens							controllers.TipoHomenagens.list(p:Int ?= 0, s ?= "name", o ?= "asc", f ?= "")

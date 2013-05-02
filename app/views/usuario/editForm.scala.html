@@ -1,0 +1,40 @@
+@(usuarioLogado: Usuario, id: Long, usuarioForm: Form[Usuario])
+
+@import helper._
+
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) }
+
+
+@main(usuarioLogado, Messages("usuario.edit.title"), "usuario", Messages("usuario.edit.lead")) {
+
+	<div class="well">
+		@form(routes.Usuarios.update(id), 'class -> "form-horizontal") {
+			
+			@inputText(usuarioForm("nome"), '_label -> "Nome")
+            @inputText(usuarioForm("email"), '_label -> "Email")
+            @inputPassword(usuarioForm("senha"), '_label -> "Senha")
+            @inputPassword(usuarioForm("confirmacaoSenha"), '_label -> "Confirmação da senha")
+            @select(
+                usuarioForm("tipoUsuario"), 
+                options = options(TipoUsuario.values().toList.map(_.toString)),
+                '_default -> "--- Tipo de usuário ---",
+                '_label -> "Tipo de usuário",
+                '_error -> usuarioForm("tipoUsuario").error.map(_.withMessage("Selecione o tipo de usuário."))
+            )
+		
+			<div class="form-actions">
+				<button type="submit" class="btn btn-primary">@Messages("save")</button>
+				<a href="@routes.Usuarios.list()" class="btn">@Messages("cancel")</a>
+			</div>
+			
+		}
+		
+		@form(routes.Usuarios.delete(id), 'class -> "topRight") {
+        	<button type="submit" class="btn btn-danger">
+        		<i class="icon-trash icon-white"></i> @Messages("delete")
+        	</button>
+    	}
+    	
+	</div>
+	
+}
