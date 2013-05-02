@@ -19,8 +19,8 @@
       <div class="control-group">  
         
             @inputText(usuarioForm("nome"), '_label -> "Nome")
-            @inputText(usuarioForm("email"), '_label -> "Email")
-            @inputPassword(usuarioForm("senha"), '_label -> "Senha")
+            @inputText(usuarioForm("email"), '_label -> "Email", 'autocomplete -> "off")
+            @inputPassword(usuarioForm("senha"), '_label -> "Senha", 'autocomplete -> "off")
             @inputPassword(usuarioForm("confirmacaoSenha"), '_label -> "Confirmação da senha")
             @select(
                 usuarioForm("tipoUsuario"), 
