@@ -17,19 +17,14 @@
 	<div class="navbar navbar-inverse navbar-fixed-top">
 		<div class="navbar-inner">
 			<div class="container">
-				<div class="pull-right">
-					@usuario.nome <span>(@usuario.email)</span>
-					@helper.form(routes.Application.logout) {
-						<button class="btn btn-small btn-primary" type="submit">Sair</button>
-					}
-				</div>
 				<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
 					<span class="icon-bar"></span>
 		            <span class="icon-bar"></span>
 		            <span class="icon-bar"></span>
 				</button>
 				<a class="brand" href="@routes.Usuarios.index()">Minhas Homenagens</a>
-				<div class="nav-collapse collapse">
+				
+				<div class="nav-collapse in collapse" style="height: auto;">
 					<ul class="nav">
 						<li class="@(" active".when(nav=="homenagens"))">
 							<a href="routes.Homenagens.list()">Homenagens</a>
@@ -41,6 +36,14 @@
 							<a href="@routes.TipoHomenagens.list()">Tipos de Homenagem</a>
 						</li>
 					</ul>
+						
+						@helper.form(routes.Application.logout, 'class -> "navbar-form pull-right") {
+							<p class="navbar-text pull-left" style="margin-right: 10px;">
+								@usuario.nome <span>(@usuario.email)</span>
+							</p>
+							<button class="btn btn-small btn-primary pull-right" type="submit">Sair</button>
+						}
+					
 				</div>
 				<!--/.nav-collapse -->
 			</div>
