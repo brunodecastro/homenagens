@@ -29,12 +29,9 @@ tipoHomenagem.create.success=O Tipo de Homenagem "{0}" foi criado
 subtipoHomenagem.create.success=O Subtipo de Homenagem "{0}" foi criado
 
 
-<<<<<<< HEAD
-=======
 # Usuario
 usuario=Usuário
 usuario.plural=Usuários
->>>>>>> delete button
 usuario.create.title=Criar novo Usuário
 usuario.create.lead=
 usuario.create.success=Usuário "{0}" criado com sucesso.
