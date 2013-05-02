@@ -23,3 +23,13 @@ tipoHomenagem.list.lead={0,choice,0#Nenhum tipo de homenagem encontrado|1#Um tip
 tipoHomenagem.create.success=O Tipo de Homenagem "{0}" foi criado
 
 subtipoHomenagem.create.success=O Subtipo de Homenagem "{0}" foi criado
+
+
+usuario.create.title=Criar novo Usuário
+usuario.create.lead=
+usuario.create.success=Usuário "{0}" criado com sucesso.
+usuario.nome.label=Nome
+usuario.list.title=Usuários
+usuario.list.lead={0,choice,0#Nenhum usuário encontrado|1#Um usuário encontrado|1<{0,number,integer} usuários encontrados}
+tipoHomenagem.edit.title=Editar Usuário
+tipoHomenagem.edit.lead=
