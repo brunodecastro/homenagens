@@ -9,6 +9,13 @@
 
 	<div class="well">
 		@form(routes.Usuarios.update(id), 'class -> "form-horizontal") {
+		
+			@if(usuarioForm.hasGlobalErrors) { 
+	            <div class="alert alert-error">
+	            <a class="close" data-dismiss="alert">×</a>
+	                @usuarioForm.globalError.message
+	            </div>
+	        }
 			
 			@inputText(usuarioForm("nome"), '_label -> "Nome")
             @inputText(usuarioForm("email"), '_label -> "Email", 'autocomplete -> "off")
