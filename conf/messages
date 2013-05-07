@@ -9,10 +9,14 @@ nothingToShow=Nothing to show
 doFilter=Filter
 filterBy=Filter by {0}...
 
+deleteMessage.title=Confirmar exclusão
+deleteMessage.text=Tem certeza que deseja excluir este {0}?
+
 
 # TipoHomenagem
-tipoHomenagem.name.label=Name
-
+tipoHomenagem=Tipo de Homenagem
+tipoHomenagem.plural=Tipos de Homenagem
+tipoHomenagem.name.label=Nome
 tipoHomenagem.create.title=Criar novo Tipo de Homenagem
 tipoHomenagem.create.lead=
 tipoHomenagem.edit.title=Editar Tipo de Homenagem
@@ -25,6 +29,9 @@ tipoHomenagem.create.success=O Tipo de Homenagem "{0}" foi criado
 subtipoHomenagem.create.success=O Subtipo de Homenagem "{0}" foi criado
 
 
+# Usuario
+usuario=Usuário
+usuario.plural=Usuários
 usuario.create.title=Criar novo Usuário
 usuario.create.lead=
 usuario.create.success=Usuário "{0}" criado com sucesso.
