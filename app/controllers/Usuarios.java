@@ -100,6 +100,7 @@ public class Usuarios extends Controller {
 		if (!usuarioForm.field("senha").valueOr("").isEmpty()) {
 			if (!usuarioForm.field("senha").valueOr("").equals(usuarioForm.field("confirmacaoSenha").value())) {
 				usuarioForm.reject("confirmacaoSenha", "Senha não confere.");
+				flash("error", "A confirmação de Senha não confere");
 			}
 		}
 

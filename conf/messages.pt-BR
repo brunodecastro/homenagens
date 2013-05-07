@@ -1,7 +1,7 @@
 # Default messages
 
 # --- Constraints
-constraint.required=Obrigatório
+constraint.required=*
 constraint.min=Valor mínimo: {0}
 constraint.max=Valor máximo: {0}
 constraint.minLength=Comprimento mínimo: {0}
