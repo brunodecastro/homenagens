@@ -7,6 +7,7 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.validation.Valid;
 
 import play.data.validation.Constraints.Required;
@@ -27,10 +28,12 @@ public class Homenagem extends Model {
 	@Required
 	public String numeroRegistro;
 	
+	@OneToOne
 	public Homenageado homenageado;
 	
 	public String descricao;
 
+	@OneToOne
 	public TipoHomenagem tipoHomenagem;
 	
 	public String resumo;
