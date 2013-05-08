@@ -96,12 +96,18 @@ public class Usuarios extends Controller {
 
 	private static void validateForm(Form<Usuario> usuarioForm) {
 
+		boolean isValid = true; 
+		
 		// Check repeated password
 		if (!usuarioForm.field("senha").valueOr("").isEmpty()) {
 			if (!usuarioForm.field("senha").valueOr("").equals(usuarioForm.field("confirmacaoSenha").value())) {
 				usuarioForm.reject("confirmacaoSenha", "Senha não confere.");
-				flash("error", "A confirmação de Senha não confere");
+				isValid = false;
 			}
+		}
+		
+		if(!isValid) {
+			flash("error", "Corrija os campos marcados abaixo:");
 		}
 
 	}
