@@ -61,6 +61,19 @@ tipoHomenagem.create.success=O Tipo de Homenagem "{0}" foi criado
 subtipoHomenagem.create.success=O Subtipo de Homenagem "{0}" foi criado
 
 
+# Homenagem
+homenagem=Homenagem
+homenagem.plural=Homenagens
+homenagem.descricao.label=Descrição
+homenagem.create.title=Criar nova Homenagem
+homenagem.create.lead=
+homenagem.edit.title=Editar Homenagem
+homenagem.edit.lead=
+homenagem.list.title=Homenagens
+homenagem.list.lead={0,choice,0#Nenhuma homenagem encontrada|1#Uma homenagem encontrada|1<{0,number,integer} homenagens encontradas}
+
+tipoHomenagem.create.success=A Homenagem "{0}" foi criada
+
 # Usuario
 usuario=Usuário
 usuario.plural=Usuários

@@ -38,6 +38,14 @@ GET		/tipoHomenagens/sub/:id							controllers.TipoHomenagens.editSub(id:Long)
 POST	/tipoHomenagens/:parentId/sub/:id				controllers.TipoHomenagens.updateSub(parentId:Long, id:Long)
 POST	/tipoHomenagens/sub/:id/delete					controllers.TipoHomenagens.deleteSub(id:Long)
 
+# Homenagens
+GET		/homenagens							controllers.Homenagens.list(p:Int ?= 0, s ?= "descricao", o ?= "asc", f ?= "")
+GET		/homenagens/new						controllers.Homenagens.create()
+POST	/homenagens							controllers.Homenagens.save()
+GET		/homenagens/:id						controllers.Homenagens.edit(id:Long)
+POST	/homenagens/:id						controllers.Homenagens.update(id:Long)
+POST	/homenagens/:id/delete				controllers.Homenagens.delete(id:Long)
+
 # Image Upload
 POST	/image						controllers.ImageController.uploadImage()
 GET		/image/:id					controllers.ImageController.getImage(id: Long)

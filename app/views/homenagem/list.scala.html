@@ -1,0 +1,107 @@
+@(usuario: Usuario, currentPage: com.avaje.ebean.Page[Homenagem], currentSortBy: String, currentOrder: String, currentFilter: String)
+
+@****************************************
+* Helper generating navigation links    *
+****************************************@
+@link(newPage:Int, newSortBy:String) = @{
+    
+    var sortBy = currentSortBy
+    var order = currentOrder
+    
+    if(newSortBy != null) {
+        sortBy = newSortBy
+        if(currentSortBy == newSortBy) {
+            if(currentOrder == "asc") {
+                order = "desc"
+            } else {
+                order = "asc"
+            }
+        } else {
+            order = "asc"
+        }
+    }
+    
+    // Generate the link
+    routes.Homenagens.list(newPage, sortBy, order, currentFilter)
+}
+
+@**********************************
+* Helper generating table headers *
+***********************************@
+@header(key:String, title:String) = {
+    <th class="@key.replace(".","_") header @if(currentSortBy == key) @{if(currentOrder == "asc") "headerSortDown" else "headerSortUp"}">
+        <a href="@link(0, key)">@title</a>
+    </th>
+}
+
+@main(usuario, Messages("homenagem.list.title"), "homenagem", Messages("homenagem.list.lead", currentPage.getTotalRowCount)) {
+    
+    <div id="actions" class="well">
+        
+        <form action="@link(0, "descricao")" method="GET" class="form-search span9">
+            <input type="search" id="searchbox" name="f" value="@currentFilter" placeholder="@Messages("filterBy", Messages("homenagem.descricao.label"))">
+            <input type="submit" id="searchsubmit" value="@Messages("doFilter")" class="btn btn-primary">
+        </form>
+        <div class="span2">
+       		<a class="btn btn-success" id="add" href="@routes.Homenagens.create()"> <i class="icon-plus-sign icon-white"></i> Novo</a>
+        </div>
+        
+    </div>
+    
+    @if(currentPage.getTotalRowCount == 0) {
+        
+        <div class="well">
+            <em>@Messages("nothingToShow")</em>
+        </div>
+        
+    } else {
+        
+        <table class="table table-striped table-bordered table-hover">
+            <thead>
+                <tr>
+                    @header("descricao", Messages("homenagem.descricao.label"))
+                </tr>
+            </thead>
+            <tbody>
+
+                @for(homenagem <- currentPage.getList) {
+                    <tr>
+                        <td><a href="@routes.Homenagens.edit(homenagem.id)">@homenagem.descricao</a></td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+
+        <div id="pagination" class="pagination">
+            <ul>
+            	
+            
+            
+                @if(currentPage.hasPrev) {
+                    <li class="prev">
+                        <a href="@link(currentPage.getPageIndex - 1, null)">&larr; Anteriores</a>
+                    </li>
+                } else {
+                    <li class="prev disabled">
+                        <a>&larr; Anteriores</a>
+                    </li>
+                }
+                <li class="current">
+                    <a>Exibindo @currentPage.getDisplayXtoYofZ(" a "," de ")</a>
+                </li>
+                @if(currentPage.hasNext) {
+                    <li class="next">
+                        <a href="@link(currentPage.getPageIndex + 1, null)">Próximos &rarr;</a>
+                    </li>
+                } else {
+                    <li class="next disabled">
+                        <a>Próximos &rarr;</a>
+                    </li>
+                }
+            </ul>
+        </div>
+        
+    }
+        
+}
