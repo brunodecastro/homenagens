@@ -25,6 +25,26 @@ create table homenageado (
   constraint pk_homenageado primary key (id))
 ;
 
+create table homenagem (
+  id                        bigint not null,
+  numero_registro           varchar(255),
+  descricao                 varchar(255),
+  resumo                    varchar(255),
+  local                     varchar(255),
+  localizacao               varchar(255),
+  precedencia               varchar(255),
+  objeto                    varchar(255),
+  prateleira                varchar(255),
+  material                  varchar(255),
+  altura                    double,
+  largura                   double,
+  comprimento               double,
+  profundidade              double,
+  quem_entregou             varchar(255),
+  data_recebimento          timestamp,
+  constraint pk_homenagem primary key (id))
+;
+
 create table picture (
   id                        bigint not null,
   url                       varchar(255),
@@ -64,6 +84,8 @@ create sequence db_image_seq;
 
 create sequence homenageado_seq;
 
+create sequence homenagem_seq;
+
 create sequence picture_seq;
 
 create sequence raw_image_seq;
@@ -93,6 +115,8 @@ drop table if exists db_image;
 
 drop table if exists homenageado;
 
+drop table if exists homenagem;
+
 drop table if exists picture;
 
 drop table if exists raw_image;
@@ -108,6 +132,8 @@ drop sequence if exists conta_seq;
 drop sequence if exists db_image_seq;
 
 drop sequence if exists homenageado_seq;
+
+drop sequence if exists homenagem_seq;
 
 drop sequence if exists picture_seq;
 
