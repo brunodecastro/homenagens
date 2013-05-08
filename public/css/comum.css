@@ -2,6 +2,10 @@ html, body {
 	background: #ffffff;
 }
 
+body {
+	padding-top: 45px;
+}
+
 a:hover {
 	text-decoration: none;
 }
