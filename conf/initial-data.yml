@@ -3,18 +3,50 @@
 
 usuarios:
 
-    - !!models.Usuario
-        id:           1
-        email:        admin@homenagens.com
-        nome:         Administrador
-        senha:        admin
-        tipoUsuario:  ADMINISTRADOR
-        
-    - !!models.Usuario
-        id:           2
-        email:        brunnodecastro@gmail.com
-        nome:         Bruno de Castro Oliveira
-        senha:        senha
-        tipoUsuario:  ADMINISTRADOR
+ - !!models.Usuario
+  id:    1
+  email:   admin@homenagens.com
+  nome:   Administrador
+  senha:   admin
+  tipoUsuario: ADMINISTRADOR
+ 
+ - !!models.Usuario
+  id:    2
+  email:   brunnodecastro@gmail.com
+  nome:   Bruno de Castro Oliveira
+  senha:   senha
+  tipoUsuario: ADMINISTRADOR
+  
+tiposHomenagem:
+
+ - !!models.TipoHomenagem
+  id:    1
+  name:   Medalha
+ 
+ - !!models.TipoHomenagem
+  id:    2
+  name:   Medalha de honra
+  parent:
+   id:  1
+
+ - !!models.TipoHomenagem
+  id:    3
+  name:   Título
+ 
+ - !!models.TipoHomenagem
+  id:    4
+  name:   Título de cidadão
+  parent:
+   id:  3
+
+ - !!models.TipoHomenagem
+  id:    5
+  name:   Medalha olímpica
+  parent:
+   id:  1
+
+ - !!models.TipoHomenagem
+  id:    6
+  name:   Caneta
                            
             

@@ -1,8 +1,10 @@
 package models;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import play.db.ebean.Model;
 
@@ -47,7 +49,10 @@ public class Homenagem extends Model {
 	
 	public String quemEntregou;
 	
-	public Date dataRecebimento; 
+	public Date dataRecebimento;
+	
+	@OneToMany
+	public List<DbImage> pictures;
 	
 	
 	// -- Queries
