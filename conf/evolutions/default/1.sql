@@ -3,6 +3,12 @@
 
 # --- !Ups
 
+create table cidade (
+  id                        bigint not null,
+  nome                      varchar(255),
+  constraint pk_cidade primary key (id))
+;
+
 create table conta (
   id                        bigint not null,
   nome                      varchar(255),
@@ -19,6 +25,13 @@ create table db_image (
   constraint pk_db_image primary key (id))
 ;
 
+create table estado (
+  id                        bigint not null,
+  nome                      varchar(255),
+  abreviacao                varchar(255),
+  constraint pk_estado primary key (id))
+;
+
 create table homenageado (
   id                        bigint not null,
   nome                      varchar(255),
@@ -27,8 +40,11 @@ create table homenageado (
 
 create table homenagem (
   id                        bigint not null,
+  homenagem_pai_id          bigint,
   numero_registro           varchar(255),
+  homenageado_id            bigint,
   descricao                 varchar(255),
+  tipo_homenagem_id         bigint,
   resumo                    varchar(255),
   local                     varchar(255),
   localizacao               varchar(255),
@@ -43,6 +59,13 @@ create table homenagem (
   quem_entregou             varchar(255),
   data_recebimento          timestamp,
   constraint pk_homenagem primary key (id))
+;
+
+create table pais (
+  id                        bigint not null,
+  nome                      varchar(255),
+  abreviacao                varchar(255),
+  constraint pk_pais primary key (id))
 ;
 
 create table picture (
@@ -78,13 +101,19 @@ create table usuario (
   constraint pk_usuario primary key (id))
 ;
 
+create sequence cidade_seq;
+
 create sequence conta_seq;
 
 create sequence db_image_seq;
 
+create sequence estado_seq;
+
 create sequence homenageado_seq;
 
 create sequence homenagem_seq;
+
+create sequence pais_seq;
 
 create sequence picture_seq;
 
@@ -100,8 +129,14 @@ alter table db_image add constraint fk_db_image_image_2 foreign key (image_id) r
 create index ix_db_image_image_2 on db_image (image_id);
 alter table db_image add constraint fk_db_image_thumbnail_3 foreign key (thumbnail_id) references raw_image (id) on delete restrict on update restrict;
 create index ix_db_image_thumbnail_3 on db_image (thumbnail_id);
-alter table tipo_homenagem add constraint fk_tipo_homenagem_parent_4 foreign key (parent_id) references tipo_homenagem (id) on delete restrict on update restrict;
-create index ix_tipo_homenagem_parent_4 on tipo_homenagem (parent_id);
+alter table homenagem add constraint fk_homenagem_homenagemPai_4 foreign key (homenagem_pai_id) references homenagem (id) on delete restrict on update restrict;
+create index ix_homenagem_homenagemPai_4 on homenagem (homenagem_pai_id);
+alter table homenagem add constraint fk_homenagem_homenageado_5 foreign key (homenageado_id) references homenageado (id) on delete restrict on update restrict;
+create index ix_homenagem_homenageado_5 on homenagem (homenageado_id);
+alter table homenagem add constraint fk_homenagem_tipoHomenagem_6 foreign key (tipo_homenagem_id) references tipo_homenagem (id) on delete restrict on update restrict;
+create index ix_homenagem_tipoHomenagem_6 on homenagem (tipo_homenagem_id);
+alter table tipo_homenagem add constraint fk_tipo_homenagem_parent_7 foreign key (parent_id) references tipo_homenagem (id) on delete restrict on update restrict;
+create index ix_tipo_homenagem_parent_7 on tipo_homenagem (parent_id);
 
 
 
@@ -109,13 +144,19 @@ create index ix_tipo_homenagem_parent_4 on tipo_homenagem (parent_id);
 
 SET REFERENTIAL_INTEGRITY FALSE;
 
+drop table if exists cidade;
+
 drop table if exists conta;
 
 drop table if exists db_image;
 
+drop table if exists estado;
+
 drop table if exists homenageado;
 
 drop table if exists homenagem;
+
+drop table if exists pais;
 
 drop table if exists picture;
 
@@ -127,13 +168,19 @@ drop table if exists usuario;
 
 SET REFERENTIAL_INTEGRITY TRUE;
 
+drop sequence if exists cidade_seq;
+
 drop sequence if exists conta_seq;
 
 drop sequence if exists db_image_seq;
 
+drop sequence if exists estado_seq;
+
 drop sequence if exists homenageado_seq;
 
 drop sequence if exists homenagem_seq;
+
+drop sequence if exists pais_seq;
 
 drop sequence if exists picture_seq;
 

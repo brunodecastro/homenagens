@@ -16,7 +16,8 @@ usuarios:
   nome:   Bruno de Castro Oliveira
   senha:   senha
   tipoUsuario: ADMINISTRADOR
-  
+
+
 tiposHomenagem:
 
  - !!models.TipoHomenagem
@@ -48,5 +49,23 @@ tiposHomenagem:
  - !!models.TipoHomenagem
   id:    6
   name:   Caneta
-                           
-            
+
+
+homenagens:
+
+ - !!models.Homenagem
+  id: 1
+  numeroRegistro: 2013Abc01
+  descricao: Medalha de honra na guerra do golfo
+  resumo: Lorem ipsum...
+  cidade:
+   id: 1
+   nome: Belzonte
+   estado:
+    id: 1
+    nome: Minas Gerais
+    abreviacao: MG
+    pais:
+     id: 1
+     nome: Brasil
+     abreviacao: BRA

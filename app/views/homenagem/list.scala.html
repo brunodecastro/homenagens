@@ -59,14 +59,18 @@
         <table class="table table-striped table-bordered table-hover">
             <thead>
                 <tr>
+                    @header("numeroRegistro", Messages("homenagem.numeroRegistro.label"))
                     @header("descricao", Messages("homenagem.descricao.label"))
+                    @header("cidade", Messages("homenagem.cidade.label"))
                 </tr>
             </thead>
             <tbody>
 
                 @for(homenagem <- currentPage.getList) {
                     <tr>
+                        <td><a href="@routes.Homenagens.edit(homenagem.id)">@homenagem.numeroRegistro</a></td>
                         <td><a href="@routes.Homenagens.edit(homenagem.id)">@homenagem.descricao</a></td>
+                        <td><a href="@routes.Homenagens.edit(homenagem.id)">@if(homenagem.cidade != null){@homenagem.cidade.nome}</a></td>
                     </tr>
                 }
 
