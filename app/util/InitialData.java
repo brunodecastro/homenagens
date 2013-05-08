@@ -18,9 +18,10 @@ public class InitialData {
             
             Map<String,List<Object>> all = (Map<String,List<Object>>) Yaml.load("initial-data.yml");
 
-            // Inseri os usuarios
+            // Insere os usuarios
             Ebean.save(all.get("usuarios"));
             
+            Ebean.save(all.get("tiposHomenagem"));
         }
     }
 
