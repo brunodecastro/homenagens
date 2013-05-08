@@ -31,6 +31,9 @@
 		
 			<div class="form-actions">
 				<button type="submit" class="btn btn-primary">@Messages("save")</button>
+				<button type="button" data-toggle="modal" data-target="#modalDelete" class="btn btn-danger">
+		        	<i class="icon-trash icon-white"></i> @Messages("delete")
+		        </button>
 				<a href="@routes.Usuarios.list()" class="btn">@Messages("cancel")</a>
 			</div>
 			
@@ -42,6 +45,23 @@
         	</button>
     	}
     	
-	</div>
+		</div>
+				
+		<div id="modalDelete" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="modalDeleteLabel" aria-hidden="true">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h3 id="modalDeleteLabel">@Messages("deleteMessage.title")</h3>
+			</div>
+			<div class="modal-body">
+				<p>@Messages("deleteMessage.text", Messages("usuario"))</p>
+			</div>
+			<div class="modal-footer">
+				@form(routes.Usuarios.delete(id)) {
+					<button class="btn" data-dismiss="modal" aria-hidden="true">@Messages("cancel")</button>
+					<button class="btn btn-danger" type="submit"><i class="icon-trash icon-white"></i> @Messages("delete")</button>
+				}
+			</div>
+		</div>
+		
 	
 }

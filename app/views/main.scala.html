@@ -27,13 +27,13 @@
 				<div class="nav-collapse in collapse" style="height: auto;">
 					<ul class="nav">
 						<li class="@(" active".when(nav=="homenagens"))">
-							<a href="routes.Homenagens.list()">Homenagens</a>
-						</li>
-						<li class="@(" active".when(nav=="homenageados"))">
-							<a href="routes.Homenageados.list()">Homenageados</a>
+							<a href="@routes.Homenagens.list()">Homenagens</a>
 						</li>
 						<li class="@(" active".when(nav=="tipoHomenagem"))">
 							<a href="@routes.TipoHomenagens.list()">Tipos de Homenagem</a>
+						</li>
+						<li class="@(" active".when(nav=="usuarios"))">
+							<a href="@routes.Usuarios.index()">Usuários</a>
 						</li>
 					</ul>
 						
