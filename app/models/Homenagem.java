@@ -1,17 +1,53 @@
 package models;
 
+import java.util.Date;
+
 import javax.persistence.Id;
 
-import play.data.validation.Constraints;
 import play.db.ebean.Model;
 
 public class Homenagem extends Model {
 
 	@Id
 	public Long id;
+	
+	public Homenagem homenagem;
+	
+	public String numeroRegistro;
+	
+	public Homenageado homenageado;
+	
+	public String descricao;
 
-	@Constraints.Required
-	public String nome;
+	public TipoHomenagem tipoHomenagem;
+	
+	public String resumo;
+	
+	public Cidade cidade;
+	
+	public String local;
+	
+	public String localizacao;
+	
+	public String precedencia;
+	
+	public String objeto;
+	
+	public String prateleira;
+	
+	public String material;
+	
+	public Double altura;
+	
+	public Double largura;
+	
+	public Double comprimento;
+	
+	public Double profundidade;
+	
+	public String quemEntregou;
+	
+	public Date dataRecebimento; 
 	
 	
 	// -- Queries
