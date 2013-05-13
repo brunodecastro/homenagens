@@ -14,6 +14,7 @@ import javax.validation.Valid;
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 
+import com.avaje.ebean.ExpressionList;
 import com.avaje.ebean.Page;
 
 @Entity
@@ -79,6 +80,34 @@ public class Homenagem extends Model {
 	public static Page<Homenagem> page(int page, int pageSize, String sortBy, String order, String filter) {
 		return find.where().ilike("descricao", "%" + filter + "%").orderBy(sortBy + " " + order).findPagingList(pageSize)
 				.getPage(page);
+	}
+	
+	public static Page<Homenagem> page(int page, int pageSize, String sortBy, String order, HomenagemFilter homenagemFilter) {
+		ExpressionList<Homenagem> queryEl = find.where();
+		
+		if(homenagemFilter != null) {
+			if(homenagemFilter.numeroRegistro != null && !homenagemFilter.numeroRegistro.isEmpty()) {
+				queryEl.ilike("numeroRegistro", "%"+ homenagemFilter.numeroRegistro + "%");
+			}
+			
+			if(homenagemFilter.descricao != null && !homenagemFilter.descricao.isEmpty()) {
+				queryEl.ilike("descricao", "%"+ homenagemFilter.descricao + "%");
+			}
+			
+			if(homenagemFilter.tipoHomenagem != null) {
+				queryEl.eq("tipoHomenagem", homenagemFilter.tipoHomenagem);
+			}
+			
+			if(homenagemFilter.dataRecebimentoInicio != null && homenagemFilter.dataRecebimentoFim != null) {
+				queryEl.between("dataRecebimento", homenagemFilter.dataRecebimentoInicio, homenagemFilter.dataRecebimentoFim);
+			} else if(homenagemFilter.dataRecebimentoInicio != null) {
+				queryEl.ge("dataRecebimento", homenagemFilter.dataRecebimentoInicio);
+			} else if(homenagemFilter.dataRecebimentoFim != null) {
+				queryEl.le("dataRecebimento", homenagemFilter.dataRecebimentoFim);
+			}
+		}
+		
+		return queryEl.orderBy(sortBy + " " + order).findPagingList(pageSize).getPage(page);
 	}
 
 }

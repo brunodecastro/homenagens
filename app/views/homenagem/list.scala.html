@@ -1,4 +1,8 @@
-@(usuario: Usuario, currentPage: com.avaje.ebean.Page[Homenagem], currentSortBy: String, currentOrder: String, currentFilter: String)
+@(usuario: Usuario, currentPage: com.avaje.ebean.Page[Homenagem], currentSortBy: String, currentOrder: String, filterForm : Form[HomenagemFilter])
+
+@import helper._
+
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) }
 
 @****************************************
 * Helper generating navigation links    *
@@ -22,7 +26,7 @@
     }
     
     // Generate the link
-    routes.Homenagens.list(newPage, sortBy, order, currentFilter)
+    routes.Homenagens.list(newPage, sortBy, order)
 }
 
 @**********************************
@@ -36,16 +40,44 @@
 
 @main(usuario, Messages("homenagem.list.title"), "homenagem", Messages("homenagem.list.lead", currentPage.getTotalRowCount)) {
     
-    <div id="actions" class="well">
-        
-        <form action="@link(0, "descricao")" method="GET" class="form-search span9">
-            <input type="search" id="searchbox" name="f" value="@currentFilter" placeholder="@Messages("filterBy", Messages("homenagem.descricao.label"))">
-            <input type="submit" id="searchsubmit" value="@Messages("doFilter")" class="btn btn-primary">
-        </form>
-        <div class="span2">
-       		<a class="btn btn-success" id="add" href="@routes.Homenagens.create()"> <i class="icon-plus-sign icon-white"></i> Novo</a>
-        </div>
-        
+    
+    <div class="accordion" id="filterAccordion">
+    	<div class="accordion-group">
+    		<div class="accordion-heading">
+    			<a class="accordion-toggle" data-toggle="collapse" data-parent="#filterAccordion" href="#collapseFilter">Filtro</a>
+    		</div>
+    		<div id="collapseFilter" class="accordion-body collapse in">
+    			<div class="accordion-inner well">
+					<form action="@link(0, "descricao")" method="GET" class="form-horizontal">
+						@inputText(filterForm("numeroRegistro"),
+							'_label -> Messages("homenagem.numeroRegistro.label"))
+							
+						@inputText(filterForm("descricao"),
+							'_label -> Messages("homenagem.descricao.label"))
+						
+						@inputText(filterForm("resumo"),
+							'_label -> Messages("homenagem.resumo.label"))
+							
+						@inputText(filterForm("quemEntregou"),
+							'_label -> Messages("homenagem.quemEntregou.label"))
+							
+						@inputDate(filterForm("dataRecebimentoInicio"),
+							'_label -> Messages("homenagem.dataRecebimentoInicio.label"))
+            			
+            			@inputDate(filterForm("dataRecebimentoFim"),
+							'_label -> Messages("homenagem.dataRecebimentoFim.label"))
+						
+						<div class="form-actions">
+							<button type="submit" class="btn btn-primary">@Messages("doFilter")</button>
+						</div>
+			        </form>
+				</div>
+			</div>
+		</div>
+	</div>
+    
+    <div class="btn-toolbar">
+    	<a class="btn btn-success" id="add" href="@routes.Homenagens.create()"> <i class="icon-plus-sign icon-white"></i> Novo</a>
     </div>
     
     @if(currentPage.getTotalRowCount == 0) {

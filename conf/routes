@@ -39,7 +39,8 @@ POST	/tipoHomenagens/:parentId/sub/:id				controllers.TipoHomenagens.updateSub(p
 POST	/tipoHomenagens/sub/:id/delete					controllers.TipoHomenagens.deleteSub(id:Long)
 
 # Homenagens
-GET		/homenagens							controllers.Homenagens.list(p:Int ?= 0, s ?= "descricao", o ?= "asc", f ?= "")
+#GET		/homenagens							controllers.Homenagens.list(p:Int ?= 0, s ?= "descricao", o ?= "asc", f ?= "")
+GET		/homenagens							controllers.Homenagens.list(p:Int ?= 0, s ?= "descricao", o ?= "asc")
 GET		/homenagens/new						controllers.Homenagens.create()
 POST	/homenagens							controllers.Homenagens.save()
 GET		/homenagens/:id						controllers.Homenagens.edit(id:Long)

@@ -2,7 +2,9 @@ package controllers;
 
 import static play.data.Form.form;
 import models.Homenagem;
+import models.HomenagemFilter;
 import models.Usuario;
+import play.data.DynamicForm;
 import play.data.Form;
 import play.i18n.Messages;
 import play.mvc.Controller;
@@ -18,7 +20,7 @@ public class Homenagens extends Controller {
      * This result directly redirect to application home.
      */
     public static Result GO_HOME = redirect(
-        routes.Homenagens.list(0, "descricao", "asc", "")
+        routes.Homenagens.list(0, "descricao", "asc")
     );
     
     /**
@@ -28,11 +30,15 @@ public class Homenagens extends Controller {
         return GO_HOME;
     }
     
-    public static Result list(int page, String sortBy, String order, String filter) {
+    public static Result list(int page, String sortBy, String order) {
+    	Form<HomenagemFilter> homenagemFilterForm = form(HomenagemFilter.class).bindFromRequest();
+//        if(homenagemFilterForm.hasErrors()) {
+//            return badRequest(createForm.render());
+//        }
         return ok(
             list.render(Usuario.consultarPorEmail(request().username()), 
-            		Homenagem.page(page, 10, sortBy, order, filter),
-                sortBy, order, filter
+            		Homenagem.page(page, 10, sortBy, order, homenagemFilterForm.get()),
+                sortBy, order, homenagemFilterForm
             )
         );
     }

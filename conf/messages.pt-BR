@@ -64,7 +64,9 @@ subtipoHomenagem.create.success=O Subtipo de Homenagem "{0}" foi criado
 # Homenagem
 homenagem=Homenagem
 homenagem.plural=Homenagens
+homenagem.numeroRegistro.label=Número de Registro
 homenagem.descricao.label=Descrição
+homenagem.cidade.label=Cidade
 homenagem.create.title=Criar nova Homenagem
 homenagem.create.lead=
 homenagem.edit.title=Editar Homenagem
