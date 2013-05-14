@@ -82,8 +82,7 @@ public class Homenagens extends Controller {
     public static Result create() {
         Form<Homenagem> homenagemForm = form(Homenagem.class);
         return ok(
-//            createForm.render(Usuario.consultarPorEmail(request().username()), homenagemForm)
-            createForm.render()
+            createForm.render(Usuario.consultarPorEmail(request().username()), homenagemForm)
         );
     }
     
@@ -93,8 +92,7 @@ public class Homenagens extends Controller {
     public static Result save() {
         Form<Homenagem> homenagemForm = form(Homenagem.class).bindFromRequest();
         if(homenagemForm.hasErrors()) {
-//            return badRequest(createForm.render(Usuario.consultarPorEmail(request().username()), homenagemForm));
-            return badRequest(createForm.render());
+            return badRequest(createForm.render(Usuario.consultarPorEmail(request().username()), homenagemForm));
         }
         homenagemForm.get().save();
         flash("success", Messages.get("homenagem.create.success", homenagemForm.get().descricao));
