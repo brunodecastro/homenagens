@@ -46,16 +46,24 @@
 
 @main(usuario, Messages("tipoHomenagem.list.title"), "tipoHomenagem", Messages("tipoHomenagem.list.lead", currentPage.getTotalRowCount)) {
     
-    <div id="actions" class="well">
-        
-        <form action="@link(0, "name")" method="GET" class="form-search span9">
-            <input type="search" id="searchbox" name="f" value="@currentFilter" placeholder="@Messages("filterBy", Messages("tipoHomenagem.name.label"))">
-            <input type="submit" id="searchsubmit" value="@Messages("doFilter")" class="btn btn-primary">
-        </form>
-        <div class="span2">
-       		<a class="btn btn-success" id="add" href="@routes.TipoHomenagens.create()"> <i class="icon-plus-sign icon-white"></i> Novo</a>
-        </div>
-        
+    <div class="accordion" id="filterAccordion">
+    	<div class="accordion-group">
+    		<div class="accordion-heading">
+    			<a class="accordion-toggle" data-toggle="collapse" data-parent="#filterAccordion" href="#collapseFilter">Filtro</a>
+    		</div>
+    		<div id="collapseFilter" class="accordion-body collapse in">
+    			<div class="accordion-inner well">
+					<form action="@link(0, "name")" method="GET" class="form-horizontal">
+			            <input type="search" id="searchbox" name="f" value="@currentFilter" placeholder="@Messages("filterBy", Messages("tipoHomenagem.name.label"))">
+			            <button type="submit" id="searchsubmit" class="btn btn-primary"><i class="icon-filter icon-white"></i> @Messages("doFilter")</button>
+			        </form>
+				</div>
+			</div>
+		</div>
+	</div>
+    
+    <div class="btn-toolbar">
+    	<a class="btn btn-success" id="add" href="@routes.TipoHomenagens.create()"> <i class="icon-plus-sign icon-white"></i> Novo</a>
     </div>
     
     @if(currentPage.getTotalRowCount == 0) {
