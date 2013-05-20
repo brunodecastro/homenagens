@@ -26,20 +26,20 @@
 	      <div class="control-group">  
 	        
 	            @inputText(homenagemForm("numeroRegistro"), '_label -> "Número de Registro")
-	            @inputText(homenagemForm("descricao"), '_label -> "Descrição")
-	            @inputText(homenagemForm("dataRecebimento"), '_label -> "Data Recebimento", 'class -> "dataRecebimento") 
-	            @inputText(homenagemForm("resumo"), '_label -> "Resumo")
-	            @inputText(homenagemForm("local"), '_label -> "Local")
-	            @inputText(homenagemForm("localizacao"), '_label -> "Localização")
-	            @inputText(homenagemForm("precedencia"), '_label -> "Precedência")
-	            @inputText(homenagemForm("objeto"), '_label -> "Objeto")
-				@inputText(homenagemForm("prateleira"), '_label -> "Prateleira")	    
-				@inputText(homenagemForm("material"), '_label -> "Material")
+	            @inputText(homenagemForm("descricao"), '_label -> "Descrição", 'class -> "input-xxlarge")
+	            @textarea(homenagemForm("resumo"), args = 'rows -> 3, 'cols -> 50, '_label -> "Resumo", 'class -> "input-xxlarge")
+	            @campoData(homenagemForm("dataRecebimento"), '_label -> "Data Recebimento") 
+	            @inputText(homenagemForm("local"), '_label -> "Local", 'class -> "input-xxlarge")
+	            @inputText(homenagemForm("localizacao"), '_label -> "Localização", 'class -> "input-xxlarge")
+	            @inputText(homenagemForm("precedencia"), '_label -> "Precedência", 'class -> "input-xxlarge")
+	            @inputText(homenagemForm("objeto"), '_label -> "Objeto", 'class -> "input-xxlarge")
+				@inputText(homenagemForm("prateleira"), '_label -> "Prateleira", 'class -> "input-xxlarge")	    
+				@inputText(homenagemForm("material"), '_label -> "Material", 'class -> "input-xxlarge")
 				@inputText(homenagemForm("altura"), '_label -> "Altura")
 				@inputText(homenagemForm("largura"), '_label -> "Largura")
 				@inputText(homenagemForm("comprimento"), '_label -> "Comprimento")   
 				@inputText(homenagemForm("profundidade"), '_label -> "Profundidade") 
-				@inputText(homenagemForm("quemEntregou"), '_label -> "Quem Entregou?") 
+				@inputText(homenagemForm("quemEntregou"), '_label -> "Quem Entregou?", 'class -> "input-xxlarge") 
 	        
 	        <div class="form-actions">
 	            <button type="submit" class="btn btn-primary">@Messages("save")</button>
@@ -57,7 +57,7 @@
 
 <script>
 
-	$('.dataRecebimento').datepicker({
+	$('#dataRecebimento').datepicker({
 		'format': 'dd/mm/yyyy',
 		'language': 'pt-BR',
 	});
