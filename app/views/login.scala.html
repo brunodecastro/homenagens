@@ -1,7 +1,8 @@
 @(form: Form[Login])
 
 <html>
-<head>@views.html.head()
+<head>
+	@views.html.head()
 </head>
 
 <body>
@@ -17,7 +18,7 @@
 			<div class="content">
 				<div class="login-form">
 
-					@helper.form(routes.Application.autenticar) {
+					@helper.form(routes.Application.autenticar, 'class -> "form-horizontal") {
 
 					<fieldset>
 
@@ -35,8 +36,12 @@
 							</div>
 						} 
 						
-						<input type="email" name="email" placeholder="Email" value="@form("email").value"> 
+						<div class="control-group">
+						<input type="email" name="email" placeholder="Email" value="@form("email").value">
+						</div>
+						<div class="control-group">
 						<input type="password"	name="senha" placeholder="Senha">
+						</div>
 
 
 						<button class="btn btn-primary" type="submit">Login</button>
@@ -49,10 +54,6 @@
 		<!-- /container -->
 	</div>
 
-	<!-- SCRIPTS -->
-	<script type="text/javascript" src="@routes.Assets.at("js/jquery-1.9.0.min.js")"></script>
-	<script type="text/javascript" src="@routes.Assets.at("js/bootstrap.js")"></script>
-
-
+	@views.html.footerscripts()
 </body>
 </html>
