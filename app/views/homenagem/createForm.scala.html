@@ -25,21 +25,21 @@
 	    
 	      <div class="control-group">  
 	        
-	            @inputText(homenagemForm("numeroRegistro"), '_label -> "Número de Registro")
-	            @inputText(homenagemForm("descricao"), '_label -> "Descrição", 'class -> "input-xxlarge")
-	            @textarea(homenagemForm("resumo"), args = 'rows -> 3, 'cols -> 50, '_label -> "Resumo", 'class -> "input-xxlarge")
-	            @campoData(homenagemForm("dataRecebimento"), '_label -> "Data Recebimento") 
-	            @inputText(homenagemForm("local"), '_label -> "Local", 'class -> "input-xxlarge")
-	            @inputText(homenagemForm("localizacao"), '_label -> "Localização", 'class -> "input-xxlarge")
-	            @inputText(homenagemForm("precedencia"), '_label -> "Precedência", 'class -> "input-xxlarge")
-	            @inputText(homenagemForm("objeto"), '_label -> "Objeto", 'class -> "input-xxlarge")
-				@inputText(homenagemForm("prateleira"), '_label -> "Prateleira", 'class -> "input-xxlarge")	    
-				@inputText(homenagemForm("material"), '_label -> "Material", 'class -> "input-xxlarge")
-				@inputText(homenagemForm("altura"), '_label -> "Altura")
-				@inputText(homenagemForm("largura"), '_label -> "Largura")
-				@inputText(homenagemForm("comprimento"), '_label -> "Comprimento")   
-				@inputText(homenagemForm("profundidade"), '_label -> "Profundidade") 
-				@inputText(homenagemForm("quemEntregou"), '_label -> "Quem Entregou?", 'class -> "input-xxlarge") 
+	            @inputText(homenagemForm("numeroRegistro"), '_label -> Messages("homenagem.numeroRegistro.label"))
+	            @inputText(homenagemForm("descricao"), '_label -> Messages("homenagem.descricao.label"), 'class -> "input-xxlarge")
+	            @textarea(homenagemForm("resumo"), args = 'rows -> 3, 'cols -> 50, '_label -> Messages("homenagem.resumo.label"), 'class -> "input-xxlarge")
+	            @campoData(homenagemForm("dataRecebimento"), '_label -> Messages("homenagem.dataRecebimento.label"))
+	            @inputText(homenagemForm("local"), '_label -> Messages("homenagem.local.label"), 'class -> "input-xxlarge")
+	            @inputText(homenagemForm("localizacao"), '_label -> Messages("homenagem.localizacao.label"), 'class -> "input-xxlarge")
+	            @inputText(homenagemForm("precedencia"), '_label -> Messages("homenagem.precedencia.label"), 'class -> "input-xxlarge")
+	            @inputText(homenagemForm("objeto"), '_label -> Messages("homenagem.objeto.label"), 'class -> "input-xxlarge")
+				@inputText(homenagemForm("prateleira"), '_label -> Messages("homenagem.prateleira.label"), 'class -> "input-xxlarge")
+				@inputText(homenagemForm("material"), '_label -> Messages("homenagem.material.label"), 'class -> "input-xxlarge")
+				@inputText(homenagemForm("altura"), '_label -> Messages("homenagem.altura.label"))
+				@inputText(homenagemForm("largura"), '_label -> Messages("homenagem.largura.label"))
+				@inputText(homenagemForm("comprimento"), '_label -> Messages("homenagem.comprimento.label"))
+				@inputText(homenagemForm("profundidade"), '_label -> Messages("homenagem.profundidade.label"))
+				@inputText(homenagemForm("quemEntregou"), '_label -> Messages("homenagem.quemEntregou.label"), 'class -> "input-xxlarge")
 	        
 	        <div class="form-actions">
 	            <button type="submit" class="btn btn-primary">@Messages("save")</button>

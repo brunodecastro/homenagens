@@ -67,8 +67,18 @@ homenagem.plural=Homenagens
 homenagem.numeroRegistro.label=Número de Registro
 homenagem.descricao.label=Descrição
 homenagem.resumo.label=Resumo
-homenagem.quemEntregou.label=Quem Entregou
-homenagem.dataRecebimento.label=Data Recebimento
+homenagem.dataRecebimento.label=Data do recebimento
+homenagem.local.label=Local
+homenagem.localizacao.label=Localização
+homenagem.precedencia.label=Precedência
+homenagem.objeto.label=Objeto
+homenagem.prateleira.label=Prateleira
+homenagem.material.label=Material
+homenagem.altura.label=Altura
+homenagem.largura.label=Largura
+homenagem.comprimento.label=Comprimento
+homenagem.profundidade.label=Profundidade
+homenagem.quemEntregou.label=Entregue por
 homenagem.cidade.label=Cidade
 homenagem.create.title=Criar nova Homenagem
 homenagem.create.lead=
@@ -77,7 +87,7 @@ homenagem.edit.lead=
 homenagem.list.title=Homenagens
 homenagem.list.lead={0,choice,0#Nenhuma homenagem encontrada|1#Uma homenagem encontrada|1<{0,number,integer} homenagens encontradas}
 
-tipoHomenagem.create.success=A Homenagem "{0}" foi criada
+homenagem.create.success=A Homenagem "{0}" foi criada
 
 # Usuario
 usuario=Usuário
