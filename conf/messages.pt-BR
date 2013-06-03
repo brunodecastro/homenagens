@@ -68,6 +68,7 @@ homenagem.numeroRegistro.label=Número de Registro
 homenagem.descricao.label=Descrição
 homenagem.resumo.label=Resumo
 homenagem.quemEntregou.label=Quem Entregou
+homenagem.dataRecebimento.label=Data Recebimento
 homenagem.cidade.label=Cidade
 homenagem.create.title=Criar nova Homenagem
 homenagem.create.lead=

@@ -35,7 +35,6 @@ $(function() {
 	});
 
 	$('#@fieldFrom.id-picker').datepicker().on('changeDate', function(ev){
-		@*$('#@fieldTo.id-picker').datepicker('setStartDate', ev.date);*@
 		if (ev.date.valueOf() > @{fieldTo.id}.data('datepicker').date.valueOf()) {
 			var newDate = new Date(ev.date);
 			newDate.setDate(newDate.getDate() + 1);
@@ -44,7 +43,6 @@ $(function() {
     });
 
 	$('#@fieldTo.id-picker').datepicker().on('changeDate', function(ev){
-		@*$('#@fieldFrom.id-picker').datepicker('setEndDate', ev.date);*@
 		if (ev.date.valueOf() < @{fieldFrom.id}.data('datepicker').date.valueOf()) {
 			var newDate = new Date(ev.date);
 			newDate.setDate(newDate.getDate() + 1);
