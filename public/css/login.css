@@ -25,3 +25,7 @@
 .login-form {
 	margin-left: 45px;
 }
+
+.login-form input {
+ 	height: 28px !important; 
+}
