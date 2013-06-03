@@ -16,6 +16,7 @@ import play.db.ebean.Model;
 
 import com.avaje.ebean.ExpressionList;
 import com.avaje.ebean.Page;
+import com.avaje.ebean.Query;
 
 @Entity
 public class Homenagem extends Model {
@@ -83,6 +84,18 @@ public class Homenagem extends Model {
 	}
 	
 	public static Page<Homenagem> page(int page, int pageSize, String sortBy, String order, HomenagemFilter homenagemFilter) {
+		Query<Homenagem> homenagemQuery = findFiltered(sortBy, order, homenagemFilter);
+		
+		return homenagemQuery.findPagingList(pageSize).getPage(page);
+	}
+	
+	public static List<Homenagem> list(String sortBy, String order, HomenagemFilter homenagemFilter) {
+		Query<Homenagem> homenagemQuery = findFiltered(sortBy, order, homenagemFilter);
+		
+		return homenagemQuery.findList();
+	}
+
+	public static Query<Homenagem> findFiltered(String sortBy, String order, HomenagemFilter homenagemFilter) {
 		ExpressionList<Homenagem> queryEl = find.where();
 		
 		if(homenagemFilter != null) {
@@ -107,7 +120,6 @@ public class Homenagem extends Model {
 			}
 		}
 		
-		return queryEl.orderBy(sortBy + " " + order).findPagingList(pageSize).getPage(page);
+		return queryEl.orderBy(sortBy + " " + order);
 	}
-
 }

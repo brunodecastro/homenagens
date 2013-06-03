@@ -1,6 +1,13 @@
 package controllers;
 
 import static play.data.Form.form;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.collections.map.HashedMap;
+
 import models.Homenagem;
 import models.HomenagemFilter;
 import models.Usuario;
@@ -111,6 +118,13 @@ public class Homenagens extends Controller {
         return GO_HOME;
     }
 
-    
+//    public static Result print(Form<HomenagemFilter> homenagemFilterForm, String sortBy, String order) {
+//    	List<Homenagem> homenagemList = Homenagem.list(sortBy, order, homenagemFilterForm.get());
+//    	Map<String, Object> reportParams = new HashMap<String, Object>();
+//    	reportParams.put("list", homenagemList);
+//        return redirect(
+//        	routes.ReportController.jasperDocument("homenagem_list", reportParams)
+//        );
+//    }
 
 }

@@ -49,7 +49,7 @@
     <div class="accordion" id="filterAccordion">
     	<div class="accordion-group">
     		<div class="accordion-heading">
-    			<a class="accordion-toggle" data-toggle="collapse" data-parent="#filterAccordion" href="#collapseFilter">Filtro</a>
+    			<a class="accordion-toggle" data-toggle="collapse" data-parent="#filterAccordion" href="#collapseFilter">@Messages("filter")</a>
     		</div>
     		<div id="collapseFilter" class="accordion-body collapse in">
     			<div class="accordion-inner well">
@@ -63,7 +63,7 @@
 	</div>
     
     <div class="btn-toolbar">
-    	<a class="btn btn-success" id="add" href="@routes.TipoHomenagens.create()"> <i class="icon-plus-sign icon-white"></i> Novo</a>
+    	<a class="btn btn-success" id="add" href="@routes.TipoHomenagens.create()"> <i class="icon-plus-sign icon-white"></i> @Messages("new")</a>
     </div>
     
     @if(currentPage.getTotalRowCount == 0) {
@@ -92,36 +92,32 @@
 
             </tbody>
         </table>
-
-        <div id="pagination" class="pagination">
-            <ul>
-            	
-            
-            
-                @if(currentPage.hasPrev) {
-                    <li class="prev">
-                        <a href="@link(currentPage.getPageIndex - 1, null)">&larr; Anteriores</a>
-                    </li>
-                } else {
-                    <li class="prev disabled">
-                        <a>&larr; Anteriores</a>
-                    </li>
-                }
-                <li class="current">
-                    <a>Exibindo @currentPage.getDisplayXtoYofZ(" a "," de ")</a>
-                </li>
-                @if(currentPage.hasNext) {
-                    <li class="next">
-                        <a href="@link(currentPage.getPageIndex + 1, null)">Próximos &rarr;</a>
-                    </li>
-                } else {
-                    <li class="next disabled">
-                        <a>Próximos &rarr;</a>
-                    </li>
-                }
-            </ul>
-        </div>
         
+        <div id="pagination" class="pagination">
+			<ul>
+				@if(currentPage.hasPrev) {
+					<li class="prev">
+						<a href="@link(currentPage.getPageIndex - 1, null)">&larr; @Messages("previous.plural")</a>
+					</li>
+				} else {
+					<li class="prev disabled">
+						<a>&larr; @Messages("previous.plural")</a>
+					</li>
+				}
+				<li class="current">
+					<a>@Messages("pagination.showing", currentPage.getDisplayXtoYofZ(" "+Messages("pagination.to")+" ", " "+Messages("pagination.of")+" "))</a>
+				</li>
+				@if(currentPage.hasNext) {
+					<li class="next">
+						<a href="@link(currentPage.getPageIndex + 1, null)">@Messages("next.plural") &rarr;</a>
+					</li>
+				} else {
+					<li class="next disabled">
+						<a>@Messages("next.plural") &rarr;</a>
+					</li>
+				}
+			</ul>
+		</div>
     }
         
 }

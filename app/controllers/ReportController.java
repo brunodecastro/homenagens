@@ -3,7 +3,6 @@ package controllers;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
-import java.util.HashMap;
 import java.util.Map;
 
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -17,8 +16,7 @@ public class ReportController {
 
 	static String REPORT_DEFINITION_PATH = "./app/reports/";
 
-	public static Result jasperDocument(String reportFile) {
-		Map reportParams = new HashMap();
+	public static Result jasperDocument(String reportFile, Map reportParams) {
 		OutputStream os = new ByteArrayOutputStream();
 		try {
 			String compiledFile = REPORT_DEFINITION_PATH + reportFile + ".jasper";

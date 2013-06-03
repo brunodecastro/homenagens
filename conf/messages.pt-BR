@@ -36,10 +36,22 @@ save=Salvar
 cancel=Cancelar
 delete=Excluir
 back=Voltar
+new=Novo
+print=Imprimir
+
+filter=Filtro
+
+previous=Anterior
+previous.plural=Anteriores
+next=Próximo
+next.plural=Próximos
 
 nothingToShow=Nada a exibir
 doFilter=Filtrar
 filterBy=Filtrar por {0}...
+pagination.showing=Exibindo {0}
+pagination.to=a
+pagination.of=de
 
 deleteMessage.title=Confirmar exclusão
 deleteMessage.text=Tem certeza que deseja excluir este {0}?

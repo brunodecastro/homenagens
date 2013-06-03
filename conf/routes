@@ -46,6 +46,7 @@ POST	/homenagens							controllers.Homenagens.save()
 GET		/homenagens/:id						controllers.Homenagens.edit(id:Long)
 POST	/homenagens/:id						controllers.Homenagens.update(id:Long)
 POST	/homenagens/:id/delete				controllers.Homenagens.delete(id:Long)
+#GET		/homenagens/print					controllers.Homenagens.print(p:Int ?= 0, s ?= "descricao", o ?= "asc")
 
 # Image Upload
 POST	/image						controllers.ImageController.uploadImage()
@@ -56,7 +57,7 @@ GET		/thumbnail/:id				controllers.ImageController.getThumbnail(id: Long)
 GET		/image						controllers.ImageController.getAllImages()
 
 # PDF
-GET		/jasper/:reportFile						controllers.ReportController.jasperDocument(reportFile: String)
+#GET		/jasper/:reportFile						controllers.ReportController.jasperDocument(reportFile: String, reportParams: Map)
 
 # Map static resources from the /public folder to the /assets URL path
 GET		/assets/*file               controllers.Assets.at(path="/public", file)
