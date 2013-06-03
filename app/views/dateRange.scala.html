@@ -1,0 +1,55 @@
+@(fieldFrom: play.api.data.Field, fieldTo: play.api.data.Field, args: (Symbol,Any)*)(implicit lang: play.api.i18n.Lang)
+
+@import play.api.i18n._
+@import views.html.helper._
+
+@elementsFrom = @{ new FieldElements(fieldFrom.id, fieldFrom, null, args.toMap, lang) }
+@elementsTo = @{ new FieldElements(fieldTo.id, fieldTo, null, args.toMap, lang) }
+
+<div class="control-group">
+	<label class="control-label" for="@fieldFrom.id">@elementsFrom.args.get('_label)</label>
+	<div class="controls">
+	    <div class="input-append date" id="@fieldFrom.id-picker" data-date="@fieldFrom.value" data-date-format="@elementsFrom.args.get('format).getOrElse("dd/mm/yyyy")">
+			<input type="text" name="@fieldFrom.name" id="@fieldFrom.id">
+			<span class="add-on"><i class="icon-calendar"></i></span>
+		</div>
+		<span class="text-center" style="margin-left: 10px; margin-right: 10px;">a</span>
+		<div class="input-append date" id="@fieldTo.id-picker" data-date="@fieldTo.value" data-date-format="@elementsTo.args.get('format).getOrElse("dd/mm/yyyy")">
+			<input type="text" name="@fieldTo.name" id="@fieldTo.id">
+			<span class="add-on"><i class="icon-calendar"></i></span>
+		</div>
+	</div>
+</div>
+
+<script>
+$(function() {
+	var @fieldFrom.id = $('#@fieldFrom.id-picker').datepicker({
+		'format': '@elementsFrom.args.get('format).getOrElse("dd/mm/yyyy")',
+		'language': 'pt-BR',
+		'autoclose': true
+	});
+	var @fieldTo.id = $('#@fieldTo.id-picker').datepicker({
+		'format': '@elementsTo.args.get('format).getOrElse("dd/mm/yyyy")',
+		'language': 'pt-BR',
+		'autoclose': true
+	});
+
+	$('#@fieldFrom.id-picker').datepicker().on('changeDate', function(ev){
+		@*$('#@fieldTo.id-picker').datepicker('setStartDate', ev.date);*@
+		if (ev.date.valueOf() > @{fieldTo.id}.data('datepicker').date.valueOf()) {
+			var newDate = new Date(ev.date);
+			newDate.setDate(newDate.getDate() + 1);
+			@{fieldTo.id}.data('datepicker').setDate(newDate);
+		}
+    });
+
+	$('#@fieldTo.id-picker').datepicker().on('changeDate', function(ev){
+		@*$('#@fieldFrom.id-picker').datepicker('setEndDate', ev.date);*@
+		if (ev.date.valueOf() < @{fieldFrom.id}.data('datepicker').date.valueOf()) {
+			var newDate = new Date(ev.date);
+			newDate.setDate(newDate.getDate() + 1);
+			@{fieldFrom.id}.data('datepicker').setDate(newDate);
+		}
+    });
+});
+</script>
