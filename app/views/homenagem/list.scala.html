@@ -66,6 +66,12 @@
             			
             			@inputDate(filterForm("dataRecebimentoFim"),
 							'_label -> Messages("homenagem.dataRecebimentoFim.label"))
+							
+						<div class="input-daterange" id="datepicker">
+							<input class="input-small" name="start" value="2012-04-05" />
+							<span class="add-on">to</span>
+							<input class="input-small" name="end" value="2012-04-07" />
+						</div>
 						
 						<div class="form-actions">
 							<button type="submit" id="searchsubmit" class="btn btn-primary"><i class="icon-filter icon-white"></i> @Messages("doFilter")</button>

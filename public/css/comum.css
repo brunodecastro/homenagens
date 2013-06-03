@@ -8,7 +8,7 @@ a:hover {
 }
 
 input, textarea, select, .uneditable-input {
-	height: 28px !important;
+/* 	height: 28px !important; */
 }
 
 .header  {
