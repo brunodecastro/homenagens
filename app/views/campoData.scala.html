@@ -9,7 +9,7 @@
   <label class="control-label" for="@field.id">@elements.args.get('_label)</label>
   <div class="controls">
     <div class="input-append date" id="@field.id-picker" data-date="@field.value" data-date-format="@elements.args.get('format).getOrElse("dd/mm/yyyy")">
-        <input type="text" name="@field.name" id="@field.id">
+        <input type="text" name="@field.name" id="@field.id" value="@field.value">
         <span class="add-on"><i class="icon-calendar"></i></span>
         <span class="help-inline">@elements.infos.mkString(", ")</span> 
         <span class="help-inline">@elements.errors.mkString(", ")</span> 
@@ -22,6 +22,7 @@ $(function() {
 	$('#@field.id-picker').datepicker({
 		'format': '@elements.args.get('format).getOrElse("dd/mm/yyyy")',
 		'language': 'pt-BR',
+		'todayBtn': 'linked'
 	});
 });
 </script>
