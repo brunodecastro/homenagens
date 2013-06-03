@@ -16,7 +16,7 @@
 	    
 	    @form(routes.Homenagens.save(), 'class -> "form-horizontal") {
 	    
-		    @if(homenagemForm.hasGlobalErrors) { 
+		    @if(homenagemForm.hasGlobalErrors) {
 	            <div class="alert alert-error">
 	            <a class="close" data-dismiss="alert">×</a>
 	                @homenagemForm.globalError.message
@@ -43,9 +43,9 @@
 	        
 	        <div class="form-actions">
 	            <button type="submit" class="btn btn-primary">@Messages("save")</button>
-	            <a href="@routes.Homenagens.list()" class="btn">@Messages("cancel")</a> 
+	            <a href="@routes.Homenagens.list()" class="btn">@Messages("cancel")</a>
 	        </div>
-	     </div>   
+	     </div>
 	        
 	    }
 	    

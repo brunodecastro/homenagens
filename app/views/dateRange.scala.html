@@ -10,12 +10,12 @@
 	<label class="control-label" for="@fieldFrom.id">@elementsFrom.args.get('_label)</label>
 	<div class="controls">
 	    <div class="input-append date" id="@fieldFrom.id-picker" data-date="@fieldFrom.value" data-date-format="@elementsFrom.args.get('format).getOrElse("dd/mm/yyyy")">
-			<input type="text" name="@fieldFrom.name" id="@fieldFrom.id">
+			<input type="text" name="@fieldFrom.name" id="@fieldFrom.id" value="@fieldFrom.value">
 			<span class="add-on"><i class="icon-calendar"></i></span>
 		</div>
 		<span class="text-center" style="margin-left: 10px; margin-right: 10px;">a</span>
 		<div class="input-append date" id="@fieldTo.id-picker" data-date="@fieldTo.value" data-date-format="@elementsTo.args.get('format).getOrElse("dd/mm/yyyy")">
-			<input type="text" name="@fieldTo.name" id="@fieldTo.id">
+			<input type="text" name="@fieldTo.name" id="@fieldTo.id" value="@fieldTo.value">
 			<span class="add-on"><i class="icon-calendar"></i></span>
 		</div>
 	</div>
@@ -26,27 +26,35 @@ $(function() {
 	var @fieldFrom.id = $('#@fieldFrom.id-picker').datepicker({
 		'format': '@elementsFrom.args.get('format).getOrElse("dd/mm/yyyy")',
 		'language': 'pt-BR',
+		'todayBtn': 'linked',
 		'autoclose': true
 	});
 	var @fieldTo.id = $('#@fieldTo.id-picker').datepicker({
 		'format': '@elementsTo.args.get('format).getOrElse("dd/mm/yyyy")',
 		'language': 'pt-BR',
+		'todayBtn': 'linked',
 		'autoclose': true
 	});
 
 	$('#@fieldFrom.id-picker').datepicker().on('changeDate', function(ev){
-		if (ev.date.valueOf() > @{fieldTo.id}.data('datepicker').date.valueOf()) {
-			var newDate = new Date(ev.date);
-			newDate.setDate(newDate.getDate() + 1);
-			@{fieldTo.id}.data('datepicker').setDate(newDate);
+		var @{fieldTo.id}_value = $('#@fieldTo.id')[0].value;
+		if(typeof(@{fieldTo.id}_value) != undefined && @{fieldTo.id}_value.trim().length > 0) {
+			if (ev.date.valueOf() > @{fieldTo.id}.data('datepicker').date.valueOf()) {
+				var newDate = new Date(ev.date);
+				newDate.setDate(newDate.getDate() + 1);
+				@{fieldTo.id}.data('datepicker').setDate(newDate);
+			}
 		}
     });
 
 	$('#@fieldTo.id-picker').datepicker().on('changeDate', function(ev){
-		if (ev.date.valueOf() < @{fieldFrom.id}.data('datepicker').date.valueOf()) {
-			var newDate = new Date(ev.date);
-			newDate.setDate(newDate.getDate() + 1);
-			@{fieldFrom.id}.data('datepicker').setDate(newDate);
+		var @{fieldFrom.id}_value = $('#@fieldFrom.id')[0].value;
+		if(typeof(@{fieldFrom.id}_value) != undefined && @{fieldFrom.id}_value.trim().length > 0) {
+			if (ev.date.valueOf() < @{fieldFrom.id}.data('datepicker').date.valueOf()) {
+				var newDate = new Date(ev.date);
+				newDate.setDate(newDate.getDate() + 1);
+				@{fieldFrom.id}.data('datepicker').setDate(newDate);
+			}
 		}
     });
 });

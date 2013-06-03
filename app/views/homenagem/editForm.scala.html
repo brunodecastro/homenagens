@@ -1,0 +1,77 @@
+@(usuarioLogado: Usuario, id: Long, homenagemForm: Form[Homenagem])
+
+@import helper._
+
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) } 
+
+@header(key:String, title:String) = {
+    <th class="@key.replace(".","_") header">
+        @title
+    </th>
+}
+
+@main(usuarioLogado, Messages("homenagem.edit.title"), "homenagem", Messages("homenagem.edit.lead")){
+
+	<div class="well">
+	    
+	    @form(routes.Homenagens.update(id), 'class -> "form-horizontal") {
+	    
+		    @if(homenagemForm.hasGlobalErrors) {
+	            <div class="alert alert-error">
+	            <a class="close" data-dismiss="alert">×</a>
+	                @homenagemForm.globalError.message
+	            </div>
+	        }
+	    
+	      <div class="control-group">  
+	        
+	            @inputText(homenagemForm("numeroRegistro"), '_label -> Messages("homenagem.numeroRegistro.label"))
+	            @inputText(homenagemForm("descricao"), '_label -> Messages("homenagem.descricao.label"), 'class -> "input-xxlarge")
+	            @textarea(homenagemForm("resumo"), args = 'rows -> 3, 'cols -> 50, '_label -> Messages("homenagem.resumo.label"), 'class -> "input-xxlarge")
+	            @campoData(homenagemForm("dataRecebimento"), '_label -> Messages("homenagem.dataRecebimento.label"))
+	            @inputText(homenagemForm("local"), '_label -> Messages("homenagem.local.label"), 'class -> "input-xxlarge")
+	            @inputText(homenagemForm("localizacao"), '_label -> Messages("homenagem.localizacao.label"), 'class -> "input-xxlarge")
+	            @inputText(homenagemForm("precedencia"), '_label -> Messages("homenagem.precedencia.label"), 'class -> "input-xxlarge")
+	            @inputText(homenagemForm("objeto"), '_label -> Messages("homenagem.objeto.label"), 'class -> "input-xxlarge")
+				@inputText(homenagemForm("prateleira"), '_label -> Messages("homenagem.prateleira.label"), 'class -> "input-xxlarge")
+				@inputText(homenagemForm("material"), '_label -> Messages("homenagem.material.label"), 'class -> "input-xxlarge")
+				@inputText(homenagemForm("altura"), '_label -> Messages("homenagem.altura.label"))
+				@inputText(homenagemForm("largura"), '_label -> Messages("homenagem.largura.label"))
+				@inputText(homenagemForm("comprimento"), '_label -> Messages("homenagem.comprimento.label"))
+				@inputText(homenagemForm("profundidade"), '_label -> Messages("homenagem.profundidade.label"))
+				@inputText(homenagemForm("quemEntregou"), '_label -> Messages("homenagem.quemEntregou.label"), 'class -> "input-xxlarge")
+	        
+	        <div class="form-actions">
+				<button type="submit" class="btn btn-primary">@Messages("save")</button>
+				<button type="button" data-toggle="modal" data-target="#modalDelete" class="btn btn-danger">
+		        	<i class="icon-trash icon-white"></i> @Messages("delete")
+		        </button>
+				<a href="@routes.Homenagens.list()" class="btn">@Messages("cancel")</a>
+			</div>
+	     </div>
+	        
+	    }
+	    
+	</div>
+	
+	<div id="modalDelete" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="modalDeleteLabel" aria-hidden="true">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			<h3 id="modalDeleteLabel">@Messages("deleteMessage.title")</h3>
+		</div>
+		<div class="modal-body">
+			<p>@Messages("deleteMessage.text", Messages("homenagem"))</p>
+		</div>
+		<div class="modal-footer">
+			@form(routes.Homenagens.delete(id)) {
+				<button class="btn" data-dismiss="modal" aria-hidden="true">@Messages("cancel")</button>
+				<button class="btn btn-danger" type="submit"><i class="icon-trash icon-white"></i> @Messages("delete")</button>
+			}
+		</div>
+	</div>
+
+}
+
+
+
+

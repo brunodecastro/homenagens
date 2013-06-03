@@ -32,9 +32,12 @@ public class Homenagens extends Controller {
     
     public static Result list(int page, String sortBy, String order) {
     	Form<HomenagemFilter> homenagemFilterForm = form(HomenagemFilter.class).bindFromRequest();
-//        if(homenagemFilterForm.hasErrors()) {
-//            return badRequest(createForm.render());
-//        }
+        if(homenagemFilterForm.hasErrors()) {
+            return badRequest(list.render(Usuario.consultarPorEmail(request().username()), 
+            		Homenagem.page(page, 10, sortBy, order, homenagemFilterForm.get()),
+                    sortBy, order, homenagemFilterForm
+                ));
+        }
         return ok(
             list.render(Usuario.consultarPorEmail(request().username()), 
             		Homenagem.page(page, 10, sortBy, order, homenagemFilterForm.get()),
@@ -54,8 +57,7 @@ public class Homenagens extends Controller {
         		homenagem
         );
         return ok(
-           // editForm.render(Usuario.consultarPorEmail(request().username()), id, homenagemForm)
-        		editForm.render()
+            editForm.render(Usuario.consultarPorEmail(request().username()), id, homenagemForm)
         );
     }
     
@@ -68,8 +70,7 @@ public class Homenagens extends Controller {
         Form<Homenagem> homenagemForm = form(Homenagem.class).bindFromRequest();
         if(homenagemForm.hasErrors()) {
         	Homenagem homenagem = Homenagem.find.byId(id);
-//            return badRequest(editForm.render(Usuario.consultarPorEmail(request().username()), id, homenagemForm));
-            return badRequest(editForm.render());
+            return badRequest(editForm.render(Usuario.consultarPorEmail(request().username()), id, homenagemForm));
         }
         homenagemForm.get().update(id);
         flash("success", "O Tipo de Homenagem \"" + homenagemForm.get().descricao + "\" foi atualizado");
