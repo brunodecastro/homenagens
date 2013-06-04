@@ -35,7 +35,7 @@
 	            )
 	            @select(
 	                homenagemForm("homenageado"), 
-	                options = options(Homenageado.values().toList.map(_.toString)),
+	                Homenageado.values().toList.map(v => (v.toString, v.getLabel)),
 	                '_default -> "--- Homenageado ---",
 	                '_label -> "Homenageado",
 	                '_error -> homenagemForm("homenageado").error.map(_.withMessage("Selecione o Homenageado."))
