@@ -34,7 +34,6 @@ public class Homenagem extends Model {
 	@Required
 	public String numeroRegistro;
 	
-	@OneToOne
 	public Homenageado homenageado;
 	
 	public String descricao;
