@@ -34,11 +34,11 @@
 	                '_error -> homenagemForm("tipoHomenagem").error.map(_.withMessage("Selecione o tipo de homenagem."))
 	            )
 	            @select(
-	                homenagemForm("tipoUsuario"), 
-	                options = options(TipoUsuario.values().toList.map(_.toString)),
-	                '_default -> "--- Tipo de usuário ---",
-	                '_label -> "Tipo de usuário",
-	                '_error -> homenagemForm("tipoUsuario").error.map(_.withMessage("Selecione o tipo de usuário."))
+	                homenagemForm("homenageado"), 
+	                options = options(Homenageado.values().toList.map(_.toString)),
+	                '_default -> "--- Homenageado ---",
+	                '_label -> "Homenageado",
+	                '_error -> homenagemForm("homenageado").error.map(_.withMessage("Selecione o Homenageado."))
 	            )
 	            @inputText(homenagemForm("descricao"), '_label -> Messages("homenagem.descricao.label"), 'class -> "input-xxlarge")
 	            @textarea(homenagemForm("resumo"), args = 'rows -> 3, 'cols -> 50, '_label -> Messages("homenagem.resumo.label"), 'class -> "input-xxlarge")
