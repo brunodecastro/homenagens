@@ -11,6 +11,12 @@
     
     var sortBy = currentSortBy
     var order = currentOrder
+    var numeroRegistro = ""
+	var descricao = ""
+	var resumo = ""
+	var quemEntregou = ""
+	var dataRecebimentoInicio = ""
+	var dataRecebimentoFim = ""
     
     if(newSortBy != null) {
         sortBy = newSortBy
@@ -25,8 +31,86 @@
         }
     }
     
+    if(filterForm("numeroRegistro") != null) {
+		numeroRegistro = filterForm("numeroRegistro").value()
+		if(numeroRegistro == null) numeroRegistro = ""
+	}
+	
+	if(filterForm("descricao") != null) {
+		descricao = filterForm("descricao").value()
+		if(descricao == null) descricao = ""
+	}
+	
+	if(filterForm("resumo") != null) {
+		resumo = filterForm("resumo").value()
+		if(resumo == null) resumo = ""
+	}
+    
+    if(filterForm("quemEntregou") != null) {
+		quemEntregou = filterForm("quemEntregou").value()
+		if(quemEntregou == null) quemEntregou = ""
+	}
+	
+	if(filterForm("dataRecebimentoInicio") != null) {
+		dataRecebimentoInicio = filterForm("dataRecebimentoInicio").value()
+		if(dataRecebimentoInicio == null) dataRecebimentoInicio = ""
+	}
+	
+	if(filterForm("dataRecebimentoFim") != null) {
+		dataRecebimentoFim = filterForm("dataRecebimentoFim").value()
+		if(dataRecebimentoFim == null) dataRecebimentoFim = ""
+	}
+	
     // Generate the link
-    routes.Homenagens.list(newPage, sortBy, order)
+    routes.Homenagens.list(newPage, sortBy, order, numeroRegistro, descricao, resumo, quemEntregou, dataRecebimentoInicio, dataRecebimentoFim)
+}
+
+@printlink() = @{
+
+	var sortBy = currentSortBy
+    var order = currentOrder
+    var numeroRegistro = ""
+	var descricao = ""
+	var resumo = ""
+	var quemEntregou = ""
+	var dataRecebimentoInicio = ""
+	var dataRecebimentoFim = ""
+    
+    if(sortBy == null) sortBy = "descricao"
+    if(order == null) order = "asc"
+    
+    if(filterForm("numeroRegistro") != null) {
+		numeroRegistro = filterForm("numeroRegistro").value()
+		if(numeroRegistro == null) numeroRegistro = ""
+	}
+	
+	if(filterForm("descricao") != null) {
+		descricao = filterForm("descricao").value()
+		if(descricao == null) descricao = ""
+	}
+	
+	if(filterForm("resumo") != null) {
+		resumo = filterForm("resumo").value()
+		if(resumo == null) resumo = ""
+	}
+    
+    if(filterForm("quemEntregou") != null) {
+		quemEntregou = filterForm("quemEntregou").value()
+		if(quemEntregou == null) quemEntregou = ""
+	}
+	
+	if(filterForm("dataRecebimentoInicio") != null) {
+		dataRecebimentoInicio = filterForm("dataRecebimentoInicio").value()
+		if(dataRecebimentoInicio == null) dataRecebimentoInicio = ""
+	}
+	
+	if(filterForm("dataRecebimentoFim") != null) {
+		dataRecebimentoFim = filterForm("dataRecebimentoFim").value()
+		if(dataRecebimentoFim == null) dataRecebimentoFim = ""
+	}
+	
+    // Generate the link
+    routes.Homenagens.print(sortBy, order, numeroRegistro, descricao, resumo, quemEntregou, dataRecebimentoInicio, dataRecebimentoFim)
 }
 
 @**********************************
@@ -73,8 +157,9 @@
 	</div>
     
     <div class="btn-toolbar">
-    	<a class="btn btn-success" id="add" href="@routes.Homenagens.create()"> <i class="icon-plus-sign icon-white"></i> @Messages("new")</a>
-    	<a class="btn btn-info" id="print" href="@routes.Homenagens.create()"> <i class="icon-print icon-white"></i> @Messages("print")</a>
+    	<a class="btn btn-success" href="@routes.Homenagens.create()"> <i class="icon-plus-sign icon-white"></i> @Messages("new")</a>
+    	<a class="btn btn-info" href="@printlink()" target="_blank"> <i class="icon-print icon-white"></i> @Messages("print")</a>
+    	
     </div>
     
     @if(currentPage.getTotalRowCount == 0) {

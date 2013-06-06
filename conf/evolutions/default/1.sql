@@ -42,9 +42,7 @@ create table homenagem (
   id                        bigint not null,
   homenagem_pai_id          bigint,
   numero_registro           varchar(255),
-  homenageado_id            bigint,
   descricao                 varchar(255),
-  tipo_homenagem_id         bigint,
   resumo                    varchar(255),
   local                     varchar(255),
   localizacao               varchar(255),
@@ -131,12 +129,8 @@ alter table db_image add constraint fk_db_image_thumbnail_3 foreign key (thumbna
 create index ix_db_image_thumbnail_3 on db_image (thumbnail_id);
 alter table homenagem add constraint fk_homenagem_homenagemPai_4 foreign key (homenagem_pai_id) references homenagem (id) on delete restrict on update restrict;
 create index ix_homenagem_homenagemPai_4 on homenagem (homenagem_pai_id);
-alter table homenagem add constraint fk_homenagem_homenageado_5 foreign key (homenageado_id) references homenageado (id) on delete restrict on update restrict;
-create index ix_homenagem_homenageado_5 on homenagem (homenageado_id);
-alter table homenagem add constraint fk_homenagem_tipoHomenagem_6 foreign key (tipo_homenagem_id) references tipo_homenagem (id) on delete restrict on update restrict;
-create index ix_homenagem_tipoHomenagem_6 on homenagem (tipo_homenagem_id);
-alter table tipo_homenagem add constraint fk_tipo_homenagem_parent_7 foreign key (parent_id) references tipo_homenagem (id) on delete restrict on update restrict;
-create index ix_tipo_homenagem_parent_7 on tipo_homenagem (parent_id);
+alter table tipo_homenagem add constraint fk_tipo_homenagem_parent_5 foreign key (parent_id) references tipo_homenagem (id) on delete restrict on update restrict;
+create index ix_tipo_homenagem_parent_5 on tipo_homenagem (parent_id);
 
 
 
