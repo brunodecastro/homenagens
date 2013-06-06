@@ -23,7 +23,6 @@ public class InitialData {
             
             Ebean.save(all.get("tiposHomenagem"));
             
-            Ebean.save(all.get("homenagens"));
         }
     }
 

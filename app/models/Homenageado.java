@@ -1,23 +1,29 @@
 package models;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
 
-import play.data.validation.Constraints;
-import play.db.ebean.Model;
+public enum Homenageado  {
 
-@Entity
-public class Homenageado extends Model {
-
-	@Id
-	public Long id;
-
-	@Constraints.Required
-	public String nome;
+	MARCONI("Marconi Perillo"),
+	VALERIA("Valéria Perillo");
 	
-	
-	// -- Queries
+	private String label;
 
-	public static Finder<String, Homenageado> find = new Finder<String, Homenageado>(String.class, Homenageado.class);
+	/**
+	 * Instancia um novo Homenageado
+	 * 
+	 * @param label
+	 */
+	private Homenageado(final String label) {
+		this.label = label;
+	}
+
+	/**
+	 * Retorna o valor do atributo label
+	 * 
+	 * @return label
+	 */
+	public String getLabel() {
+		return this.label;
+	}
 
 }

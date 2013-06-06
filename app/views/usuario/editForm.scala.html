@@ -23,7 +23,7 @@
             @inputPassword(usuarioForm("confirmacaoSenha"), '_label -> "Confirmação da senha")
             @select(
                 usuarioForm("tipoUsuario"), 
-                options = options(TipoUsuario.values().toList.map(_.toString)),
+                TipoUsuario.values().toList.map(v => (v.toString, v.getLabel)),
                 '_default -> "--- Tipo de usuário ---",
                 '_label -> "Tipo de usuário",
                 '_error -> usuarioForm("tipoUsuario").error.map(_.withMessage("Selecione o tipo de usuário."))

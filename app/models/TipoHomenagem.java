@@ -61,6 +61,14 @@ public class TipoHomenagem extends Model {
         return options;
     }
 	
+	public static Map<String,String> allOptions() {
+        LinkedHashMap<String,String> options = new LinkedHashMap<String,String>();
+        for(TipoHomenagem c: TipoHomenagem.find.all()) {
+            options.put(c.id.toString(), c.name);
+        }
+        return options;
+    }
+	
 	public Form<TipoHomenagem> getForm() {
 		Form<TipoHomenagem> tipoHomenagemForm = form(TipoHomenagem.class).fill(this);
 		return tipoHomenagemForm;

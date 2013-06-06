@@ -26,6 +26,20 @@
 	      <div class="control-group">  
 	        
 	            @inputText(homenagemForm("numeroRegistro"), '_label -> Messages("homenagem.numeroRegistro.label"))
+	            @select(
+	                homenagemForm("homenageado"), 
+	                Homenageado.values().toList.map(v => (v.toString, v.getLabel)),
+	                '_default -> "--- Homenageado ---",
+	                '_label -> "Homenageado",
+	                '_error -> homenagemForm("homenageado").error.map(_.withMessage("Selecione o Homenageado."))
+	            )
+		        @select(
+	                homenagemForm("tipoHomenagem"), 
+	                options = options(TipoHomenagem.allOptions),
+	                '_default -> "--- Tipo de homenagem ---",
+	                '_label -> "Tipo de homenagem",
+	                '_error -> homenagemForm("tipoHomenagem").error.map(_.withMessage("Selecione o tipo de homenagem."))
+	            )
 	            @inputText(homenagemForm("descricao"), '_label -> Messages("homenagem.descricao.label"), 'class -> "input-xxlarge")
 	            @textarea(homenagemForm("resumo"), args = 'rows -> 3, 'cols -> 50, '_label -> Messages("homenagem.resumo.label"), 'class -> "input-xxlarge")
 	            @campoData(homenagemForm("dataRecebimento"), '_label -> Messages("homenagem.dataRecebimento.label"))
