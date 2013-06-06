@@ -12,7 +12,7 @@ create table cidade (
 create table conta (
   id                        bigint not null,
   nome                      varchar(255),
-  saldo                     double,
+  saldo                     float,
   usuario_id                bigint,
   constraint pk_conta primary key (id))
 ;
@@ -46,10 +46,10 @@ create table homenagem (
   objeto                    varchar(255),
   prateleira                varchar(255),
   material                  varchar(255),
-  altura                    double,
-  largura                   double,
-  comprimento               double,
-  profundidade              double,
+  altura                    float,
+  largura                   float,
+  comprimento               float,
+  profundidade              float,
   quem_entregou             varchar(255),
   data_recebimento          timestamp,
   constraint ck_homenagem_homenageado check (homenageado in (0,1)),
@@ -71,7 +71,7 @@ create table picture (
 
 create table raw_image (
   id                        bigint not null,
-  image                     blob,
+  image                     bytea,
   width                     integer,
   height                    integer,
   mimetype                  varchar(255),
@@ -116,46 +116,42 @@ create sequence tipo_homenagem_seq;
 
 create sequence usuario_seq;
 
-alter table conta add constraint fk_conta_usuario_1 foreign key (usuario_id) references usuario (id) on delete restrict on update restrict;
+alter table conta add constraint fk_conta_usuario_1 foreign key (usuario_id) references usuario (id);
 create index ix_conta_usuario_1 on conta (usuario_id);
-alter table db_image add constraint fk_db_image_image_2 foreign key (image_id) references raw_image (id) on delete restrict on update restrict;
+alter table db_image add constraint fk_db_image_image_2 foreign key (image_id) references raw_image (id);
 create index ix_db_image_image_2 on db_image (image_id);
-alter table db_image add constraint fk_db_image_thumbnail_3 foreign key (thumbnail_id) references raw_image (id) on delete restrict on update restrict;
+alter table db_image add constraint fk_db_image_thumbnail_3 foreign key (thumbnail_id) references raw_image (id);
 create index ix_db_image_thumbnail_3 on db_image (thumbnail_id);
-alter table homenagem add constraint fk_homenagem_homenagemPai_4 foreign key (homenagem_pai_id) references homenagem (id) on delete restrict on update restrict;
+alter table homenagem add constraint fk_homenagem_homenagemPai_4 foreign key (homenagem_pai_id) references homenagem (id);
 create index ix_homenagem_homenagemPai_4 on homenagem (homenagem_pai_id);
-alter table homenagem add constraint fk_homenagem_tipoHomenagem_5 foreign key (tipo_homenagem_id) references tipo_homenagem (id) on delete restrict on update restrict;
+alter table homenagem add constraint fk_homenagem_tipoHomenagem_5 foreign key (tipo_homenagem_id) references tipo_homenagem (id);
 create index ix_homenagem_tipoHomenagem_5 on homenagem (tipo_homenagem_id);
-alter table tipo_homenagem add constraint fk_tipo_homenagem_parent_6 foreign key (parent_id) references tipo_homenagem (id) on delete restrict on update restrict;
+alter table tipo_homenagem add constraint fk_tipo_homenagem_parent_6 foreign key (parent_id) references tipo_homenagem (id);
 create index ix_tipo_homenagem_parent_6 on tipo_homenagem (parent_id);
 
 
 
 # --- !Downs
 
-SET REFERENTIAL_INTEGRITY FALSE;
+drop table if exists cidade cascade;
 
-drop table if exists cidade;
+drop table if exists conta cascade;
 
-drop table if exists conta;
+drop table if exists db_image cascade;
 
-drop table if exists db_image;
+drop table if exists estado cascade;
 
-drop table if exists estado;
+drop table if exists homenagem cascade;
 
-drop table if exists homenagem;
+drop table if exists pais cascade;
 
-drop table if exists pais;
+drop table if exists picture cascade;
 
-drop table if exists picture;
+drop table if exists raw_image cascade;
 
-drop table if exists raw_image;
+drop table if exists tipo_homenagem cascade;
 
-drop table if exists tipo_homenagem;
-
-drop table if exists usuario;
-
-SET REFERENTIAL_INTEGRITY TRUE;
+drop table if exists usuario cascade;
 
 drop sequence if exists cidade_seq;
 
