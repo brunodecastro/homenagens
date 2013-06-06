@@ -43,6 +43,27 @@
 	            @inputText(homenagemForm("descricao"), '_label -> Messages("homenagem.descricao.label"), 'class -> "input-xxlarge")
 	            @textarea(homenagemForm("resumo"), args = 'rows -> 3, 'cols -> 50, '_label -> Messages("homenagem.resumo.label"), 'class -> "input-xxlarge")
 	            @campoData(homenagemForm("dataRecebimento"), '_label -> Messages("homenagem.dataRecebimento.label"))
+	            @select(
+	                homenagemForm("pais"), 
+	                Pais.find.all.map(v => (v.id.toString, v.nome)),
+	                '_default -> "--- País ---",
+	                '_label -> "País",
+	                '_error -> homenagemForm("pais").error.map(_.withMessage("Selecione o país."))
+	            )
+	            @select(
+	                homenagemForm("estado"), 
+	                Estado.find.all.map(v => (v.id.toString, v.nome)),
+	                '_default -> "--- Estado ---",
+	                '_label -> "Estado",
+	                '_error -> homenagemForm("estado").error.map(_.withMessage("Selecione o estado."))
+	            )
+	            @select(
+	                homenagemForm("cidade"), 
+	                Cidade.find.all.map(v => (v.id.toString, v.nome)),
+	                '_default -> "--- Cidade ---",
+	                '_label -> "Cidade",
+	                '_error -> homenagemForm("cidade").error.map(_.withMessage("Selecione a cidade."))
+	            )
 	            @inputText(homenagemForm("local"), '_label -> Messages("homenagem.local.label"), 'class -> "input-xxlarge")
 	            @inputText(homenagemForm("localizacao"), '_label -> Messages("homenagem.localizacao.label"), 'class -> "input-xxlarge")
 	            @inputText(homenagemForm("precedencia"), '_label -> Messages("homenagem.precedencia.label"), 'class -> "input-xxlarge")

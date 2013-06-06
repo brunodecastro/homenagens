@@ -3,12 +3,11 @@ package models;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.FetchType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.validation.Valid;
 
 import play.data.validation.Constraints.Required;
@@ -40,12 +39,14 @@ public class Homenagem extends Model {
 	public String descricao;
 
 	@Required
-	@OneToOne
+	@ManyToOne
 	public TipoHomenagem tipoHomenagem;
 	
-	public String resumo;
-	
+	@Required
+	@ManyToOne
 	public Cidade cidade;
+	
+	public String resumo;
 	
 	public String local;
 	
@@ -77,7 +78,7 @@ public class Homenagem extends Model {
 	
 	// -- Queries
 
-	public static Finder<Long, Homenagem> find = new Finder<Long, Homenagem>(Long.class, Homenagem.class);
+	public static Model.Finder<Long, Homenagem> find = new Finder<Long, Homenagem>(Long.class, Homenagem.class);
 	
 	public static Page<Homenagem> page(int page, int pageSize, String sortBy, String order, String filter) {
 		return find.where().ilike("descricao", "%" + filter + "%").orderBy(sortBy + " " + order).findPagingList(pageSize)
