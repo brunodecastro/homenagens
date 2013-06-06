@@ -4,12 +4,14 @@
 usuarios:
 
  - !!models.Usuario
+  id:    1
   email:   admin@homenagens.com
   nome:   Administrador
   senha:   admin
   tipoUsuario: ADMINISTRADOR
  
  - !!models.Usuario
+  id:    2
   email:   brunnodecastro@gmail.com
   nome:   Bruno de Castro Oliveira
   senha:   senha
@@ -18,16 +20,72 @@ usuarios:
 
 tiposHomenagem:
 
- - &medalha !!models.TipoHomenagem
+ - !!models.TipoHomenagem
+  id:    1
   name:   Medalha
  
  - !!models.TipoHomenagem
+  id:    2
   name:   Medalha de honra
-  parent: *medalha
+  parent:
+   id:  1
 
- - &titulo !!models.TipoHomenagem
+ - !!models.TipoHomenagem
+  id:    3
   name:   Título
  
  - !!models.TipoHomenagem
+  id:    4
   name:   Título de cidadão
-  parent: *titulo
+  parent:
+   id:  3
+
+ - !!models.TipoHomenagem
+  id:    5
+  name:   Medalha olímpica
+  parent:
+   id:  1
+
+ - !!models.TipoHomenagem
+  id:    6
+  name:   Caneta
+
+
+homenagens:
+
+ - !!models.Homenagem
+  id: 1
+  numeroRegistro: 2013Abc01
+  descricao: Medalha de honra na guerra do golfo
+  resumo: Lorem ipsum...
+  homenageado:
+   id: 1
+   nome: Marconi
+  cidade:
+   id: 1
+   nome: Belzonte
+   estado:
+    id: 1
+    nome: Minas Gerais
+    abreviacao: MG
+    pais:
+     id: 1
+     nome: Brasil
+     abreviacao: BRA
+
+ - !!models.Homenagem
+  id: 2
+  numeroRegistro: 2013Abc02
+  descricao: Medalha de honra na guerra do Vietnam
+  resumo: Lorem ipsum...
+  cidade:
+   id: 1
+   nome: Belzonte
+   estado:
+    id: 1
+    nome: Minas Gerais
+    abreviacao: MG
+    pais:
+     id: 1
+     nome: Brasil
+     abreviacao: BRA

@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+
 import org.apache.commons.collections.map.HashedMap;
 
 import models.Homenagem;
@@ -27,7 +29,7 @@ public class Homenagens extends Controller {
      * This result directly redirect to application home.
      */
     public static Result GO_HOME = redirect(
-        routes.Homenagens.list(0, "descricao", "asc")
+        routes.Homenagens.list(0, "descricao", "asc", "", "", "", "", "", "")
     );
     
     /**
@@ -37,7 +39,7 @@ public class Homenagens extends Controller {
         return GO_HOME;
     }
     
-    public static Result list(int page, String sortBy, String order) {
+    public static Result list(int page, String sortBy, String order, String numeroRegistro, String descricao, String resumo, String quemEntregou, String dataRecebimentoInicio, String dataRecebimentoFim) {
     	Form<HomenagemFilter> homenagemFilterForm = form(HomenagemFilter.class).bindFromRequest();
         if(homenagemFilterForm.hasErrors()) {
             return badRequest(list.render(Usuario.consultarPorEmail(request().username()), 
@@ -118,13 +120,15 @@ public class Homenagens extends Controller {
         return GO_HOME;
     }
 
-//    public static Result print(Form<HomenagemFilter> homenagemFilterForm, String sortBy, String order) {
-//    	List<Homenagem> homenagemList = Homenagem.list(sortBy, order, homenagemFilterForm.get());
-//    	Map<String, Object> reportParams = new HashMap<String, Object>();
-//    	reportParams.put("list", homenagemList);
-//        return redirect(
-//        	routes.ReportController.jasperDocument("homenagem_list", reportParams)
-//        );
-//    }
+    public static Result print(String sortBy, String order, String numeroRegistro, String descricao, String resumo, String quemEntregou, String dataRecebimentoInicio, String dataRecebimentoFim) {
+    	Form<HomenagemFilter> homenagemFilterForm = form(HomenagemFilter.class).bindFromRequest();
+    	List<Homenagem> homenagemList = Homenagem.list(sortBy, order, homenagemFilterForm.get());
+    	
+    	Map<String, Object> reportParams = new HashMap<String, Object>();
+    	reportParams.put("title", "titulo");
+    	
+        return ReportController.jasperDocument("homenagem_list", reportParams, new
+    			JRBeanCollectionDataSource(homenagemList));
+    }
 
 }
