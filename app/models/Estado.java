@@ -2,6 +2,7 @@ package models;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 import play.db.ebean.Model;
 
@@ -15,10 +16,12 @@ public class Estado extends Model {
 	
 	public String abreviacao;
 
+	@ManyToOne
 	public Pais pais;
 
 	// -- Queries
 
-	public static Finder<String, Estado> find = new Finder<String, Estado>(String.class, Estado.class);
+	public static Model.Finder<String, Estado> find = new Finder<String, Estado>(String.class, Estado.class);
+	
 
 }

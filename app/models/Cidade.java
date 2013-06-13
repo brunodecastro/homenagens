@@ -2,6 +2,7 @@ package models;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 import play.db.ebean.Model;
 
@@ -13,10 +14,12 @@ public class Cidade extends Model {
 	
 	public String nome;
 
+	@ManyToOne
 	public Estado estado;
 
 	// -- Queries
 
-	public static Finder<String, Cidade> find = new Finder<String, Cidade>(String.class, Cidade.class);
+	public static Model.Finder<String, Cidade> find = new Finder<String, Cidade>(String.class, Cidade.class);
+	
 
 }

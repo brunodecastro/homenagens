@@ -17,7 +17,8 @@ public class Pais extends Model {
 
 	// -- Queries
 
-	public static Finder<String, Pais> find = new Finder<String, Pais>(
-			String.class, Pais.class);
+	public static Model.Finder<String, Pais> find = new Finder<String, Pais>(String.class, Pais.class);
+	
+	
 
 }
