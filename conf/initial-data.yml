@@ -58,9 +58,6 @@ homenagens:
   numeroRegistro: 2013Abc01
   descricao: Medalha de honra na guerra do golfo
   resumo: Lorem ipsum...
-  homenageado:
-   id: 1
-   nome: Marconi
   cidade:
    id: 1
    nome: Belzonte

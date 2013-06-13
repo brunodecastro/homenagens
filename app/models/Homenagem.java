@@ -108,6 +108,12 @@ public class Homenagem extends Model {
 				queryEl.ilike("descricao", "%"+ homenagemFilter.descricao + "%");
 			}
 			
+			if(homenagemFilter.homenageado != null) {
+				queryEl.eq("homenageado", homenagemFilter.homenageado);
+			} else {
+				queryEl.eq("homenageado", Homenageado.MARCONI);
+			}
+			
 			if(homenagemFilter.tipoHomenagem != null) {
 				queryEl.eq("tipoHomenagem", homenagemFilter.tipoHomenagem);
 			}
@@ -121,6 +127,6 @@ public class Homenagem extends Model {
 			}
 		}
 		
-		return queryEl.orderBy(sortBy + " " + order);
+		return queryEl.orderBy("homenageado asc, "+ sortBy + " " + order);
 	}
 }
