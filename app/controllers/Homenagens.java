@@ -8,6 +8,10 @@ import java.util.Map;
 
 import models.Cidade;
 import models.Estado;
+
+import org.apache.commons.collections.map.HashedMap;
+
+import models.Homenageado;
 import models.Homenagem;
 import models.HomenagemFilter;
 import models.Usuario;
@@ -29,15 +33,23 @@ public class Homenagens extends Controller {
 	/**
      * This result directly redirect to application home.
      */
-    public static Result GO_HOME = redirect(
-        routes.Homenagens.list(0, "descricao", "asc", "", "", "", "", "", "")
+    private static Result GO_HOME = redirect(
+        routes.Homenagens.list(0, "descricao", "asc", "", "", "", "", "", "", "")
     );
+    
+    private static Result goHome(Homenageado homenageado) {
+    	if(homenageado != null) {
+    		return redirect(routes.Homenagens.list(0, "descricao", "asc", homenageado.name(), "", "", "", "", "", ""));
+    	} else {
+    		return GO_HOME;
+    	}
+    }
     
     /**
      * Handle default path requests, redirect to homenagems list
      */
     public static Result index() {
-        return GO_HOME;
+        return goHome(null);
     }
     
     public static Result listarEstados(Long pais) {
@@ -52,7 +64,7 @@ public class Homenagens extends Controller {
         return ok(Json.toJson(cidades));
     }
     
-    public static Result list(int page, String sortBy, String order, String numeroRegistro, String descricao, String resumo, String quemEntregou, String dataRecebimentoInicio, String dataRecebimentoFim) {
+    public static Result list(int page, String sortBy, String order, String homenageado, String numeroRegistro, String descricao, String resumo, String quemEntregou, String dataRecebimentoInicio, String dataRecebimentoFim) {
     	Form<HomenagemFilter> homenagemFilterForm = form(HomenagemFilter.class).bindFromRequest();
         if(homenagemFilterForm.hasErrors()) {
             return badRequest(list.render(Usuario.consultarPorEmail(request().username()), 
@@ -95,8 +107,8 @@ public class Homenagens extends Controller {
             return badRequest(editForm.render(Usuario.consultarPorEmail(request().username()), id, homenagemForm));
         }
         homenagemForm.get().update(id);
-        flash("success", "O Tipo de Homenagem \"" + homenagemForm.get().descricao + "\" foi atualizado");
-        return GO_HOME;
+        flash("success", "A Homenagem \"" + homenagemForm.get().descricao + "\" foi atualizada");
+        return goHome(homenagemForm.get() != null ? homenagemForm.get().homenageado : null);
     }
     
     /**
@@ -119,7 +131,7 @@ public class Homenagens extends Controller {
         }
         homenagemForm.get().save();
         flash("success", Messages.get("homenagem.create.success", homenagemForm.get().descricao));
-        return GO_HOME;
+        return goHome(homenagemForm.get() != null ? homenagemForm.get().homenageado : null);
     }
     
     /**
@@ -127,18 +139,25 @@ public class Homenagens extends Controller {
      */
     public static Result delete(Long id) {
     	Homenagem homenagem = Homenagem.find.ref(id);
+    	Homenageado homenageado = homenagem.homenageado;
     	String deletedName = homenagem.descricao;
     	homenagem.delete();
-        flash("success", "O Tipo de Homenagem \"" + deletedName + "\" foi excluído");
-        return GO_HOME;
+        flash("success", "A Homenagem \"" + deletedName + "\" foi excluída");
+        return goHome(homenageado);
     }
 
-    public static Result print(String sortBy, String order, String numeroRegistro, String descricao, String resumo, String quemEntregou, String dataRecebimentoInicio, String dataRecebimentoFim) {
+    public static Result print(String sortBy, String order, String homenageado, String numeroRegistro, String descricao, String resumo, String quemEntregou, String dataRecebimentoInicio, String dataRecebimentoFim) {
     	Form<HomenagemFilter> homenagemFilterForm = form(HomenagemFilter.class).bindFromRequest();
     	List<Homenagem> homenagemList = Homenagem.list(sortBy, order, homenagemFilterForm.get());
     	
     	Map<String, Object> reportParams = new HashMap<String, Object>();
-    	reportParams.put("title", "titulo");
+    	reportParams.put("REPORT_TITLE", "titulo");
+    	
+    	Homenageado homenageadoObj = homenagemFilterForm.get().homenageado;
+    	if(homenageadoObj == null) {
+    		homenageadoObj = Homenageado.valueOf(homenageado);
+    	}
+    	reportParams.put("HOMENAGEADO_NOME", homenageadoObj.getLabel());
     	
         return ReportController.jasperDocument("homenagem_list", reportParams, new
     			JRBeanCollectionDataSource(homenagemList));

@@ -11,6 +11,7 @@
     
     var sortBy = currentSortBy
     var order = currentOrder
+    var homenageado = ""
     var numeroRegistro = ""
 	var descricao = ""
 	var resumo = ""
@@ -31,6 +32,11 @@
         }
     }
     
+    if(filterForm("homenageado") != null) {
+		homenageado = filterForm("homenageado").value()
+		if(homenageado == null) homenageado = "MARCONI"
+	}
+    
     if(filterForm("numeroRegistro") != null) {
 		numeroRegistro = filterForm("numeroRegistro").value()
 		if(numeroRegistro == null) numeroRegistro = ""
@@ -62,13 +68,14 @@
 	}
 	
     // Generate the link
-    routes.Homenagens.list(newPage, sortBy, order, numeroRegistro, descricao, resumo, quemEntregou, dataRecebimentoInicio, dataRecebimentoFim)
+    routes.Homenagens.list(newPage, sortBy, order, homenageado, numeroRegistro, descricao, resumo, quemEntregou, dataRecebimentoInicio, dataRecebimentoFim)
 }
 
 @printlink() = @{
 
 	var sortBy = currentSortBy
     var order = currentOrder
+    var homenageado = ""
     var numeroRegistro = ""
 	var descricao = ""
 	var resumo = ""
@@ -79,6 +86,11 @@
     if(sortBy == null) sortBy = "descricao"
     if(order == null) order = "asc"
     
+    if(filterForm("homenageado") != null) {
+		homenageado = filterForm("homenageado").value()
+		if(homenageado == null) homenageado = "MARCONI"
+	}
+	
     if(filterForm("numeroRegistro") != null) {
 		numeroRegistro = filterForm("numeroRegistro").value()
 		if(numeroRegistro == null) numeroRegistro = ""
@@ -110,7 +122,7 @@
 	}
 	
     // Generate the link
-    routes.Homenagens.print(sortBy, order, numeroRegistro, descricao, resumo, quemEntregou, dataRecebimentoInicio, dataRecebimentoFim)
+    routes.Homenagens.print(sortBy, order, homenageado, numeroRegistro, descricao, resumo, quemEntregou, dataRecebimentoInicio, dataRecebimentoFim)
 }
 
 @**********************************
@@ -133,7 +145,14 @@
     		<div id="collapseFilter" class="accordion-body collapse in">
     			<div class="accordion-inner well">
 					<form action="@link(0, "descricao")" method="GET" class="form-horizontal">
-						@inputText(filterForm("numeroRegistro"),
+						@select(
+							filterForm("homenageado"), 
+							Homenageado.values().toList.map(v => (v.toString, v.getLabel)),
+							'_label -> Messages("homenagem.homenageado.label"),
+							'_error -> filterForm("homenageado").error.map(_.withMessage("Selecione o Homenageado."))
+						)
+	            
+	            		@inputText(filterForm("numeroRegistro"),
 							'_label -> Messages("homenagem.numeroRegistro.label"))
 							
 						@inputText(filterForm("descricao"),

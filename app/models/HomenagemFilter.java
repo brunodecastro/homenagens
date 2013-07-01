@@ -21,6 +21,8 @@ public class HomenagemFilter extends Model {
 	public String numeroRegistro;
 	
 	public String descricao;
+	
+	public Homenageado homenageado;
 
 	public TipoHomenagem tipoHomenagem;
 	

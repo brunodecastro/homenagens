@@ -30,7 +30,11 @@
 	            @select(
 	                homenagemForm("homenageado"), 
 	                Homenageado.values().toList.map(v => (v.toString, v.getLabel)),
+<<<<<<< HEAD
 	                '_label -> "Homenageado",
+=======
+	                '_label -> Messages("homenagem.homenageado.label"),
+>>>>>>> 355dc59288c4dcd416b66b42d400c4aaeec34af1
 	                '_error -> homenagemForm("homenageado").error.map(_.withMessage("Selecione o Homenageado."))
 	            )
 		        @select(
