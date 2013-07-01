@@ -55,6 +55,7 @@
 	                options(Seq()),
 	                '_default -> "--- Estado ---",
 	                '_label -> "Estado",
+	                'disabled -> "disabled",
 	                '_error -> homenagemForm("estado").error.map(_.withMessage("Selecione o estado."))
 	            )
 	            @select(
@@ -62,6 +63,7 @@
 	                options(Seq()),
 	                '_default -> "--- Cidade ---",
 	                '_label -> "Cidade",
+	                'disabled -> "disabled",
 	                '_error -> homenagemForm("cidade").error.map(_.withMessage("Selecione a cidade."))
 	            )
 	            @inputText(homenagemForm("local"), '_label -> Messages("homenagem.local.label"), 'class -> "input-xxlarge")
@@ -98,6 +100,7 @@
 	    if(paisId != "") {
 		    myJsRoutes.controllers.Homenagens.listarEstados(paisId).ajax({
 			    success : function(result) {
+			    	$('#estado').removeAttr("disabled");
 			    	
 			    	$.each(result, function(index, data) {
 			    	    $('#estado').append(
@@ -106,6 +109,8 @@
 			    	});
 			    }
 			});
+	    } else {
+	    	$('#estado').attr('disabled','disabled');
 	    }
 	    
 	    return false;
@@ -120,6 +125,7 @@
 	    if(estadoId != "") {
 		    myJsRoutes.controllers.Homenagens.listarCidades(estadoId).ajax({
 			    success : function(result) {
+			    	$('#cidade').removeAttr("disabled");
 			    	
 			    	$.each(result, function(index, data) {
 			    	    $('#cidade').append(
@@ -128,6 +134,8 @@
 			    	});
 			    }
 			});
+	    }else {
+	    	$('#cidade').attr('disabled','disabled');
 	    }
 	    
 	    return false;
