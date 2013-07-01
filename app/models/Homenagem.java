@@ -60,13 +60,13 @@ public class Homenagem extends Model {
 	
 	public String material;
 	
-	public Double altura;
+	public String altura;
 	
-	public Double largura;
+	public String largura;
 	
-	public Double comprimento;
+	public String comprimento;
 	
-	public Double profundidade;
+	public String profundidade;
 	
 	public String quemEntregou;
 	

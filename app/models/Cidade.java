@@ -1,5 +1,7 @@
 package models;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -19,7 +21,15 @@ public class Cidade extends Model {
 
 	// -- Queries
 
-	public static Model.Finder<String, Cidade> find = new Finder<String, Cidade>(String.class, Cidade.class);
+	public static Model.Finder<Long, Cidade> find = new Finder<Long, Cidade>(Long.class, Cidade.class);
 	
-
+	/**
+     * Consulta as cidades do estado.
+     */
+    public static List<Cidade> listarPorEstado(Long estado) {
+        return find.where()
+            .eq("estado.id", estado)
+            .orderBy("nome asc")
+            .findList();
+    }
 }

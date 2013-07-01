@@ -1,5 +1,7 @@
 package models;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -21,7 +23,16 @@ public class Estado extends Model {
 
 	// -- Queries
 
-	public static Model.Finder<String, Estado> find = new Finder<String, Estado>(String.class, Estado.class);
+	public static Model.Finder<Long, Estado> find = new Finder<Long, Estado>(Long.class, Estado.class);
 	
 
+	/**
+     * Consulta os paises do estado.
+     */
+    public static List<Estado> listarPorPais(Long pais) {
+        return find.where()
+            .eq("pais.id", pais)
+            .orderBy("nome asc")
+            .findList();
+    }
 }

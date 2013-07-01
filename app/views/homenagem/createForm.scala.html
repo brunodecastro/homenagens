@@ -10,6 +10,7 @@
     </th>
 }
 
+
 @main(usuarioLogado, Messages("homenagem.create.title"), "homenagem", Messages("homenagem.create.lead")){
 
 	<div class="well">
@@ -29,7 +30,6 @@
 	            @select(
 	                homenagemForm("homenageado"), 
 	                Homenageado.values().toList.map(v => (v.toString, v.getLabel)),
-	                '_default -> "--- Homenageado ---",
 	                '_label -> "Homenageado",
 	                '_error -> homenagemForm("homenageado").error.map(_.withMessage("Selecione o Homenageado."))
 	            )
@@ -52,14 +52,14 @@
 	            )
 	            @select(
 	                homenagemForm("estado"), 
-	                Estado.find.all.map(v => (v.id.toString, v.nome)),
+	                options(Seq()),
 	                '_default -> "--- Estado ---",
 	                '_label -> "Estado",
 	                '_error -> homenagemForm("estado").error.map(_.withMessage("Selecione o estado."))
 	            )
 	            @select(
 	                homenagemForm("cidade"), 
-	                Cidade.find.all.map(v => (v.id.toString, v.nome)),
+	                options(Seq()),
 	                '_default -> "--- Cidade ---",
 	                '_label -> "Cidade",
 	                '_error -> homenagemForm("cidade").error.map(_.withMessage("Selecione a cidade."))
@@ -85,6 +85,55 @@
 	    }
 	    
 	</div>  
+	
+	
+<script>
+
+	$('#pais').change(function() {
+	    var paisId = $(this).val();
+	    
+	    //Remove todos os options, menos o vazio
+	    $('#estado option[value!=""]').remove();
+	    
+	    if(paisId != "") {
+		    myJsRoutes.controllers.Homenagens.listarEstados(paisId).ajax({
+			    success : function(result) {
+			    	
+			    	$.each(result, function(index, data) {
+			    	    $('#estado').append(
+			    	        $('<option></option>').val(data.id).html(data.nome)
+			    	    );
+			    	});
+			    }
+			});
+	    }
+	    
+	    return false;
+	});
+	
+	$('#estado').change(function() {
+	    var estadoId = $(this).val();
+	    
+	    //Remove todos os options, menos o vazio
+	    $('#cidade option[value!=""]').remove();
+	    
+	    if(estadoId != "") {
+		    myJsRoutes.controllers.Homenagens.listarCidades(estadoId).ajax({
+			    success : function(result) {
+			    	
+			    	$.each(result, function(index, data) {
+			    	    $('#cidade').append(
+			    	        $('<option></option>').val(data.id).html(data.nome)
+			    	    );
+			    	});
+			    }
+			});
+	    }
+	    
+	    return false;
+	});
+
+</script>
 
 }
 

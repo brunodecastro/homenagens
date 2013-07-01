@@ -46,6 +46,8 @@ POST	/homenagens							controllers.Homenagens.save()
 GET		/homenagens/$id<[0-9]+>				controllers.Homenagens.edit(id:Long)
 POST	/homenagens/$id<[0-9]+>				controllers.Homenagens.update(id:Long)
 POST	/homenagens/$id<[0-9]+>/delete		controllers.Homenagens.delete(id:Long)
+GET     /homenagens/estados/:id     		controllers.Homenagens.listarEstados(id: Long)
+GET     /homenagens/cidades/:id     		controllers.Homenagens.listarCidades(id: Long)
 
 
 # Image Upload
@@ -62,3 +64,5 @@ GET		/image						controllers.ImageController.getAllImages()
 # Map static resources from the /public folder to the /assets URL path
 GET		/assets/*file               controllers.Assets.at(path="/public", file)
 
+
+GET     /javascriptRoutes     controllers.Homenagens.javascriptRoutes

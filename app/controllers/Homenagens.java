@@ -6,21 +6,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
-
-import org.apache.commons.collections.map.HashedMap;
-
+import models.Cidade;
+import models.Estado;
 import models.Homenagem;
 import models.HomenagemFilter;
 import models.Usuario;
-import play.data.DynamicForm;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import play.Routes;
 import play.data.Form;
 import play.i18n.Messages;
+import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
-
-import views.html.homenagem.*;
+import views.html.homenagem.createForm;
+import views.html.homenagem.editForm;
+import views.html.homenagem.list;
 
 @Security.Authenticated(Secured.class)
 public class Homenagens extends Controller {
@@ -37,6 +38,18 @@ public class Homenagens extends Controller {
      */
     public static Result index() {
         return GO_HOME;
+    }
+    
+    public static Result listarEstados(Long pais) {
+        List<Estado> estados = Estado.listarPorPais(pais);
+
+        return ok(Json.toJson(estados));
+    }
+    
+    public static Result listarCidades(Long estado) {
+        List<Cidade> cidades = Cidade.listarPorEstado(estado);
+
+        return ok(Json.toJson(cidades));
     }
     
     public static Result list(int page, String sortBy, String order, String numeroRegistro, String descricao, String resumo, String quemEntregou, String dataRecebimentoInicio, String dataRecebimentoFim) {
@@ -129,6 +142,16 @@ public class Homenagens extends Controller {
     	
         return ReportController.jasperDocument("homenagem_list", reportParams, new
     			JRBeanCollectionDataSource(homenagemList));
+    }
+    
+    public static Result javascriptRoutes() {
+        response().setContentType("text/javascript");
+        return ok(
+            Routes.javascriptRouter("myJsRoutes",
+                routes.javascript.Homenagens.listarEstados(),
+                routes.javascript.Homenagens.listarCidades()
+            )
+        );
     }
 
 }
