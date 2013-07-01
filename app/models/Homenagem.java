@@ -43,7 +43,6 @@ public class Homenagem extends Model {
 	@ManyToOne
 	public TipoHomenagem tipoHomenagem;
 	
-	@Required
 	@ManyToOne
 	public Cidade cidade;
 	
