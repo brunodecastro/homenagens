@@ -15,61 +15,59 @@
 
 	<div class="well">
 	    
-	    @form(routes.Homenagens.save(), 'class -> "form-horizontal") {
+		@form(routes.Homenagens.save(), 'class -> "form-horizontal") {
 	    
-		    @if(homenagemForm.hasGlobalErrors) {
-	            <div class="alert alert-error">
-	            <a class="close" data-dismiss="alert">×</a>
-	                @homenagemForm.globalError.message
-	            </div>
-	        }
-	    
-	      <div class="control-group">  
-	        
-	            @inputText(homenagemForm("numeroRegistro"), '_label -> Messages("homenagem.numeroRegistro.label"))
-	            @select(
-	                homenagemForm("homenageado"), 
-	                Homenageado.values().toList.map(v => (v.toString, v.getLabel)),
-	                '_label -> Messages("homenagem.homenageado.label"),
-	                '_error -> homenagemForm("homenageado").error.map(_.withMessage("Selecione o Homenageado."))
-	            )
-		        @select(
-	                homenagemForm("tipoHomenagem"), 
-	                options = options(TipoHomenagem.allOptions),
-	                '_default -> "--- Tipo de homenagem ---",
-	                '_label -> "Tipo de homenagem",
-	                '_error -> homenagemForm("tipoHomenagem").error.map(_.withMessage("Selecione o tipo de homenagem."))
-	            )
-	            @inputText(homenagemForm("descricao"), '_label -> Messages("homenagem.descricao.label"), 'class -> "input-xxlarge")
-	            @textarea(homenagemForm("resumo"), args = 'rows -> 3, 'cols -> 50, '_label -> Messages("homenagem.resumo.label"), 'class -> "input-xxlarge")
-	            @campoData(homenagemForm("dataRecebimento"), '_label -> Messages("homenagem.dataRecebimento.label"))
-	            @select(
-	                homenagemForm("pais"), 
-	                Pais.find.all.map(v => (v.id.toString, v.nome)),
-	                '_default -> "--- País ---",
-	                '_label -> "País",
-	                '_error -> homenagemForm("pais").error.map(_.withMessage("Selecione o país."))
-	            )
-	            @select(
-	                homenagemForm("estado"), 
-	                options(Seq()),
-	                '_default -> "--- Estado ---",
-	                '_label -> "Estado",
-	                'disabled -> "disabled",
-	                '_error -> homenagemForm("estado").error.map(_.withMessage("Selecione o estado."))
-	            )
-	            @select(
-	                homenagemForm("cidade"), 
-	                options(Seq()),
-	                '_default -> "--- Cidade ---",
-	                '_label -> "Cidade",
-	                'disabled -> "disabled",
-	                '_error -> homenagemForm("cidade").error.map(_.withMessage("Selecione a cidade."))
-	            )
-	            @inputText(homenagemForm("local"), '_label -> Messages("homenagem.local.label"), 'class -> "input-xxlarge")
-	            @inputText(homenagemForm("localizacao"), '_label -> Messages("homenagem.localizacao.label"), 'class -> "input-xxlarge")
-	            @inputText(homenagemForm("precedencia"), '_label -> Messages("homenagem.precedencia.label"), 'class -> "input-xxlarge")
-	            @inputText(homenagemForm("objeto"), '_label -> Messages("homenagem.objeto.label"), 'class -> "input-xxlarge")
+			@if(homenagemForm.hasGlobalErrors) {
+				<div class="alert alert-error">
+					<a class="close" data-dismiss="alert">×</a>
+					@homenagemForm.globalError.message
+				</div>
+			}
+			
+			<div class="control-group">  
+       
+				@inputText(homenagemForm("numeroRegistro"), '_label -> Messages("homenagem.numeroRegistro.label"))
+				@select(
+					homenagemForm("homenageado"), 
+					Homenageado.values().toList.map(v => (v.toString, v.getLabel)),
+					'_label -> Messages("homenagem.homenageado.label"),
+					'_error -> homenagemForm("homenageado").error.map(_.withMessage("Selecione o Homenageado."))
+				)
+				@select(
+					homenagemForm("tipoHomenagem"), 
+					options = options(TipoHomenagem.allOptions),
+					'_default -> "--- Tipo de homenagem ---",
+					'_label -> "Tipo de homenagem",
+					'_error -> homenagemForm("tipoHomenagem").error.map(_.withMessage("Selecione o tipo de homenagem."))
+				)
+				@inputText(homenagemForm("descricao"), '_label -> Messages("homenagem.descricao.label"), 'class -> "input-xxlarge")
+				@textarea(homenagemForm("resumo"), args = 'rows -> 3, 'cols -> 50, '_label -> Messages("homenagem.resumo.label"), 'class -> "input-xxlarge")
+				@campoData(homenagemForm("dataRecebimento"), '_label -> Messages("homenagem.dataRecebimento.label"))
+				@select(
+					homenagemForm("pais"), 
+					Pais.find.all.map(v => (v.id.toString, v.nome)),
+					'_default -> "--- País ---",
+					'_label -> "País",
+					'_error -> homenagemForm("pais").error.map(_.withMessage("Selecione o país."))
+				)
+				@select(
+					homenagemForm("estado"), 
+					options(Seq()),
+					'_default -> "--- Estado ---",
+					'_label -> "Estado",
+					'_error -> homenagemForm("estado").error.map(_.withMessage("Selecione o estado."))
+				)
+				@select(
+					homenagemForm("cidade"), 
+					options(Seq()),
+					'_default -> "--- Cidade ---",
+					'_label -> "Cidade",
+					'_error -> homenagemForm("cidade").error.map(_.withMessage("Selecione a cidade."))
+				)
+				@inputText(homenagemForm("local"), '_label -> Messages("homenagem.local.label"), 'class -> "input-xxlarge")
+				@inputText(homenagemForm("localizacao"), '_label -> Messages("homenagem.localizacao.label"), 'class -> "input-xxlarge")
+				@inputText(homenagemForm("precedencia"), '_label -> Messages("homenagem.precedencia.label"), 'class -> "input-xxlarge")
+				@inputText(homenagemForm("objeto"), '_label -> Messages("homenagem.objeto.label"), 'class -> "input-xxlarge")
 				@inputText(homenagemForm("prateleira"), '_label -> Messages("homenagem.prateleira.label"), 'class -> "input-xxlarge")
 				@inputText(homenagemForm("material"), '_label -> Messages("homenagem.material.label"), 'class -> "input-xxlarge")
 				@inputText(homenagemForm("altura"), '_label -> Messages("homenagem.altura.label"))
@@ -77,74 +75,68 @@
 				@inputText(homenagemForm("comprimento"), '_label -> Messages("homenagem.comprimento.label"))
 				@inputText(homenagemForm("profundidade"), '_label -> Messages("homenagem.profundidade.label"))
 				@inputText(homenagemForm("quemEntregou"), '_label -> Messages("homenagem.quemEntregou.label"), 'class -> "input-xxlarge")
-	        
-	        <div class="form-actions">
-	            <button type="submit" class="btn btn-primary">@Messages("save")</button>
-	            <a href="@routes.Homenagens.list()" class="btn">@Messages("cancel")</a>
-	        </div>
-	     </div>
-	        
-	    }
-	    
+				
+				<div class="form-actions">
+					<button type="submit" class="btn btn-primary">@Messages("save")</button>
+					<a href="@routes.Homenagens.list()" class="btn">@Messages("cancel")</a>
+				</div>
+			</div>
+		}
+	
 	</div>  
 	
-	
-<script>
-
-	$('#pais').change(function() {
-	    var paisId = $(this).val();
+	<script>
+		
+		$('#pais').change(function() {
+			var paisId = $(this).val();
+			
+			//Remove todos os options, menos o vazio
+			$('#estado option[value!=""]').remove();
 	    
-	    //Remove todos os options, menos o vazio
-	    $('#estado option[value!=""]').remove();
-	    
-	    if(paisId != "") {
-		    myJsRoutes.controllers.Homenagens.listarEstados(paisId).ajax({
-			    success : function(result) {
-			    	$('#estado').removeAttr("disabled");
-			    	
-			    	$.each(result, function(index, data) {
-			    	    $('#estado').append(
-			    	        $('<option></option>').val(data.id).html(data.nome)
-			    	    );
-			    	});
-			    }
-			});
-	    } else {
-	    	$('#estado').attr('disabled','disabled');
-	    }
-	    
-	    return false;
-	});
-	
-	$('#estado').change(function() {
-	    var estadoId = $(this).val();
-	    
-	    //Remove todos os options, menos o vazio
-	    $('#cidade option[value!=""]').remove();
-	    
-	    if(estadoId != "") {
-		    myJsRoutes.controllers.Homenagens.listarCidades(estadoId).ajax({
-			    success : function(result) {
-			    	$('#cidade').removeAttr("disabled");
-			    	
-			    	$.each(result, function(index, data) {
-			    	    $('#cidade').append(
-			    	        $('<option></option>').val(data.id).html(data.nome)
-			    	    );
-			    	});
-			    }
-			});
-	    }else {
-	    	$('#cidade').attr('disabled','disabled');
-	    }
-	    
-	    return false;
-	});
-
-</script>
+			if(paisId != "") {
+				myJsRoutes.controllers.Homenagens.listarEstados(paisId).ajax({
+					success : function(result) {
+						$('#estado').removeAttr("disabled");
+						
+						$.each(result, function(index, data) {
+							$('#estado').append(
+								$('<option></option>').val(data.id).html(data.nome)
+							);
+						});
+					}
+				});
+			} else {
+				$('#estado').attr('disabled','disabled');
+			}
+			
+			return false;
+		});
+		
+		$('#estado').change(function() {
+			var estadoId = $(this).val();
+			
+		    //Remove todos os options, menos o vazio
+			$('#cidade option[value!=""]').remove();
+		    
+			if(estadoId != "") {
+				myJsRoutes.controllers.Homenagens.listarCidades(estadoId).ajax({
+					success : function(result) {
+						$('#cidade').removeAttr("disabled");
+						
+						$.each(result, function(index, data) {
+							$('#cidade').append(
+								$('<option></option>').val(data.id).html(data.nome)
+							);
+						});
+					}
+				});
+			}else {
+				$('#cidade').attr('disabled','disabled');
+			}
+		    
+			return false;
+		});
+		
+	</script>
 
 }
-
-
-
-
