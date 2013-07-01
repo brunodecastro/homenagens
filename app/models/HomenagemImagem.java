@@ -4,6 +4,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import play.data.validation.Constraints.Required;
@@ -13,7 +14,7 @@ import com.avaje.ebean.annotation.PrivateOwned;
 
 @SuppressWarnings("serial")
 @Entity
-public class DbImage extends Model {
+public class HomenagemImagem extends Model {
 
 	@Id
 	public Long id;
@@ -30,6 +31,9 @@ public class DbImage extends Model {
 	@PrivateOwned
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private RawImage thumbnail;
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	public Homenagem homenagem;
 
 	public Long getId() {
 		return id;
@@ -64,6 +68,6 @@ public class DbImage extends Model {
 	}
 
 	// -- Queries
-	public static Finder<Long, DbImage> find = new Finder<Long, DbImage>(Long.class, DbImage.class);
+	public static Finder<Long, HomenagemImagem> find = new Finder<Long, HomenagemImagem>(Long.class, HomenagemImagem.class);
 
 }

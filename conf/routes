@@ -51,6 +51,7 @@ GET     /homenagens/cidades/:id     		controllers.Homenagens.listarCidades(id: L
 
 
 # Image Upload
+GET		/upload						controllers.ImageController.startUpload()
 POST	/image						controllers.ImageController.uploadImage()
 GET		/image/$id<[0-9]+>			controllers.ImageController.getImage(id: Long)
 DELETE	/image/$id<[0-9]+>			controllers.ImageController.deleteImage(id: Long)

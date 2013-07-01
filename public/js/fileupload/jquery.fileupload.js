@@ -1,5 +1,5 @@
 /*
- * jQuery File Upload Plugin 5.28.8
+ * jQuery File Upload Plugin 5.31.6
  * https://github.com/blueimp/jQuery-File-Upload
  *
  * Copyright 2010, Sebastian Tschan
@@ -10,7 +10,7 @@
  */
 
 /*jslint nomen: true, unparam: true, regexp: true */
-/*global define, window, document, File, Blob, FormData, location */
+/*global define, window, document, location, File, Blob, FormData */
 
 (function (factory) {
     'use strict';
@@ -32,6 +32,10 @@
     // but not non-multipart XHR file uploads:
     $.support.xhrFileUpload = !!(window.XMLHttpRequestUpload && window.FileReader);
     $.support.xhrFormDataFileUpload = !!window.FormData;
+
+    // Detect support for Blob slicing (required for chunked uploads):
+    $.support.blobSlice = window.Blob && (Blob.prototype.slice ||
+        Blob.prototype.webkitSlice || Blob.prototype.mozSlice);
 
     // The fileupload widget listens for change events on file input fields defined
     // via fileInput setting and paste or drop events of the given dropZone.
@@ -115,6 +119,23 @@
             // By default, uploads are started automatically when adding files:
             autoUpload: true,
 
+            // Error and info messages:
+            messages: {
+                uploadedBytes: 'Uploaded bytes exceed file size'
+            },
+
+            // Translation function, gets the message key to be translated
+            // and an object with context specific data as arguments:
+            i18n: function (message, context) {
+                message = this.messages[message] || message.toString();
+                if (context) {
+                    $.each(context, function (key, value) {
+                        message = message.replace('{' + key + '}', value);
+                    });
+                }
+                return message;
+            },
+
             // Additional form data to be sent along with the file uploads can be set
             // using this option, which accepts an array of objects with name and
             // value properties, a function returning such an array, a FormData
@@ -127,21 +148,25 @@
             // The add callback is invoked as soon as files are added to the fileupload
             // widget (via file input selection, drag & drop, paste or add API call).
             // If the singleFileUploads option is enabled, this callback will be
-            // called once for each file in the selection for XHR file uplaods, else
+            // called once for each file in the selection for XHR file uploads, else
             // once for each file selection.
+            //
             // The upload starts when the submit method is invoked on the data parameter.
             // The data object contains a files property holding the added files
-            // and allows to override plugin options as well as define ajax settings.
+            // and allows you to override plugin options as well as define ajax settings.
+            //
             // Listeners for this callback can also be bound the following way:
             // .bind('fileuploadadd', func);
+            //
             // data.submit() returns a Promise object and allows to attach additional
             // handlers using jQuery's Deferred callbacks:
             // data.submit().done(func).fail(func).always(func);
             add: function (e, data) {
                 if (data.autoUpload || (data.autoUpload !== false &&
-                        ($(this).data('blueimp-fileupload') ||
-                        $(this).data('fileupload')).options.autoUpload)) {
-                    data.submit();
+                        $(this).fileupload('option', 'autoUpload'))) {
+                    data.process().done(function () {
+                        data.submit();
+                    });
                 }
             },
 
@@ -205,14 +230,20 @@
             cache: false
         },
 
-        // A list of options that require a refresh after assigning a new value:
-        _refreshOptionsList: [
+        // A list of options that require reinitializing event listeners and/or
+        // special initialization code:
+        _specialOptions: [
             'fileInput',
             'dropZone',
             'pasteZone',
             'multipart',
             'forceIframeTransport'
         ],
+
+        _blobSlice: $.support.blobSlice && function () {
+            var slice = this.slice || this.webkitSlice || this.mozSlice;
+            return slice.apply(this, arguments);
+        },
 
         _BitrateTimer: function () {
             this.timestamp = ((Date.now) ? Date.now() : (new Date()).getTime());
@@ -360,9 +391,11 @@
             if (options.contentRange) {
                 options.headers['Content-Range'] = options.contentRange;
             }
-            if (!multipart) {
+            if (!multipart || options.blob || !this._isInstanceOf('File', file)) {
                 options.headers['Content-Disposition'] = 'attachment; filename="' +
                     encodeURI(file.name) + '"';
+            }
+            if (!multipart) {
                 options.contentType = file.type;
                 options.data = options.blob || file;
             } else if ($.support.xhrFormDataFileUpload) {
@@ -395,8 +428,6 @@
                         });
                     }
                     if (options.blob) {
-                        options.headers['Content-Disposition'] = 'attachment; filename="' +
-                            encodeURI(file.name) + '"';
                         formData.append(paramName, options.blob, file.name);
                     } else {
                         $.each(options.files, function (index, file) {
@@ -420,13 +451,13 @@
         },
 
         _initIframeSettings: function (options) {
+            var targetHost = $('<a></a>').prop('href', options.url).prop('host');
             // Setting the dataType to iframe enables the iframe transport:
             options.dataType = 'iframe ' + (options.dataType || '');
             // The iframe transport accepts a serialized array as form data:
             options.formData = this._getFormData(options);
             // Add redirect url to form data on cross-domain uploads:
-            if (options.redirect && $('<a></a>').prop('href', options.url)
-                    .prop('host') !== location.host) {
+            if (options.redirect && targetHost && targetHost !== location.host) {
                 options.formData.push({
                     name: options.redirectParamName || 'redirect',
                     value: options.redirect
@@ -548,9 +579,20 @@
             return this._enhancePromise(promise);
         },
 
-        // Adds convenience methods to the callback arguments:
+        // Adds convenience methods to the data callback argument:
         _addConvenienceMethods: function (e, data) {
-            var that = this;
+            var that = this,
+                getPromise = function (data) {
+                    return $.Deferred().resolveWith(that, [data]).promise();
+                };
+            data.process = function (resolveFunc, rejectFunc) {
+                if (resolveFunc || rejectFunc) {
+                    data._processQueue = this._processQueue =
+                        (this._processQueue || getPromise(this))
+                            .pipe(resolveFunc, rejectFunc);
+                }
+                return this._processQueue || getPromise(this);
+            };
             data.submit = function () {
                 if (this.state() !== 'pending') {
                     data.jqXHR = this.jqXHR =
@@ -568,6 +610,9 @@
             data.state = function () {
                 if (this.jqXHR) {
                     return that._getDeferredState(this.jqXHR);
+                }
+                if (this._processQueue) {
+                    return that._getDeferredState(this._processQueue);
                 }
             };
             data.progress = function () {
@@ -594,12 +639,13 @@
         // should be uploaded in chunks, but does not invoke any
         // upload requests:
         _chunkedUpload: function (options, testOnly) {
+            options.uploadedBytes = options.uploadedBytes || 0;
             var that = this,
                 file = options.files[0],
                 fs = file.size,
-                ub = options.uploadedBytes = options.uploadedBytes || 0,
+                ub = options.uploadedBytes,
                 mcs = options.maxChunkSize || fs,
-                slice = file.slice || file.webkitSlice || file.mozSlice,
+                slice = this._blobSlice,
                 dfd = $.Deferred(),
                 promise = dfd.promise(),
                 jqXHR,
@@ -612,7 +658,7 @@
                 return true;
             }
             if (ub >= fs) {
-                file.error = 'Uploaded bytes exceed file size';
+                file.error = options.i18n('uploadedBytes');
                 return this._getXHRPromise(
                     false,
                     options.context,
@@ -648,7 +694,7 @@
                         // Create a progress event if no final progress event
                         // with loaded equaling total has been triggered
                         // for this chunk:
-                        if (o._progress.loaded === currentLoaded) {
+                        if (currentLoaded + o.chunkSize - o._progress.loaded) {
                             that._onProgress($.Event('progress', {
                                 lengthComputable: true,
                                 loaded: ub - o.uploadedBytes,
@@ -817,7 +863,8 @@
                     this._slots.push(slot);
                     pipe = slot.pipe(send);
                 } else {
-                    pipe = (this._sequence = this._sequence.pipe(send, send));
+                    this._sequence = this._sequence.pipe(send, send);
+                    pipe = this._sequence;
                 }
                 // Return the piped Promise object, enhanced with an abort method,
                 // which is delegated to the jqXHR object of the current upload,
@@ -1067,9 +1114,9 @@
         },
 
         _onDrop: function (e) {
+            e.dataTransfer = e.originalEvent && e.originalEvent.dataTransfer;
             var that = this,
-                dataTransfer = e.dataTransfer = e.originalEvent &&
-                    e.originalEvent.dataTransfer,
+                dataTransfer = e.dataTransfer,
                 data = {};
             if (dataTransfer && dataTransfer.files && dataTransfer.files.length) {
                 e.preventDefault();
@@ -1083,8 +1130,8 @@
         },
 
         _onDragOver: function (e) {
-            var dataTransfer = e.dataTransfer = e.originalEvent &&
-                e.originalEvent.dataTransfer;
+            e.dataTransfer = e.originalEvent && e.originalEvent.dataTransfer;
+            var dataTransfer = e.dataTransfer;
             if (dataTransfer) {
                 if (this._trigger('dragover', e) === false) {
                     return false;
@@ -1118,12 +1165,12 @@
         },
 
         _setOption: function (key, value) {
-            var refresh = $.inArray(key, this._refreshOptionsList) !== -1;
-            if (refresh) {
+            var reinit = $.inArray(key, this._specialOptions) !== -1;
+            if (reinit) {
                 this._destroyEventHandlers();
             }
             this._super(key, value);
-            if (refresh) {
+            if (reinit) {
                 this._initSpecialOptions();
                 this._initEventHandlers();
             }
@@ -1145,10 +1192,35 @@
             }
         },
 
-        _create: function () {
-            var options = this.options;
+        _getRegExp: function (str) {
+            var parts = str.split('/'),
+                modifiers = parts.pop();
+            parts.shift();
+            return new RegExp(parts.join('/'), modifiers);
+        },
+
+        _isRegExpOption: function (key, value) {
+            return key !== 'url' && $.type(value) === 'string' &&
+                /^\/.*\/[igm]{0,3}$/.test(value);
+        },
+
+        _initDataAttributes: function () {
+            var that = this,
+                options = this.options;
             // Initialize options set via HTML5 data-attributes:
-            $.extend(options, $(this.element[0].cloneNode(false)).data());
+            $.each(
+                $(this.element[0].cloneNode(false)).data(),
+                function (key, value) {
+                    if (that._isRegExpOption(key, value)) {
+                        value = that._getRegExp(value);
+                    }
+                    options[key] = value;
+                }
+            );
+        },
+
+        _create: function () {
+            this._initDataAttributes();
             this._initSpecialOptions();
             this._slots = [];
             this._sequence = this._getXHRPromise(true);

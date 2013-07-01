@@ -3,6 +3,7 @@ package models;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -72,9 +73,9 @@ public class Homenagem extends Model {
 	
 	public Date dataRecebimento;
 	
-//	@OneToMany
-//	public List<DbImage> pictures;
-	
+	@Valid
+	@OneToMany(mappedBy="homenagem")
+	public List<HomenagemImagem> imagens;
 	
 	// -- Queries
 

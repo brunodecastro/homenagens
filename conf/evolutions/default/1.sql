@@ -18,14 +18,6 @@ create table conta (
   constraint pk_conta primary key (id))
 ;
 
-create table db_image (
-  id                        bigint not null,
-  filename                  varchar(255),
-  image_id                  bigint,
-  thumbnail_id              bigint,
-  constraint pk_db_image primary key (id))
-;
-
 create table estado (
   id                        bigint not null,
   nome                      varchar(255),
@@ -57,6 +49,15 @@ create table homenagem (
   data_recebimento          timestamp,
   constraint ck_homenagem_homenageado check (homenageado in (0,1)),
   constraint pk_homenagem primary key (id))
+;
+
+create table homenagem_imagem (
+  id                        bigint not null,
+  filename                  varchar(255),
+  image_id                  bigint,
+  thumbnail_id              bigint,
+  homenagem_id              bigint,
+  constraint pk_homenagem_imagem primary key (id))
 ;
 
 create table pais (
@@ -103,11 +104,11 @@ create sequence cidade_seq;
 
 create sequence conta_seq;
 
-create sequence db_image_seq;
-
 create sequence estado_seq;
 
 create sequence homenagem_seq;
+
+create sequence homenagem_imagem_seq;
 
 create sequence pais_seq;
 
@@ -123,20 +124,22 @@ alter table cidade add constraint fk_cidade_estado_1 foreign key (estado_id) ref
 create index ix_cidade_estado_1 on cidade (estado_id);
 alter table conta add constraint fk_conta_usuario_2 foreign key (usuario_id) references usuario (id) on delete restrict on update restrict;
 create index ix_conta_usuario_2 on conta (usuario_id);
-alter table db_image add constraint fk_db_image_image_3 foreign key (image_id) references raw_image (id) on delete restrict on update restrict;
-create index ix_db_image_image_3 on db_image (image_id);
-alter table db_image add constraint fk_db_image_thumbnail_4 foreign key (thumbnail_id) references raw_image (id) on delete restrict on update restrict;
-create index ix_db_image_thumbnail_4 on db_image (thumbnail_id);
-alter table estado add constraint fk_estado_pais_5 foreign key (pais_id) references pais (id) on delete restrict on update restrict;
-create index ix_estado_pais_5 on estado (pais_id);
-alter table homenagem add constraint fk_homenagem_homenagemPai_6 foreign key (homenagem_pai_id) references homenagem (id) on delete restrict on update restrict;
-create index ix_homenagem_homenagemPai_6 on homenagem (homenagem_pai_id);
-alter table homenagem add constraint fk_homenagem_tipoHomenagem_7 foreign key (tipo_homenagem_id) references tipo_homenagem (id) on delete restrict on update restrict;
-create index ix_homenagem_tipoHomenagem_7 on homenagem (tipo_homenagem_id);
-alter table homenagem add constraint fk_homenagem_cidade_8 foreign key (cidade_id) references cidade (id) on delete restrict on update restrict;
-create index ix_homenagem_cidade_8 on homenagem (cidade_id);
-alter table tipo_homenagem add constraint fk_tipo_homenagem_parent_9 foreign key (parent_id) references tipo_homenagem (id) on delete restrict on update restrict;
-create index ix_tipo_homenagem_parent_9 on tipo_homenagem (parent_id);
+alter table estado add constraint fk_estado_pais_3 foreign key (pais_id) references pais (id) on delete restrict on update restrict;
+create index ix_estado_pais_3 on estado (pais_id);
+alter table homenagem add constraint fk_homenagem_homenagemPai_4 foreign key (homenagem_pai_id) references homenagem (id) on delete restrict on update restrict;
+create index ix_homenagem_homenagemPai_4 on homenagem (homenagem_pai_id);
+alter table homenagem add constraint fk_homenagem_tipoHomenagem_5 foreign key (tipo_homenagem_id) references tipo_homenagem (id) on delete restrict on update restrict;
+create index ix_homenagem_tipoHomenagem_5 on homenagem (tipo_homenagem_id);
+alter table homenagem add constraint fk_homenagem_cidade_6 foreign key (cidade_id) references cidade (id) on delete restrict on update restrict;
+create index ix_homenagem_cidade_6 on homenagem (cidade_id);
+alter table homenagem_imagem add constraint fk_homenagem_imagem_image_7 foreign key (image_id) references raw_image (id) on delete restrict on update restrict;
+create index ix_homenagem_imagem_image_7 on homenagem_imagem (image_id);
+alter table homenagem_imagem add constraint fk_homenagem_imagem_thumbnail_8 foreign key (thumbnail_id) references raw_image (id) on delete restrict on update restrict;
+create index ix_homenagem_imagem_thumbnail_8 on homenagem_imagem (thumbnail_id);
+alter table homenagem_imagem add constraint fk_homenagem_imagem_homenagem_9 foreign key (homenagem_id) references homenagem (id) on delete restrict on update restrict;
+create index ix_homenagem_imagem_homenagem_9 on homenagem_imagem (homenagem_id);
+alter table tipo_homenagem add constraint fk_tipo_homenagem_parent_10 foreign key (parent_id) references tipo_homenagem (id) on delete restrict on update restrict;
+create index ix_tipo_homenagem_parent_10 on tipo_homenagem (parent_id);
 
 
 
@@ -148,11 +151,11 @@ drop table if exists cidade;
 
 drop table if exists conta;
 
-drop table if exists db_image;
-
 drop table if exists estado;
 
 drop table if exists homenagem;
+
+drop table if exists homenagem_imagem;
 
 drop table if exists pais;
 
@@ -170,11 +173,11 @@ drop sequence if exists cidade_seq;
 
 drop sequence if exists conta_seq;
 
-drop sequence if exists db_image_seq;
-
 drop sequence if exists estado_seq;
 
 drop sequence if exists homenagem_seq;
+
+drop sequence if exists homenagem_imagem_seq;
 
 drop sequence if exists pais_seq;
 

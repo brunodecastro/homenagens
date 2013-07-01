@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 
-import models.DbImage;
+import models.HomenagemImagem;
 import models.RawImage;
 
 import org.apache.commons.io.FileUtils;
@@ -20,15 +20,20 @@ import play.mvc.Http.MultipartFormData;
 import play.mvc.Http.MultipartFormData.FilePart;
 import play.mvc.Result;
 import play.mvc.Results;
+import views.html.*;
 
 public class ImageController {
+	
+	public static Result startUpload() {
+		return Results.ok(upload.render());
+	}
 
 	public static Result getAllImages() {
 		ObjectNode result = Json.newObject();
 		ArrayNode array = result.putArray("files");
 
-		List<DbImage> bdImages = DbImage.find.all();
-		for (DbImage image : bdImages) {
+		List<HomenagemImagem> bdImages = HomenagemImagem.find.all();
+		for (HomenagemImagem image : bdImages) {
 			array.add(dbImageToJson(image));
 		}
 
@@ -36,7 +41,7 @@ public class ImageController {
 	}
 
 	public static Result getImage(Long id) {
-		DbImage dbImage = DbImage.find.byId(id);
+		HomenagemImagem dbImage = HomenagemImagem.find.byId(id);
 		if (dbImage == null) {
 			return Results.status(404);
 		}
@@ -45,7 +50,7 @@ public class ImageController {
 	}
 
 	public static Result getThumbnail(Long id) {
-		DbImage dbImage = DbImage.find.byId(id);
+		HomenagemImagem dbImage = HomenagemImagem.find.byId(id);
 		if (dbImage == null) {
 			return Results.status(404);
 		}
@@ -54,7 +59,7 @@ public class ImageController {
 	}
 
 	public static Result deleteImage(Long id) {
-		DbImage dbImage = DbImage.find.byId(id);
+		HomenagemImagem dbImage = HomenagemImagem.find.byId(id);
 		dbImage.delete();
 
 		return Results.ok();
@@ -73,7 +78,7 @@ public class ImageController {
 			List<FilePart> fileParts = body.getFiles();
 
 			for (FilePart filePart : fileParts) {
-				DbImage image = new DbImage();
+				HomenagemImagem image = new HomenagemImagem();
 				// image.setId(id);
 				image.setFilename(filePart.getFilename());
 				File imgFile = filePart.getFile();
@@ -94,13 +99,13 @@ public class ImageController {
 		}
 	}
 
-	private static boolean isAllowedMimetype(DbImage image) {
+	private static boolean isAllowedMimetype(HomenagemImagem image) {
 		Configuration config = Play.application().configuration();
 		int index = Arrays.binarySearch(config.getString("image.mimetypes.allowed").split(","), image.getImage().getMimetype());
 		return index >= 0;
 	}
 
-	private static void setRawImage(DbImage image, byte[] bytes) {
+	private static void setRawImage(HomenagemImagem image, byte[] bytes) {
 		RawImage rawImage = image.getImage();
 		if (rawImage == null) {
 			rawImage = new RawImage();
@@ -109,7 +114,7 @@ public class ImageController {
 		rawImage.setImage(bytes);
 	}
 
-	private static void setRawThumbnail(DbImage image) {
+	private static void setRawThumbnail(HomenagemImagem image) {
 		Configuration config = Play.application().configuration();
 		int thumbnailWidth = config.getInt("thumbnails.width");
 		int thumbnailHeight = config.getInt("thumbnails.height");
@@ -122,7 +127,7 @@ public class ImageController {
 		thumbnail.setImage(thumbnailBytes);
 	}
 
-	private static ObjectNode dbImageToJson(DbImage image) {
+	private static ObjectNode dbImageToJson(HomenagemImagem image) {
 		ObjectNode result = Json.newObject();
 		result.put("id", image.getId());
 		result.put("name", image.getFilename());
