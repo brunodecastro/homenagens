@@ -49,17 +49,10 @@ create table homenagem (
   objeto                    varchar(255),
   prateleira                varchar(255),
   material                  varchar(255),
-<<<<<<< HEAD
   altura                    varchar(255),
   largura                   varchar(255),
   comprimento               varchar(255),
   profundidade              varchar(255),
-=======
-  altura                    double,
-  largura                   double,
-  comprimento               double,
-  profundidade              double,
->>>>>>> 355dc59288c4dcd416b66b42d400c4aaeec34af1
   quem_entregou             varchar(255),
   data_recebimento          timestamp,
   constraint ck_homenagem_homenageado check (homenageado in (0,1)),
