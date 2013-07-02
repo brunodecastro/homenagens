@@ -136,19 +136,20 @@ public class Homenagens extends Controller {
      */
     private static boolean validateForm(Form<Homenagem> homenagemForm) {
     	
+    	boolean isValid = true; 
+    	
     	String tipoHomenagem = form().bindFromRequest().get("tipoHomenagem.id");
     	
     	if(tipoHomenagem.equals("")) {
     		homenagemForm.reject("tipoHomenagem.id", "");
+    		isValid = false;
     	}
     	
-    	if(homenagemForm.hasErrors() || tipoHomenagem.equals("")) {
-    		
+    	if(homenagemForm.hasErrors() || !isValid) {
     		homenagemForm.reject(Messages.get("formErrorMessage"));
-    		return false;
     	}
     	
-    	return true;
+    	return isValid;
     }
     
     /**
