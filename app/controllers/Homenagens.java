@@ -11,6 +11,7 @@ import models.Estado;
 import models.Homenageado;
 import models.Homenagem;
 import models.HomenagemFilter;
+import models.TipoHomenagem;
 import models.Usuario;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import play.Routes;
@@ -122,13 +123,28 @@ public class Homenagens extends Controller {
      * Handle the 'new homenagem form' submission 
      */
     public static Result save() {
-        Form<Homenagem> homenagemForm = form(Homenagem.class).bindFromRequest();
-        if(homenagemForm.hasErrors()) {
+    	Form<Homenagem> homenagemForm = form(Homenagem.class).bindFromRequest();
+        if(!validateForm(homenagemForm)) {
             return badRequest(createForm.render(Usuario.consultarPorEmail(request().username()), homenagemForm));
         }
         homenagemForm.get().save();
         flash("success", Messages.get("homenagem.create.success", homenagemForm.get().descricao));
         return goHome(homenagemForm.get() != null ? homenagemForm.get().homenageado : null);
+    }
+    
+    private static boolean validateForm(Form<Homenagem> homenagemForm) {
+    	
+    	String tipoHomenagem = form().bindFromRequest().get("tipoHomenagem.id");
+    	
+    	if(tipoHomenagem.equals("")) {
+    		homenagemForm.reject("tipoHomenagem.id", "");
+    	}
+    	
+    	if(homenagemForm.hasErrors() || tipoHomenagem.equals("")) {
+    		return false;
+    	}
+    	
+    	return true;
     }
     
     /**

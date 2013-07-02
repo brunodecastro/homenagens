@@ -34,11 +34,11 @@
 					'_error -> homenagemForm("homenageado").error.map(_.withMessage("Selecione o Homenageado."))
 				)
 				@select(
-					homenagemForm("tipoHomenagem"), 
+					homenagemForm("tipoHomenagem.id"), 
 					options = options(TipoHomenagem.allOptions),
 					'_default -> "--- Tipo de homenagem ---",
 					'_label -> "Tipo de homenagem",
-					'_error -> homenagemForm("tipoHomenagem").error.map(_.withMessage("Selecione o tipo de homenagem."))
+					'_error -> homenagemForm("tipoHomenagem.id").error.map(_.withMessage("Selecione o tipo de homenagem."))
 				)
 				@inputText(homenagemForm("descricao"), '_label -> Messages("homenagem.descricao.label"), 'class -> "input-xxlarge")
 				@textarea(homenagemForm("resumo"), args = 'rows -> 3, 'cols -> 50, '_label -> Messages("homenagem.resumo.label"), 'class -> "input-xxlarge")
@@ -82,7 +82,7 @@
 	
 	</div>  
 	
-	<script>
+	<script type="text/javascript">
 		
 		$('#pais_id').change(function() {
 			var paisId = $(this).val();
@@ -93,7 +93,7 @@
 			if(paisId != "") {
 				myJsRoutes.controllers.Homenagens.listarEstados(paisId).ajax({
 					success : function(result) {
-						$('#estado_id').removeAttr("disabled");
+						//$('#estado_id').removeAttr("disabled");
 						
 						$.each(result, function(index, data) {
 							$('#estado_id').append(
@@ -103,7 +103,7 @@
 					}
 				});
 			} else {
-				$('#estado_id').attr('disabled','disabled');
+				//$('#estado_id').attr('disabled','disabled');
 			}
 			
 			return false;
@@ -118,7 +118,7 @@
 			if(estadoId != "") {
 				myJsRoutes.controllers.Homenagens.listarCidades(estadoId).ajax({
 					success : function(result) {
-						$('#cidade_id').removeAttr("disabled");
+						//$('#cidade_id').removeAttr("disabled");
 						
 						$.each(result, function(index, data) {
 							$('#cidade_id').append(
@@ -128,7 +128,7 @@
 					}
 				});
 			}else {
-				$('#cidade_id').attr('disabled','disabled');
+				//$('#cidade_id').attr('disabled','disabled');
 			}
 		    
 			return false;

@@ -26,7 +26,7 @@ public class Application extends Controller {
 
 		if (!loginForm.hasErrors()) {
 			session("email", loginForm.get().email);
-			return redirect(routes.Usuarios.index());
+			return redirect(routes.Homenagens.index());
 		} else {
 			return badRequest(login.render(loginForm));
 		}
