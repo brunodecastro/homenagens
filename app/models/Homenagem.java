@@ -8,6 +8,7 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 import javax.validation.Valid;
 
 import play.data.validation.Constraints.Required;
@@ -41,6 +42,12 @@ public class Homenagem extends Model {
 	@Required
 	@ManyToOne
 	public TipoHomenagem tipoHomenagem;
+	
+	@Transient
+	public Pais pais;
+	
+	@Transient
+	public Estado estado;
 	
 	@ManyToOne
 	public Cidade cidade;

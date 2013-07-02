@@ -51,13 +51,13 @@
 				)
 				@select(
 					homenagemForm("estado.id"), 
-					options(Seq()),
+					Estado.listarPorPais(homenagemForm("pais.id").value).map(v => (v.id.toString, v.nome)),
 					'_default -> "--- Estado ---",
 					'_label -> "Estado"
 				)
 				@select(
 					homenagemForm("cidade.id"), 
-					options(Seq()),
+					Cidade.listarPorEstado(homenagemForm("estado.id").value).map(v => (v.id.toString, v.nome)),
 					'_default -> "--- Cidade ---",
 					'_label -> "Cidade"
 				)

@@ -1,5 +1,6 @@
 package models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -34,5 +35,17 @@ public class Estado extends Model {
             .eq("pais.id", pais)
             .orderBy("nome asc")
             .findList();
+    }
+    
+    /**
+     * Consulta os paises do estado.
+     */
+    public static List<Estado> listarPorPais(String pais) {
+    	
+    	if(pais == null) {
+    		return new ArrayList<Estado>();
+    	} else {
+    		return listarPorPais(Long.valueOf(pais));
+    	}
     }
 }

@@ -1,5 +1,6 @@
 package models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -31,5 +32,17 @@ public class Cidade extends Model {
             .eq("estado.id", estado)
             .orderBy("nome asc")
             .findList();
+    }
+    
+    /**
+     * Consulta as cidades do estado.
+     */
+    public static List<Cidade> listarPorEstado(String estado) {
+    	
+    	if(estado == null) {
+    		return new ArrayList<Cidade>();
+    	} else {
+    		return listarPorEstado(Long.valueOf(estado));
+    	}
     }
 }
