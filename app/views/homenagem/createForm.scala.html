@@ -44,20 +44,20 @@
 				@textarea(homenagemForm("resumo"), args = 'rows -> 3, 'cols -> 50, '_label -> Messages("homenagem.resumo.label"), 'class -> "input-xxlarge")
 				@campoData(homenagemForm("dataRecebimento"), '_label -> Messages("homenagem.dataRecebimento.label"))
 				@select(
-					homenagemForm("pais.id"), 
-					Pais.find.all.map(v => (v.id.toString, v.nome)),
+					field = homenagemForm("pais.id"), 
+					options = Pais.find.all.map(v => (v.id.toString, v.nome)),
 					'_default -> "--- País ---",
 					'_label -> "País"
 				)
 				@select(
-					homenagemForm("estado.id"), 
-					Estado.listarPorPais(homenagemForm("pais.id").value).map(v => (v.id.toString, v.nome)),
+					field = homenagemForm("estado.id"), 
+					options = Estado.listarPorPais(homenagemForm("pais.id").value).map(v => (v.id.toString, v.nome)),
 					'_default -> "--- Estado ---",
 					'_label -> "Estado"
 				)
 				@select(
-					homenagemForm("cidade.id"), 
-					Cidade.listarPorEstado(homenagemForm("estado.id").value).map(v => (v.id.toString, v.nome)),
+					field = homenagemForm("cidade.id"), 
+					options = Cidade.listarPorEstado(homenagemForm("estado.id").value).map(v => (v.id.toString, v.nome)),
 					'_default -> "--- Cidade ---",
 					'_label -> "Cidade"
 				)
