@@ -67,3 +67,8 @@ table.computers .header a {
     font-weight: bold;
     text-transform: uppercase;
 }
+
+.navbar-text {
+    color: white !important;
+}
+

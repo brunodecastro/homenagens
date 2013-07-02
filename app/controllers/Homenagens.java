@@ -11,7 +11,6 @@ import models.Estado;
 import models.Homenageado;
 import models.Homenagem;
 import models.HomenagemFilter;
-import models.TipoHomenagem;
 import models.Usuario;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import play.Routes;
@@ -32,7 +31,7 @@ public class Homenagens extends Controller {
      * This result directly redirect to application home.
      */
     private static Result GO_HOME = redirect(
-        routes.Homenagens.list(0, "descricao", "asc", "", "", "", "", "", "", "")
+        routes.Homenagens.list(0, "descricao", "asc", Homenageado.MARCONI.name(), "", "", "", "", "", "")
     );
     
     private static Result goHome(Homenageado homenageado) {
@@ -101,7 +100,6 @@ public class Homenagens extends Controller {
     public static Result update(Long id) {
         Form<Homenagem> homenagemForm = form(Homenagem.class).bindFromRequest();
         if(homenagemForm.hasErrors()) {
-        	Homenagem homenagem = Homenagem.find.byId(id);
             return badRequest(editForm.render(Usuario.consultarPorEmail(request().username()), id, homenagemForm));
         }
         homenagemForm.get().update(id);
