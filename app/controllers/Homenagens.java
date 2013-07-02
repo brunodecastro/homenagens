@@ -174,14 +174,4 @@ public class Homenagens extends Controller {
     			JRBeanCollectionDataSource(homenagemList));
     }
     
-    public static Result javascriptRoutes() {
-        response().setContentType("text/javascript");
-        return ok(
-            Routes.javascriptRouter("myJsRoutes",
-                routes.javascript.Homenagens.listarEstados(),
-                routes.javascript.Homenagens.listarCidades()
-            )
-        );
-    }
-
 }

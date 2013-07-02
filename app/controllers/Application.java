@@ -1,6 +1,7 @@
 package controllers;
 
 import static play.data.Form.form;
+import play.Routes;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -31,5 +32,15 @@ public class Application extends Controller {
 			return badRequest(login.render(loginForm));
 		}
 	}
+	
+	public static Result javascriptRoutes() {
+        response().setContentType("text/javascript");
+        return ok(
+            Routes.javascriptRouter("myJsRoutes",
+                routes.javascript.Homenagens.listarEstados(),
+                routes.javascript.Homenagens.listarCidades()
+            )
+        );
+    }
 
 }
