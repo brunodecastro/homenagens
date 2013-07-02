@@ -1,16 +1,62 @@
+# Default messages
+
+# --- Constraints
+constraint.required=*
+constraint.min=Valor mínimo: {0}
+constraint.max=Valor máximo: {0}
+constraint.minLength=Comprimento mínimo: {0}
+constraint.maxLength=Comprimento máximo: {0}
+constraint.email=Email
+
+# --- Formats
+format.date=Data (''{0}'')
+format.numeric=Numérico
+format.real=Real
+
+# --- Errors
+error.invalid=Valores inválidos
+error.required=Este campo é de preenchimento obrigatório
+error.number=Valor numérico esperado
+error.real=Valor numérico real esperado
+error.real.precision=Valor numérico real com não mais que {0} digito(s) incuindo {1} decimal(is) esperado
+error.min=Deve ser maior ou igual a {0}
+error.min.strict=Deve ser estritamente maior que {0}
+error.max=Deve ser menor ou igual a {0}
+error.max.strict=Deve ser estritamente menor que {0}
+error.minLength=Comprimento mínimo é {0}
+error.maxLength=Comprimento máximo é {0}
+error.email=Email válido obrigatório
+error.pattern=Deve atender {0}
+
+
+
 # Messages
 
-save=Save
-cancel=Cancel
-delete=Delete
-back=Back
+save=Salvar
+cancel=Cancelar
+delete=Excluir
+back=Voltar
+new=Novo
+print=Imprimir
 
-nothingToShow=Nothing to show
-doFilter=Filter
-filterBy=Filter by {0}...
+filter=Filtro
+
+previous=Anterior
+previous.plural=Anteriores
+next=Próximo
+next.plural=Próximos
+
+nothingToShow=Nada a exibir
+doFilter=Filtrar
+filterBy=Filtrar por {0}...
+pagination.showing=Exibindo {0}
+pagination.to=a
+pagination.of=de
 
 deleteMessage.title=Confirmar exclusão
 deleteMessage.text=Tem certeza que deseja excluir este {0}?
+
+formErrorMessage=Alguns campos do seu formulário estão incorretos. Corrija-os e tente novamente.
 
 
 # TipoHomenagem
@@ -28,6 +74,35 @@ tipoHomenagem.create.success=O Tipo de Homenagem "{0}" foi criado
 
 subtipoHomenagem.create.success=O Subtipo de Homenagem "{0}" foi criado
 
+
+# Homenagem
+homenagem=Homenagem
+homenagem.plural=Homenagens
+homenagem.homenageado.label=Homenageado(a)
+homenagem.numeroRegistro.label=Número de Registro
+homenagem.descricao.label=Descrição
+homenagem.resumo.label=Resumo
+homenagem.dataRecebimento.label=Data do recebimento
+homenagem.local.label=Local
+homenagem.localizacao.label=Localização
+homenagem.precedencia.label=Precedência
+homenagem.objeto.label=Objeto
+homenagem.prateleira.label=Prateleira
+homenagem.material.label=Material
+homenagem.altura.label=Altura
+homenagem.largura.label=Largura
+homenagem.comprimento.label=Comprimento
+homenagem.profundidade.label=Profundidade
+homenagem.quemEntregou.label=Entregue por
+homenagem.cidade.label=Cidade
+homenagem.create.title=Criar nova Homenagem
+homenagem.create.lead=
+homenagem.edit.title=Editar Homenagem
+homenagem.edit.lead=
+homenagem.list.title=Homenagens
+homenagem.list.lead={0,choice,0#Nenhuma homenagem encontrada|1#Uma homenagem encontrada|1<{0,number,integer} homenagens encontradas}
+
+homenagem.create.success=A Homenagem "{0}" foi criada
 
 # Usuario
 usuario=Usuário

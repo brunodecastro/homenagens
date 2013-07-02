@@ -13,6 +13,8 @@
 
 @main(usuarioLogado, Messages("homenagem.create.title"), "homenagem", Messages("homenagem.create.lead")){
 
+	<script type="text/javascript" src="@routes.Assets.at("js/views/homenagens.js")"></script>
+
 	<div class="well">
 	    
 		@form(routes.Homenagens.save(), 'class -> "form-horizontal") {
@@ -42,6 +44,7 @@
 				)
 				@inputText(homenagemForm("descricao"), '_label -> Messages("homenagem.descricao.label"), 'class -> "input-xxlarge")
 				@textarea(homenagemForm("resumo"), args = 'rows -> 3, 'cols -> 50, '_label -> Messages("homenagem.resumo.label"), 'class -> "input-xxlarge")
+				@inputText(homenagemForm("quemEntregou"), '_label -> Messages("homenagem.quemEntregou.label"), 'class -> "input-xxlarge")
 				@campoData(homenagemForm("dataRecebimento"), '_label -> Messages("homenagem.dataRecebimento.label"))
 				@select(
 					field = homenagemForm("pais.id"), 
@@ -71,7 +74,6 @@
 				@inputText(homenagemForm("largura"), '_label -> Messages("homenagem.largura.label"))
 				@inputText(homenagemForm("comprimento"), '_label -> Messages("homenagem.comprimento.label"))
 				@inputText(homenagemForm("profundidade"), '_label -> Messages("homenagem.profundidade.label"))
-				@inputText(homenagemForm("quemEntregou"), '_label -> Messages("homenagem.quemEntregou.label"), 'class -> "input-xxlarge")
 				
 				<div class="form-actions">
 					<button type="submit" class="btn btn-primary">@Messages("save")</button>

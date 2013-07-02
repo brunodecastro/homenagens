@@ -42,7 +42,7 @@ public class Estado extends Model {
      */
     public static List<Estado> listarPorPais(String pais) {
     	
-    	if(pais == null) {
+    	if(pais == null || pais.equals("")) {
     		return new ArrayList<Estado>();
     	} else {
     		return listarPorPais(Long.valueOf(pais));

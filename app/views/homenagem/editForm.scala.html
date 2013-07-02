@@ -12,6 +12,12 @@
 
 @main(usuarioLogado, Messages("homenagem.edit.title"), "homenagem", Messages("homenagem.edit.lead")){
 
+	
+	<script type="text/javascript" src="@routes.Assets.at("js/views/homenagens.js")"></script>
+	<!-- The main application script -->
+	<script type="text/javascript" src="@routes.Assets.at("js/fileupload/main.js")"></script>
+
+
 	<div class="well">
 	
 		<ul class="nav nav-tabs">
@@ -48,6 +54,7 @@
 						)
 						@inputText(homenagemForm("descricao"), '_label -> Messages("homenagem.descricao.label"), 'class -> "input-xxlarge")
 						@textarea(homenagemForm("resumo"), args = 'rows -> 3, 'cols -> 50, '_label -> Messages("homenagem.resumo.label"), 'class -> "input-xxlarge")
+						@inputText(homenagemForm("quemEntregou"), '_label -> Messages("homenagem.quemEntregou.label"), 'class -> "input-xxlarge")
 						@campoData(homenagemForm("dataRecebimento"), '_label -> Messages("homenagem.dataRecebimento.label"))
 						@select(
 							field = homenagemForm("pais.id"), 
@@ -77,7 +84,6 @@
 						@inputText(homenagemForm("largura"), '_label -> Messages("homenagem.largura.label"))
 						@inputText(homenagemForm("comprimento"), '_label -> Messages("homenagem.comprimento.label"))
 						@inputText(homenagemForm("profundidade"), '_label -> Messages("homenagem.profundidade.label"))
-						@inputText(homenagemForm("quemEntregou"), '_label -> Messages("homenagem.quemEntregou.label"), 'class -> "input-xxlarge")
 						
 						<div class="form-actions">
 							<button type="submit" class="btn btn-primary">@Messages("save")</button>
@@ -259,9 +265,10 @@
 			}
 		</div>
 	</div>
-
+	
 }
 
+<<<<<<< HEAD
 <script>
 	$(function () {
 		'use strict';
@@ -308,3 +315,5 @@
 
 	});
 </script>
+=======
+>>>>>>> 7597f816a06d152817c21a237e0373fa743cf235

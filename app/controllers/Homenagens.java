@@ -111,12 +111,12 @@ public class Homenagens extends Controller {
      * @param id Id of the homenagem to edit
      */
     public static Result update(Long id) {
-        Form<Homenagem> homenagemForm = form(Homenagem.class).bindFromRequest();
-        if(homenagemForm.hasErrors()) {
-            return badRequest(editForm.render(Usuario.consultarPorEmail(request().username()), id, homenagemForm));
+    	Form<Homenagem> homenagemForm = form(Homenagem.class).bindFromRequest();
+        if(!validateForm(homenagemForm)) {
+            return badRequest(createForm.render(Usuario.consultarPorEmail(request().username()), homenagemForm));
         }
         homenagemForm.get().update(id);
-        flash("success", "A Homenagem \"" + homenagemForm.get().descricao + "\" foi atualizada");
+        flash("success", "A Homenagem \"" + homenagemForm.get().numeroRegistro + "\" foi atualizada");
         return goHome(homenagemForm.get() != null ? homenagemForm.get().homenageado : null);
     }
     
@@ -139,23 +139,31 @@ public class Homenagens extends Controller {
             return badRequest(createForm.render(Usuario.consultarPorEmail(request().username()), homenagemForm));
         }
         homenagemForm.get().save();
-        flash("success", Messages.get("homenagem.create.success", homenagemForm.get().descricao));
+        flash("success", Messages.get("homenagem.create.success", homenagemForm.get().numeroRegistro));
         return goHome(homenagemForm.get() != null ? homenagemForm.get().homenageado : null);
     }
     
+    /**
+     * Validate the form
+     * @param homenagemForm
+     * @return boolean
+     */
     private static boolean validateForm(Form<Homenagem> homenagemForm) {
+    	
+    	boolean isValid = true; 
     	
     	String tipoHomenagem = form().bindFromRequest().get("tipoHomenagem.id");
     	
     	if(tipoHomenagem.equals("")) {
     		homenagemForm.reject("tipoHomenagem.id", "");
+    		isValid = false;
     	}
     	
-    	if(homenagemForm.hasErrors() || tipoHomenagem.equals("")) {
-    		return false;
+    	if(homenagemForm.hasErrors() || !isValid) {
+    		homenagemForm.reject(Messages.get("formErrorMessage"));
     	}
     	
-    	return true;
+    	return isValid;
     }
     
     /**
@@ -164,9 +172,8 @@ public class Homenagens extends Controller {
     public static Result delete(Long id) {
     	Homenagem homenagem = Homenagem.find.ref(id);
     	Homenageado homenageado = homenagem.homenageado;
-    	String deletedName = homenagem.descricao;
     	homenagem.delete();
-        flash("success", "A Homenagem \"" + deletedName + "\" foi excluída");
+        flash("success", "A Homenagem \"" + homenagem.numeroRegistro + "\" foi excluída");
         return goHome(homenageado);
     }
 

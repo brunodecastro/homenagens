@@ -60,6 +60,7 @@ public class TipoHomenagens extends Controller {
     public static Result update(Long id) {
         Form<TipoHomenagem> tipoHomenagemForm = form(TipoHomenagem.class).bindFromRequest();
         if(tipoHomenagemForm.hasErrors()) {
+        	tipoHomenagemForm.reject(Messages.get("formErrorMessage"));	
         	TipoHomenagem tipoHomenagem = TipoHomenagem.find.byId(id);
             return badRequest(editForm.render(Usuario.consultarPorEmail(request().username()), id, tipoHomenagemForm, TipoHomenagem.getSubs(tipoHomenagem)));
         }
@@ -84,6 +85,7 @@ public class TipoHomenagens extends Controller {
     public static Result save() {
         Form<TipoHomenagem> tipoHomenagemForm = form(TipoHomenagem.class).bindFromRequest();
         if(tipoHomenagemForm.hasErrors()) {
+        	tipoHomenagemForm.reject(Messages.get("formErrorMessage"));	
             return badRequest(createForm.render(Usuario.consultarPorEmail(request().username()), tipoHomenagemForm));
         }
         tipoHomenagemForm.get().save();
@@ -115,6 +117,7 @@ public class TipoHomenagens extends Controller {
     public static Result saveSub(Long parentId) {
     	Form<TipoHomenagem> tipoHomenagemForm = form(TipoHomenagem.class).bindFromRequest();
         if(tipoHomenagemForm.hasErrors()) {
+        	tipoHomenagemForm.reject(Messages.get("formErrorMessage"));	
             return badRequest(createSubForm.render(Usuario.consultarPorEmail(request().username()), parentId, tipoHomenagemForm));
         }
     	TipoHomenagem sub = tipoHomenagemForm.get();
@@ -137,6 +140,7 @@ public class TipoHomenagens extends Controller {
     public static Result updateSub(Long parentId, Long id) {
         Form<TipoHomenagem> tipoHomenagemForm = form(TipoHomenagem.class).bindFromRequest();
         if(tipoHomenagemForm.hasErrors()) {
+        	tipoHomenagemForm.reject(Messages.get("formErrorMessage"));	
             return badRequest(editSubForm.render(Usuario.consultarPorEmail(request().username()), parentId, id, tipoHomenagemForm));
         }
         

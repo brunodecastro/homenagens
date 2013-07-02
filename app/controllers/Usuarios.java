@@ -7,7 +7,9 @@ import play.i18n.Messages;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
-import views.html.usuario.*;
+import views.html.usuario.createForm;
+import views.html.usuario.editForm;
+import views.html.usuario.list;
 
 import com.avaje.ebean.Page;
 
@@ -53,10 +55,8 @@ public class Usuarios extends Controller {
 		Form<Usuario> usuarioForm = form(Usuario.class).bindFromRequest();
 		
 		//Validate the form
-		validateForm(usuarioForm);
-		
-		if (usuarioForm.hasErrors()) {
-			return badRequest(editForm.render(Usuario.consultarPorEmail(request().username()), id, usuarioForm));
+		if (!validateForm(usuarioForm)) {
+			return badRequest(createForm.render(usuarioForm, Usuario.consultarPorEmail(request().username())));
 		}
 		
 		usuarioForm.get().update(id);
@@ -83,9 +83,7 @@ public class Usuarios extends Controller {
 		Form<Usuario> usuarioForm = form(Usuario.class).bindFromRequest();
 
 		//Validate the form
-		validateForm(usuarioForm);
-
-		if (usuarioForm.hasErrors()) {
+		if (!validateForm(usuarioForm)) {
 			return badRequest(createForm.render(usuarioForm, Usuario.consultarPorEmail(request().username())));
 		}
 
@@ -94,7 +92,12 @@ public class Usuarios extends Controller {
 		return GO_HOME;
 	}
 
-	private static void validateForm(Form<Usuario> usuarioForm) {
+	/**
+     * Validate the form
+     * @param usuarioForm
+     * @return boolean
+     */
+    private static boolean validateForm(Form<Usuario> usuarioForm) {
 
 		boolean isValid = true; 
 		
@@ -106,10 +109,11 @@ public class Usuarios extends Controller {
 			}
 		}
 		
-		if(!isValid) {
-			flash("error", "Corrija os campos marcados abaixo:");
+		if (usuarioForm.hasErrors() || !isValid) {
+			usuarioForm.reject(Messages.get("formErrorMessage"));
 		}
 
+		return isValid;
 	}
 
 	/**
