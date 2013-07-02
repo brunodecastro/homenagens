@@ -12,6 +12,12 @@
 
 @main(usuarioLogado, Messages("homenagem.edit.title"), "homenagem", Messages("homenagem.edit.lead")){
 
+	
+	<script type="text/javascript" src="@routes.Assets.at("js/views/homenagens.js")"></script>
+	<!-- The main application script -->
+	<script type="text/javascript" src="@routes.Assets.at("js/fileupload/main.js")"></script>
+
+
 	<div class="well">
 	
 		<ul class="nav nav-tabs">
@@ -251,10 +257,5 @@
 		</div>
 	</div>
 	
-	
-	<script type="text/javascript" src="@routes.Assets.at("js/views/homenagens.js")"></script>
-
 }
 
-<!-- The main application script -->
-<script type="text/javascript" src="@routes.Assets.at("js/fileupload/main.js")"></script>

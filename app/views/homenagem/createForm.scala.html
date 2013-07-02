@@ -13,6 +13,8 @@
 
 @main(usuarioLogado, Messages("homenagem.create.title"), "homenagem", Messages("homenagem.create.lead")){
 
+	<script type="text/javascript" src="@routes.Assets.at("js/views/homenagens.js")"></script>
+
 	<div class="well">
 	    
 		@form(routes.Homenagens.save(), 'class -> "form-horizontal") {
@@ -81,8 +83,5 @@
 		}
 	
 	</div>  
-	
-	
-	<script type="text/javascript" src="@routes.Assets.at("js/views/homenagens.js")"></script>
 
 }
