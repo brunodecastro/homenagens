@@ -66,4 +66,4 @@ GET		/image						controllers.ImageController.getAllImages()
 GET		/assets/*file               controllers.Assets.at(path="/public", file)
 
 
-GET     /javascriptRoutes     controllers.Homenagens.javascriptRoutes
+GET     /javascriptRoutes     controllers.Homenagens.javascriptRoutes()
