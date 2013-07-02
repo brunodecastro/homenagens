@@ -39,7 +39,7 @@ public class Cidade extends Model {
      */
     public static List<Cidade> listarPorEstado(String estado) {
     	
-    	if(estado == null) {
+    	if(estado == null || estado.equals("")) {
     		return new ArrayList<Cidade>();
     	} else {
     		return listarPorEstado(Long.valueOf(estado));
