@@ -44,25 +44,22 @@
 				@textarea(homenagemForm("resumo"), args = 'rows -> 3, 'cols -> 50, '_label -> Messages("homenagem.resumo.label"), 'class -> "input-xxlarge")
 				@campoData(homenagemForm("dataRecebimento"), '_label -> Messages("homenagem.dataRecebimento.label"))
 				@select(
-					homenagemForm("pais"), 
+					homenagemForm("pais.id"), 
 					Pais.find.all.map(v => (v.id.toString, v.nome)),
 					'_default -> "--- País ---",
-					'_label -> "País",
-					'_error -> homenagemForm("pais").error.map(_.withMessage("Selecione o país."))
+					'_label -> "País"
 				)
 				@select(
-					homenagemForm("estado"), 
+					homenagemForm("estado.id"), 
 					options(Seq()),
 					'_default -> "--- Estado ---",
-					'_label -> "Estado",
-					'_error -> homenagemForm("estado").error.map(_.withMessage("Selecione o estado."))
+					'_label -> "Estado"
 				)
 				@select(
-					homenagemForm("cidade"), 
+					homenagemForm("cidade.id"), 
 					options(Seq()),
 					'_default -> "--- Cidade ---",
-					'_label -> "Cidade",
-					'_error -> homenagemForm("cidade").error.map(_.withMessage("Selecione a cidade."))
+					'_label -> "Cidade"
 				)
 				@inputText(homenagemForm("local"), '_label -> Messages("homenagem.local.label"), 'class -> "input-xxlarge")
 				@inputText(homenagemForm("localizacao"), '_label -> Messages("homenagem.localizacao.label"), 'class -> "input-xxlarge")
@@ -87,51 +84,51 @@
 	
 	<script>
 		
-		$('#pais').change(function() {
+		$('#pais_id').change(function() {
 			var paisId = $(this).val();
 			
 			//Remove todos os options, menos o vazio
-			$('#estado option[value!=""]').remove();
+			$('#estado_id option[value!=""]').remove();
 	    
 			if(paisId != "") {
 				myJsRoutes.controllers.Homenagens.listarEstados(paisId).ajax({
 					success : function(result) {
-						$('#estado').removeAttr("disabled");
+						$('#estado_id').removeAttr("disabled");
 						
 						$.each(result, function(index, data) {
-							$('#estado').append(
+							$('#estado_id').append(
 								$('<option></option>').val(data.id).html(data.nome)
 							);
 						});
 					}
 				});
 			} else {
-				$('#estado').attr('disabled','disabled');
+				$('#estado_id').attr('disabled','disabled');
 			}
 			
 			return false;
 		});
 		
-		$('#estado').change(function() {
+		$('#estado_id').change(function() {
 			var estadoId = $(this).val();
 			
 		    //Remove todos os options, menos o vazio
-			$('#cidade option[value!=""]').remove();
+			$('#cidade_id option[value!=""]').remove();
 		    
 			if(estadoId != "") {
 				myJsRoutes.controllers.Homenagens.listarCidades(estadoId).ajax({
 					success : function(result) {
-						$('#cidade').removeAttr("disabled");
+						$('#cidade_id').removeAttr("disabled");
 						
 						$.each(result, function(index, data) {
-							$('#cidade').append(
+							$('#cidade_id').append(
 								$('<option></option>').val(data.id).html(data.nome)
 							);
 						});
 					}
 				});
 			}else {
-				$('#cidade').attr('disabled','disabled');
+				$('#cidade_id').attr('disabled','disabled');
 			}
 		    
 			return false;

@@ -24,10 +24,6 @@ import views.html.*;
 
 public class ImageController {
 	
-	public static Result startUpload() {
-		return Results.ok(upload.render());
-	}
-
 	public static Result getAllImages() {
 		ObjectNode result = Json.newObject();
 		ArrayNode array = result.putArray("files");
