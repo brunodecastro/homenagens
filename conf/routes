@@ -39,12 +39,13 @@ POST	/homenagens							controllers.Homenagens.save()
 GET		/homenagens/$id<[0-9]+>				controllers.Homenagens.edit(id:Long)
 POST	/homenagens/$id<[0-9]+>				controllers.Homenagens.update(id:Long)
 POST	/homenagens/$id<[0-9]+>/delete		controllers.Homenagens.delete(id:Long)
-GET     /homenagens/estados/:id     		controllers.Homenagens.listarEstados(id: Long)
-GET     /homenagens/cidades/:id     		controllers.Homenagens.listarCidades(id: Long)
+GET     /homenagens/estados/$id<[0-9]+>		controllers.Homenagens.listarEstados(id: Long)
+GET     /homenagens/cidades/$id<[0-9]+>		controllers.Homenagens.listarCidades(id: Long)
+GET     /homenagens/images/$id<[0-9]+>		controllers.Homenagens.getAllImages(id: Long)
+POST	/homenagens/images/$id<[0-9]+>		controllers.Homenagens.uploadImage(id: Long)
 
 
 # Image Upload
-POST	/image						controllers.ImageController.uploadImage()
 GET		/image/$id<[0-9]+>			controllers.ImageController.getImage(id: Long)
 DELETE	/image/$id<[0-9]+>			controllers.ImageController.deleteImage(id: Long)
 GET		/thumbnail/$id<[0-9]+>		controllers.ImageController.getThumbnail(id: Long)

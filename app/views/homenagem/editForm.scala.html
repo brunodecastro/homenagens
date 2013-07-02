@@ -91,7 +91,7 @@
 		    </div>
 			<div class="tab-pane" id="images">
 				
-				@helper.form(action = routes.ImageController.uploadImage, 'id -> "fileupload", 'enctype -> "multipart/form-data") {
+				@helper.form(action = routes.Homenagens.uploadImage(id), 'id -> "fileupload", 'enctype -> "multipart/form-data") {
 					<div class="row fileupload-buttonbar">
 						<div class="span6">
 							<span class="btn btn-success fileinput-button">
@@ -130,7 +130,16 @@
 					<table role="presentation" class="table table-striped"><tbody class="files" data-toggle="modal-gallery" data-target="#modal-gallery"></tbody></table>
 				}
 				
-				
+				<div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls">
+    <div class="slides"></div>
+    <h3 class="title"></h3>
+    <a class="prev">‹</a>
+    <a class="next">›</a>
+    <a class="close">×</a>
+    <a class="play-pause"></a>
+    <ol class="indicator"></ol>
+</div>
+
 				<!-- modal-gallery is the modal dialog used for the image gallery -->
 				<div id="modal-gallery" class="modal modal-gallery hide fade" data-filter=":odd">
 					<div class="modal-header">
@@ -253,5 +262,49 @@
 
 }
 
-<!-- The main application script -->
-<script type="text/javascript" src="@routes.Assets.at("js/fileupload/main.js")"></script>
+<script>
+	$(function () {
+		'use strict';
+		
+		// Initialize the jQuery File Upload widget:
+		$('#fileupload').fileupload({
+			// Uncomment the following to send cross-domain cookies:
+			//xhrFields: {withCredentials: true},
+			url: '/homenagens/images/@id'
+		});
+		
+		// Enable iframe cross-domain access via redirect option:
+		$('#fileupload').fileupload(
+			'option',
+			'redirect',
+			window.location.href.replace(
+				/\/[^\/]*$/,
+				'/assets/cors/result.html?%s'
+			)
+		);
+		
+		$('#fileupload').fileupload('option', {
+			url: '/homenagens/images/@id',
+				// Enable image resizing, except for Android and Opera,
+				// which actually support image resizing, but fail to
+				// send Blob objects via XHR requests:
+				disableImageResize: /Android(?!.*Chrome)|Opera/.test(window.navigator && navigator.userAgent),
+				imageMaxWidth: 800,
+				imageMaxHeight: 600,
+				acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i
+		});
+		
+	    // Show the blueimp Gallery as lightbox when clicking on image links:
+	    $('#fileupload .files').on('click', '.gallery', function (event) {
+	        // The :even filter removes duplicate links (thumbnail and file name links):
+	        if (blueimp.Gallery($('#fileupload .gallery').filter(':even'), {
+	                index: this
+	            })) {
+	            // Prevent the default link action on
+	            // successful Gallery initialization:
+	            event.preventDefault();
+	        }
+	    });
+
+	});
+</script>
