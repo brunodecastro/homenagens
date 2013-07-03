@@ -1,3 +1,9 @@
+-- USUARIO
+
+INSERT INTO usuario (id, email, nome, senha, tipo_usuario) VALUES 
+(NEXTVAL('usuario_seq'), 'admin@homenagens.com', 'Administrador', 'admin', 0),
+(NEXTVAL('usuario_seq'), 'brunnodecastro@gmail.com', 'Bruno de Castro Oliveira', 'senha', 0);
+
 -- PAIS
 
 INSERT INTO pais (id, nome, abreviacao) VALUES (1, 'Brasil', 'BR');

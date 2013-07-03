@@ -2,8 +2,6 @@ package models;
 
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import play.data.format.Formats;
@@ -16,7 +14,6 @@ import com.avaje.ebean.Page;
 public class Usuario extends Model {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	public Long id;
 
 	@Constraints.Required

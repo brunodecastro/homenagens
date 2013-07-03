@@ -111,6 +111,7 @@ public class Usuarios extends Controller {
 		
 		if (usuarioForm.hasErrors() || !isValid) {
 			usuarioForm.reject(Messages.get("formErrorMessage"));
+			isValid = false;
 		}
 
 		return isValid;

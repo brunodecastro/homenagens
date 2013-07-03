@@ -1,22 +1,6 @@
 
 # Usuários
 
-usuarios:
-
- - !!models.Usuario
-  id:    1
-  email:   admin@homenagens.com
-  nome:   Administrador
-  senha:   admin
-  tipoUsuario: ADMINISTRADOR
- 
- - !!models.Usuario
-  id:    2
-  email:   brunnodecastro@gmail.com
-  nome:   Bruno de Castro Oliveira
-  senha:   senha
-  tipoUsuario: ADMINISTRADOR
-
 
 tiposHomenagem:
 
