@@ -8,7 +8,6 @@ import java.util.Map;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -28,7 +27,7 @@ public class TipoHomenagem extends Model {
 	@Required
 	public String name;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	public TipoHomenagem parent;
 	
 	@OneToMany(mappedBy="parent", cascade = CascadeType.REMOVE)
