@@ -6,12 +6,12 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.validation.Valid;
 
 import play.data.Form;
 import play.data.validation.Constraints.Required;
@@ -31,8 +31,7 @@ public class TipoHomenagem extends Model {
 	@ManyToOne(fetch=FetchType.LAZY)
 	public TipoHomenagem parent;
 	
-	@Valid
-	@OneToMany(mappedBy="parent")
+	@OneToMany(mappedBy="parent", cascade = CascadeType.REMOVE)
 	public List<TipoHomenagem> subs;
 
 	public TipoHomenagem() {

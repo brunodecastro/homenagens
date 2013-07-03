@@ -97,10 +97,9 @@ public class TipoHomenagens extends Controller {
      * Handle tipoHomenagem deletion
      */
     public static Result delete(Long id) {
-    	TipoHomenagem tipoHomenagem = TipoHomenagem.find.ref(id);
-    	String deletedName = tipoHomenagem.name;
+    	TipoHomenagem tipoHomenagem = TipoHomenagem.find.byId(id);
     	tipoHomenagem.delete();
-        flash("success", "O Tipo de Homenagem \"" + deletedName + "\" foi excluído");
+        flash("success", "O Tipo de Homenagem \"" + tipoHomenagem.name + "\" foi excluído");
         return GO_HOME;
     }
   

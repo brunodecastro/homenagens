@@ -3,6 +3,7 @@ package models;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -10,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.Valid;
 
+import play.data.format.Formats;
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
 
@@ -43,6 +45,13 @@ public class Homenagem extends Model {
 	public TipoHomenagem tipoHomenagem;
 	
 	@ManyToOne
+	public Pais pais;
+	
+	@ManyToOne
+	public Estado estado;
+	
+	@Required
+	@ManyToOne
 	public Cidade cidade;
 	
 	public String resumo;
@@ -69,10 +78,11 @@ public class Homenagem extends Model {
 	
 	public String quemEntregou;
 	
+	@Formats.DateTime(pattern="dd/MM/yyyy")
 	public Date dataRecebimento;
 	
 	@Valid
-	@OneToMany(mappedBy="homenagem")
+	@OneToMany(mappedBy="homenagem", cascade = CascadeType.REMOVE)
 	public List<HomenagemImagem> imagens;
 
 	public static Model.Finder<Long, Homenagem> find = new Finder<Long, Homenagem>(Long.class, Homenagem.class);
