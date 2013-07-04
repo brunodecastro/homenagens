@@ -16,6 +16,3 @@ dist
 /.settings
 .cache
 .DS_Store
-conf/evolutions/default/1.sql
-
-conf/evolutions/default/1.sql
