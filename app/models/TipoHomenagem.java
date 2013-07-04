@@ -6,7 +6,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -31,7 +30,7 @@ public class TipoHomenagem extends Model {
 	@ManyToOne(fetch=FetchType.LAZY)
 	public TipoHomenagem parent;
 
-	@OneToMany(mappedBy="parent", cascade = CascadeType.REMOVE)
+	@OneToMany(mappedBy="parent")
 	public List<TipoHomenagem> subs;
 
 	public TipoHomenagem() {
@@ -43,6 +42,18 @@ public class TipoHomenagem extends Model {
 	
 	public static Model.Finder<Long, TipoHomenagem> find = new Finder<Long, TipoHomenagem>(Long.class, TipoHomenagem.class);
 
+	/**
+     * Deletes this entity.
+     * Usado para resolver o problema do cascade.
+     */
+	@Override
+    public void delete() {
+		for (TipoHomenagem subTipoHomenagem : subs) {
+			subTipoHomenagem.delete();
+		} 
+		super.delete();
+    }
+	
 	public static Page<TipoHomenagem> page(int page, int pageSize, String sortBy, String order, String filter) {
 		return find.where().ilike("name", "%" + filter + "%").isNull("parent").orderBy(sortBy + " " + order).findPagingList(pageSize)
 				.getPage(page);

@@ -4,6 +4,7 @@ import static play.data.Form.form;
 import models.TipoHomenagem;
 import models.Usuario;
 import play.data.Form;
+import play.db.ebean.Transactional;
 import play.i18n.Messages;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -96,6 +97,7 @@ public class TipoHomenagens extends Controller {
     /**
      * Handle tipoHomenagem deletion
      */
+    @Transactional
     public static Result delete(Long id) {
     	TipoHomenagem tipoHomenagem = TipoHomenagem.find.byId(id);
     	tipoHomenagem.delete();
