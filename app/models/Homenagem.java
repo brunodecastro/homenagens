@@ -54,6 +54,8 @@ public class Homenagem extends Model {
 	@ManyToOne
 	public Cidade cidade;
 	
+	public String outraCidade;
+	
 	public String resumo;
 	
 	public String local;

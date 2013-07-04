@@ -42,7 +42,7 @@
 					'_label -> "Tipo de homenagem",
 					'_error -> homenagemForm("tipoHomenagem.id").error.map(_.withMessage("Selecione o tipo de homenagem."))
 				)
-				@inputText(homenagemForm("descricao"), '_label -> Messages("homenagem.descricao.label"), 'class -> "input-xxlarge")
+				@textarea(homenagemForm("descricao"), args = 'rows -> 3, 'cols -> 50, '_label -> Messages("homenagem.descricao.label"), 'class -> "input-xxlarge")
 				@textarea(homenagemForm("resumo"), args = 'rows -> 3, 'cols -> 50, '_label -> Messages("homenagem.resumo.label"), 'class -> "input-xxlarge")
 				@inputText(homenagemForm("quemEntregou"), '_label -> Messages("homenagem.quemEntregou.label"), 'class -> "input-xxlarge")
 				@campoData(homenagemForm("dataRecebimento"), '_label -> Messages("homenagem.dataRecebimento.label"))
@@ -64,6 +64,7 @@
 					'_default -> "--- Cidade ---",
 					'_label -> "Cidade"
 				)
+				@inputText(homenagemForm("outraCidade"), '_label -> Messages("homenagem.outraCidade.label"), 'class -> "input-xxlarge")
 				@inputText(homenagemForm("local"), '_label -> Messages("homenagem.local.label"), 'class -> "input-xxlarge")
 				@inputText(homenagemForm("localizacao"), '_label -> Messages("homenagem.localizacao.label"), 'class -> "input-xxlarge")
 				@inputText(homenagemForm("precedencia"), '_label -> Messages("homenagem.precedencia.label"), 'class -> "input-xxlarge")
