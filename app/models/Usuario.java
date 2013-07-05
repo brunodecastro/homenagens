@@ -4,7 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
 
-import play.data.format.Formats;
 import play.data.validation.Constraints;
 import play.db.ebean.Model;
 
@@ -17,7 +16,6 @@ public class Usuario extends Model {
 	public Long id;
 
 	@Constraints.Required
-	@Formats.NonEmpty
 	public String email;
 
 	@Constraints.Required
@@ -28,7 +26,6 @@ public class Usuario extends Model {
 	
 	@Enumerated
 	@Constraints.Required
-	@Formats.NonEmpty
 	public TipoUsuario tipoUsuario;
 		
 	
