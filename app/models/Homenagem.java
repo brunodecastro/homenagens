@@ -34,6 +34,7 @@ public class Homenagem extends Model {
 	public List<Homenagem> homenagensFilhas;
 
 	@Required
+	@Lob
 	public String numeroRegistro;
 
 	@Required
@@ -56,31 +57,43 @@ public class Homenagem extends Model {
 	@ManyToOne
 	public Cidade cidade;
 
+	@Lob
 	public String outraCidade;
 
 	@Lob
 	public String resumo;
 
+	@Lob
 	public String local;
 
+	@Lob
 	public String localizacao;
 
+	@Lob
 	public String precedencia;
 
+	@Lob
 	public String objeto;
 
+	@Lob
 	public String prateleira;
 
+	@Lob
 	public String material;
 
+	@Lob
 	public String altura;
 
+	@Lob
 	public String largura;
 
+	@Lob
 	public String comprimento;
 
+	@Lob
 	public String profundidade;
 
+	@Lob
 	public String quemEntregou;
 
 	@Formats.DateTime(pattern = "dd/MM/yyyy")

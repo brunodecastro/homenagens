@@ -3,6 +3,7 @@ package models;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 
 import play.data.validation.Constraints;
 import play.db.ebean.Model;
@@ -16,12 +17,15 @@ public class Usuario extends Model {
 	public Long id;
 
 	@Constraints.Required
+	@Lob
 	public String email;
 
 	@Constraints.Required
+	@Lob
 	public String nome;
 
 	@Constraints.Required
+	@Lob
 	public String senha;
 	
 	@Enumerated
