@@ -203,7 +203,11 @@
                     <tr>
                         <td><a href="@routes.Homenagens.edit(homenagem.id)">@homenagem.numeroRegistro</a></td>
                         <td><a href="@routes.Homenagens.edit(homenagem.id)">@homenagem.descricao</a></td>
-                        <td><a href="@routes.Homenagens.edit(homenagem.id)">@if(homenagem.cidade != null){@homenagem.cidade.nome}</a></td>
+                        <td><a href="@routes.Homenagens.edit(homenagem.id)">
+                        	@if(homenagem.cidade != null){
+                        		@homenagem.cidade.nome - @homenagem.cidade.estado.abreviacao 
+                        	}
+                        </a></td>
                     </tr>
                 }
 

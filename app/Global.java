@@ -12,5 +12,5 @@ public class Global extends GlobalSettings {
 		
 		InitialData.execute();
 	}
-
+	
 }

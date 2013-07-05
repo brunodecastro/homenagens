@@ -8,6 +8,13 @@
 
 	<div class="well">
 		@form(routes.TipoHomenagens.updateSub(parentId, id), 'class -> "form-horizontal") {
+		
+			@if(tipoHomenagemForm.hasGlobalErrors) {
+				<div class="alert alert-error">
+					<a class="close" data-dismiss="alert">×</a>
+					@tipoHomenagemForm.globalError.message
+				</div>
+			}
 			
 			@inputText(tipoHomenagemForm("name"),
 				'_label -> Messages("tipoHomenagem.name.label"))
@@ -40,7 +47,7 @@
 			<p>@Messages("deleteMessage.text", Messages("tipoHomenagem"))</p>
 		</div>
 		<div class="modal-footer">
-			@form(routes.TipoHomenagens.delete(id)) {
+			@form(routes.TipoHomenagens.deleteSub(id)) {
 				<button class="btn" data-dismiss="modal" aria-hidden="true">@Messages("cancel")</button>
 				<button class="btn btn-danger" type="submit"><i class="icon-trash icon-white"></i> @Messages("delete")</button>
 			}

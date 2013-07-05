@@ -14,6 +14,14 @@
     
 	<div class="well">
 		@form(routes.TipoHomenagens.save(), 'class -> "form-horizontal") {
+		
+			@if(tipoHomenagemForm.hasGlobalErrors) {
+				<div class="alert alert-error">
+					<a class="close" data-dismiss="alert">×</a>
+					@tipoHomenagemForm.globalError.message
+				</div>
+			}
+		
 			
 			@inputText(tipoHomenagemForm("name"),
 				'_label -> Messages("tipoHomenagem.name.label"))
