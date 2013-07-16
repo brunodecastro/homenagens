@@ -8,15 +8,17 @@
 	<style name="Row" fontName="Helvetica">
 		<conditionalStyle>
 			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
-			<style backcolor="#C0C0C0" fontName="Helvetica"/>
+			<style mode="Opaque" backcolor="#F0EFEF" fontName="Helvetica"/>
 		</conditionalStyle>
 	</style>
 	<parameter name="REPORT_TITLE" class="java.lang.String"/>
 	<parameter name="HOMENAGEADO_NOME" class="java.lang.String"/>
 	<field name="descricao" class="java.lang.String"/>
 	<field name="numeroRegistro" class="java.lang.String"/>
-	<field name="homenageado.label" class="java.lang.String"/>
-	<field name="homenageado" class="java.lang.Object"/>
+	<field name="tipoHomenagem.name" class="java.lang.String"/>
+	<field name="cidadeCompleto" class="java.lang.String"/>
+	<field name="quemEntregou" class="java.lang.String"/>
+	<field name="localizacao" class="java.lang.String"/>
 	<pageHeader>
 		<band height="20">
 			<textField isBlankWhenNull="true">
@@ -39,14 +41,51 @@
 					<bottomPen lineWidth="1.0"/>
 				</box>
 				<staticText>
-					<reportElement uuid="f11ff8a7-d52c-42b1-ae48-9123afd1fb4a" style="Column header" x="0" y="0" width="401" height="20"/>
-					<textElement/>
+					<reportElement uuid="f11ff8a7-d52c-42b1-ae48-9123afd1fb4a" style="Column header" x="0" y="0" width="100" height="20"/>
+					<textElement>
+						<paragraph leftIndent="2" rightIndent="2"/>
+					</textElement>
 					<text><![CDATA[Registro]]></text>
 				</staticText>
 				<staticText>
-					<reportElement uuid="f375ea97-c412-40c9-9f86-590df8bb5409" style="Column header" x="401" y="0" width="401" height="20"/>
-					<textElement/>
+					<reportElement uuid="f375ea97-c412-40c9-9f86-590df8bb5409" style="Column header" mode="Transparent" x="240" y="0" width="200" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="Helvetica" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single" rightIndent="2"/>
+					</textElement>
 					<text><![CDATA[Descrição]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="28baf45c-d823-4c05-8dfa-cf8e62ebadda" mode="Transparent" x="100" y="0" width="140" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="Helvetica" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single" rightIndent="2"/>
+					</textElement>
+					<text><![CDATA[Tipo]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="df674c34-6125-467d-ab8d-3b9673008d2e" mode="Transparent" x="440" y="2" width="145" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="Helvetica" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single" rightIndent="2"/>
+					</textElement>
+					<text><![CDATA[CIdade]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="5cc1c874-7249-478f-933c-20977624612a" mode="Transparent" x="585" y="2" width="117" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="Helvetica" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single" rightIndent="2"/>
+					</textElement>
+					<text><![CDATA[Entregue por]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="3f81fd4a-d45d-4aa2-b5cd-53eba4c62347" mode="Transparent" x="702" y="0" width="100" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="Helvetica" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single" rightIndent="2"/>
+					</textElement>
+					<text><![CDATA[Localização]]></text>
 				</staticText>
 			</frame>
 		</band>
@@ -54,16 +93,52 @@
 	<detail>
 		<band height="20">
 			<frame>
-				<reportElement uuid="61a5bb26-dad7-4c4b-af5f-0397ff23fae7" x="0" y="0" width="802" height="20"/>
-				<textField>
-					<reportElement uuid="7e11c801-fe9a-4f5f-be25-63404437a071" x="401" y="0" width="401" height="20"/>
-					<textElement/>
+				<reportElement uuid="61a5bb26-dad7-4c4b-af5f-0397ff23fae7" style="Row" stretchType="RelativeToBandHeight" x="0" y="0" width="802" height="20"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="7e11c801-fe9a-4f5f-be25-63404437a071" stretchType="RelativeToBandHeight" x="240" y="0" width="200" height="20" isPrintWhenDetailOverflows="true"/>
+					<textElement>
+						<paragraph rightIndent="2"/>
+					</textElement>
 					<textFieldExpression><![CDATA[$F{descricao}]]></textFieldExpression>
 				</textField>
-				<textField>
-					<reportElement uuid="e2fd1066-f8ba-4603-b8ab-47816241c95b" x="0" y="0" width="401" height="20"/>
-					<textElement/>
+				<textField isStretchWithOverflow="true">
+					<reportElement uuid="e2fd1066-f8ba-4603-b8ab-47816241c95b" stretchType="RelativeToBandHeight" x="0" y="0" width="100" height="20" isPrintWhenDetailOverflows="true"/>
+					<textElement>
+						<paragraph leftIndent="2" rightIndent="2"/>
+					</textElement>
 					<textFieldExpression><![CDATA[$F{numeroRegistro}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="false">
+					<reportElement uuid="7f799cb7-0585-459e-bca7-0e47df75db1e" stretchType="RelativeToBandHeight" mode="Transparent" x="100" y="0" width="140" height="20" isPrintWhenDetailOverflows="true" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+						<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single" rightIndent="2"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{tipoHomenagem.name}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="false">
+					<reportElement uuid="587a9f2c-fca4-4085-af0d-db4cc90e770d" stretchType="RelativeToBandHeight" mode="Transparent" x="440" y="0" width="145" height="20" isPrintWhenDetailOverflows="true" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+						<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single" rightIndent="2"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{cidadeCompleto}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="false">
+					<reportElement uuid="a23857e1-8484-4dce-ad73-11f562a0b1c6" stretchType="RelativeToBandHeight" mode="Transparent" x="585" y="0" width="117" height="20" isPrintWhenDetailOverflows="true" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+						<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single" rightIndent="2"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{quemEntregou}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="false">
+					<reportElement uuid="c1d6a838-7115-4ef1-819d-b83859d65db0" stretchType="RelativeToBandHeight" mode="Transparent" x="702" y="0" width="100" height="20" isPrintWhenDetailOverflows="true" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+						<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single" rightIndent="2"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{localizacao}]]></textFieldExpression>
 				</textField>
 			</frame>
 		</band>

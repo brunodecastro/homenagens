@@ -182,13 +182,12 @@ public class Homenagens extends Controller {
     	List<Homenagem> homenagemList = Homenagem.list(sortBy, order, homenagemFilterForm.get());
     	
     	Map<String, Object> reportParams = new HashMap<String, Object>();
-    	reportParams.put("REPORT_TITLE", "titulo");
     	
     	Homenageado homenageadoObj = homenagemFilterForm.get().homenageado;
     	if(homenageadoObj == null) {
     		homenageadoObj = Homenageado.valueOf(homenageado);
     	}
-    	reportParams.put("HOMENAGEADO_NOME", homenageadoObj.getLabel());
+    	reportParams.put("REPORT_TITLE", "Troféus e objetos - "+ homenageadoObj.getNomeComTratamento());
     	
         return ReportController.jasperDocument("homenagem_list", reportParams, new
     			JRBeanCollectionDataSource(homenagemList));

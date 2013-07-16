@@ -102,6 +102,19 @@ public class Homenagem extends Model {
 	@Valid
 	@OneToMany(mappedBy = "homenagem", cascade = CascadeType.REMOVE)
 	public List<HomenagemImagem> imagens;
+	
+	public String getCidadeCompleto() {
+		if(outraCidade != null && !outraCidade.trim().isEmpty()) {
+			return outraCidade;
+		} else if(cidade != null) {
+			return cidade.nome + " - " + cidade.estado.abreviacao + " - " + cidade.estado.pais.abreviacao;
+		} else if (estado != null) {
+			return estado.abreviacao + " - " + estado.pais.abreviacao;
+		} else if (pais != null) {
+			return pais.abreviacao;
+		}
+		return null;
+	}
 
 	public static Model.Finder<Long, Homenagem> find = new Finder<Long, Homenagem>(Long.class, Homenagem.class);
 
