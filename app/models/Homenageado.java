@@ -3,7 +3,7 @@ package models;
 
 public enum Homenageado  {
 
-	MARCONI("Marconi Perillo", "Sr."),
+	MARCONI("Marconi Perillo Jr.", "Sr."),
 	VALERIA("Valéria Perillo", "Sra.");
 	
 	private String label;
