@@ -21,26 +21,26 @@ create table estado (
 create table homenagem (
   id                        bigint not null,
   homenagem_pai_id          bigint,
-  numero_registro           text,
+  numero_registro           clob,
   homenageado               integer,
-  descricao                 text,
+  descricao                 clob,
   tipo_homenagem_id         bigint,
   pais_id                   bigint,
   estado_id                 bigint,
   cidade_id                 bigint,
-  outra_cidade              text,
-  resumo                    text,
-  local                     text,
-  localizacao               text,
-  precedencia               text,
-  objeto                    text,
-  prateleira                text,
-  material                  text,
-  altura                    text,
-  largura                   text,
-  comprimento               text,
-  profundidade              text,
-  quem_entregou             text,
+  outra_cidade              clob,
+  resumo                    clob,
+  local                     clob,
+  localizacao               clob,
+  precedencia               clob,
+  objeto                    clob,
+  prateleira                clob,
+  material                  clob,
+  altura                    clob,
+  largura                   clob,
+  comprimento               clob,
+  profundidade              clob,
+  quem_entregou             clob,
   data_recebimento          timestamp,
   constraint ck_homenagem_homenageado check (homenageado in (0,1)),
   constraint pk_homenagem primary key (id))
@@ -64,7 +64,7 @@ create table pais (
 
 create table raw_image (
   id                        bigint not null,
-  image                     bytea,
+  image                     blob,
   width                     integer,
   height                    integer,
   mimetype                  varchar(255),
@@ -74,16 +74,16 @@ create table raw_image (
 
 create table tipo_homenagem (
   id                        bigint not null,
-  name                      text,
+  name                      clob,
   parent_id                 bigint,
   constraint pk_tipo_homenagem primary key (id))
 ;
 
 create table usuario (
   id                        bigint not null,
-  email                     text,
-  nome                      text,
-  senha                     text,
+  email                     clob,
+  nome                      clob,
+  senha                     clob,
   tipo_usuario              integer,
   constraint ck_usuario_tipo_usuario check (tipo_usuario in (0,1)),
   constraint pk_usuario primary key (id))
@@ -105,48 +105,52 @@ create sequence tipo_homenagem_seq;
 
 create sequence usuario_seq;
 
-alter table cidade add constraint fk_cidade_estado_1 foreign key (estado_id) references estado (id);
+alter table cidade add constraint fk_cidade_estado_1 foreign key (estado_id) references estado (id) on delete restrict on update restrict;
 create index ix_cidade_estado_1 on cidade (estado_id);
-alter table estado add constraint fk_estado_pais_2 foreign key (pais_id) references pais (id);
+alter table estado add constraint fk_estado_pais_2 foreign key (pais_id) references pais (id) on delete restrict on update restrict;
 create index ix_estado_pais_2 on estado (pais_id);
-alter table homenagem add constraint fk_homenagem_homenagemPai_3 foreign key (homenagem_pai_id) references homenagem (id);
+alter table homenagem add constraint fk_homenagem_homenagemPai_3 foreign key (homenagem_pai_id) references homenagem (id) on delete restrict on update restrict;
 create index ix_homenagem_homenagemPai_3 on homenagem (homenagem_pai_id);
-alter table homenagem add constraint fk_homenagem_tipoHomenagem_4 foreign key (tipo_homenagem_id) references tipo_homenagem (id);
+alter table homenagem add constraint fk_homenagem_tipoHomenagem_4 foreign key (tipo_homenagem_id) references tipo_homenagem (id) on delete restrict on update restrict;
 create index ix_homenagem_tipoHomenagem_4 on homenagem (tipo_homenagem_id);
-alter table homenagem add constraint fk_homenagem_pais_5 foreign key (pais_id) references pais (id);
+alter table homenagem add constraint fk_homenagem_pais_5 foreign key (pais_id) references pais (id) on delete restrict on update restrict;
 create index ix_homenagem_pais_5 on homenagem (pais_id);
-alter table homenagem add constraint fk_homenagem_estado_6 foreign key (estado_id) references estado (id);
+alter table homenagem add constraint fk_homenagem_estado_6 foreign key (estado_id) references estado (id) on delete restrict on update restrict;
 create index ix_homenagem_estado_6 on homenagem (estado_id);
-alter table homenagem add constraint fk_homenagem_cidade_7 foreign key (cidade_id) references cidade (id);
+alter table homenagem add constraint fk_homenagem_cidade_7 foreign key (cidade_id) references cidade (id) on delete restrict on update restrict;
 create index ix_homenagem_cidade_7 on homenagem (cidade_id);
-alter table homenagem_imagem add constraint fk_homenagem_imagem_image_8 foreign key (image_id) references raw_image (id);
+alter table homenagem_imagem add constraint fk_homenagem_imagem_image_8 foreign key (image_id) references raw_image (id) on delete restrict on update restrict;
 create index ix_homenagem_imagem_image_8 on homenagem_imagem (image_id);
-alter table homenagem_imagem add constraint fk_homenagem_imagem_thumbnail_9 foreign key (thumbnail_id) references raw_image (id);
+alter table homenagem_imagem add constraint fk_homenagem_imagem_thumbnail_9 foreign key (thumbnail_id) references raw_image (id) on delete restrict on update restrict;
 create index ix_homenagem_imagem_thumbnail_9 on homenagem_imagem (thumbnail_id);
-alter table homenagem_imagem add constraint fk_homenagem_imagem_homenagem_10 foreign key (homenagem_id) references homenagem (id);
+alter table homenagem_imagem add constraint fk_homenagem_imagem_homenagem_10 foreign key (homenagem_id) references homenagem (id) on delete restrict on update restrict;
 create index ix_homenagem_imagem_homenagem_10 on homenagem_imagem (homenagem_id);
-alter table tipo_homenagem add constraint fk_tipo_homenagem_parent_11 foreign key (parent_id) references tipo_homenagem (id);
+alter table tipo_homenagem add constraint fk_tipo_homenagem_parent_11 foreign key (parent_id) references tipo_homenagem (id) on delete restrict on update restrict;
 create index ix_tipo_homenagem_parent_11 on tipo_homenagem (parent_id);
 
 
 
 # --- !Downs
 
-drop table if exists cidade cascade;
+SET REFERENTIAL_INTEGRITY FALSE;
 
-drop table if exists estado cascade;
+drop table if exists cidade;
 
-drop table if exists homenagem cascade;
+drop table if exists estado;
 
-drop table if exists homenagem_imagem cascade;
+drop table if exists homenagem;
 
-drop table if exists pais cascade;
+drop table if exists homenagem_imagem;
 
-drop table if exists raw_image cascade;
+drop table if exists pais;
 
-drop table if exists tipo_homenagem cascade;
+drop table if exists raw_image;
 
-drop table if exists usuario cascade;
+drop table if exists tipo_homenagem;
+
+drop table if exists usuario;
+
+SET REFERENTIAL_INTEGRITY TRUE;
 
 drop sequence if exists cidade_seq;
 
