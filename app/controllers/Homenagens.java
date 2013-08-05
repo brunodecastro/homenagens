@@ -187,7 +187,7 @@ public class Homenagens extends Controller {
     	if(homenageadoObj == null) {
     		homenageadoObj = Homenageado.valueOf(homenageado);
     	}
-    	reportParams.put("REPORT_TITLE", "Troféus e objetos - "+ homenageadoObj.getNomeComTratamento());
+    	reportParams.put("REPORT_TITLE", "Homenagens - "+ homenageadoObj.getNomeComTratamento());
     	
         return ReportController.jasperDocument("homenagem_list", reportParams, new
     			JRBeanCollectionDataSource(homenagemList));
