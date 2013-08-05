@@ -59,20 +59,20 @@
 						@select(
 							field = homenagemForm("pais.id"), 
 							options = Pais.find.all.map(v => (v.id.toString, v.nome)),
-							'_default -> "--- País ---",
-							'_label -> "País"
+							'_default -> Messages("homenagem.pais.select.default.label"),
+							'_label -> Messages("homenagem.pais.label")
 						)
 						@select(
 							field = homenagemForm("estado.id"), 
 							options = Estado.listarPorPais(homenagemForm("pais.id").value).map(v => (v.id.toString, v.nome)),
-							'_default -> "--- Estado ---",
-							'_label -> "Estado"
+							'_default -> Messages("homenagem.estado.select.default.label"),
+							'_label -> Messages("homenagem.estado.label")
 						)
 						@select(
 							field = homenagemForm("cidade.id"), 
 							options = Cidade.listarPorEstado(homenagemForm("estado.id").value).map(v => (v.id.toString, v.nome)),
-							'_default -> "--- Cidade ---",
-							'_label -> "Cidade"
+							'_default -> Messages("homenagem.cidade.select.default.label"),
+							'_label -> Messages("homenagem.cidade.label")
 						)
 						@inputText(homenagemForm("outraCidade"), '_label -> Messages("homenagem.outraCidade.label"), 'class -> "input-xxlarge")
 						@inputText(homenagemForm("local"), '_label -> Messages("homenagem.local.label"), 'class -> "input-xxlarge")

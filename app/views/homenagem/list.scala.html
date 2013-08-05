@@ -153,16 +153,20 @@
 						)
 	            
 	            		@inputText(filterForm("numeroRegistro"),
-							'_label -> Messages("homenagem.numeroRegistro.label"))
+							'_label -> Messages("homenagem.numeroRegistro.label"),
+							'class -> "input-xlarge")
 							
 						@inputText(filterForm("descricao"),
-							'_label -> Messages("homenagem.descricao.label"))
+							'_label -> Messages("homenagem.descricao.label"),
+							'class -> "input-xxlarge")
 						
 						@inputText(filterForm("resumo"),
-							'_label -> Messages("homenagem.resumo.label"))
+							'_label -> Messages("homenagem.resumo.label"),
+							'class -> "input-xxlarge")
 							
 						@inputText(filterForm("quemEntregou"),
-							'_label -> Messages("homenagem.quemEntregou.label"))
+							'_label -> Messages("homenagem.quemEntregou.label"),
+							'class -> "input-xxlarge")
 							
 						@dateRange(filterForm("dataRecebimentoInicio"), filterForm("dataRecebimentoFim"), '_label -> Messages("homenagem.dataRecebimento.label"))
 						
