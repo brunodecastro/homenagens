@@ -104,16 +104,29 @@ public class Homenagem extends Model {
 	public List<HomenagemImagem> imagens;
 	
 	public String getCidadeCompleto() {
+		String cidadeCompleto = null;
+		
 		if(outraCidade != null && !outraCidade.trim().isEmpty()) {
-			return outraCidade;
+			cidadeCompleto = outraCidade;
+			
+			if(estado != null) {
+				if(!cidadeCompleto.trim().isEmpty()) {
+					cidadeCompleto = cidadeCompleto + " - ";
+				}
+				cidadeCompleto = cidadeCompleto + estado.abreviacao;
+			}
+			
+			if(pais != null) {
+				if(!cidadeCompleto.trim().isEmpty()) {
+					cidadeCompleto = cidadeCompleto + " - ";
+				}
+				cidadeCompleto = cidadeCompleto + pais.abreviacao;
+			}
 		} else if(cidade != null) {
-			return cidade.nome + " - " + cidade.estado.abreviacao + " - " + cidade.estado.pais.abreviacao;
-		} else if (estado != null) {
-			return estado.abreviacao + " - " + estado.pais.abreviacao;
-		} else if (pais != null) {
-			return pais.abreviacao;
+			cidadeCompleto = cidade.nome + " - " + cidade.estado.abreviacao + " - " + cidade.estado.pais.abreviacao;
 		}
-		return null;
+		
+		return cidadeCompleto;
 	}
 
 	public static Model.Finder<Long, Homenagem> find = new Finder<Long, Homenagem>(Long.class, Homenagem.class);
