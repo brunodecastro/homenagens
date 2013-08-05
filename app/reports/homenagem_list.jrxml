@@ -3,9 +3,9 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
-	<style name="Title" fontName="Arial" fontSize="12" isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="false"/>
-	<style name="Column header" vAlign="Middle" fontName="Arial" fontSize="10" pdfFontName="Helvetica-Bold" isPdfEmbedded="false"/>
-	<style name="Row" fontName="Arial" isPdfEmbedded="false">
+	<style name="Title" fontName="SansSerif" fontSize="12" isBold="true"/>
+	<style name="Column header" vAlign="Middle" fontName="SansSerif" fontSize="10"/>
+	<style name="Row" fontName="SansSerif">
 		<conditionalStyle>
 			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
 			<style mode="Opaque" backcolor="#F0EFEF" fontName="Helvetica"/>
@@ -50,7 +50,7 @@
 				<staticText>
 					<reportElement uuid="f375ea97-c412-40c9-9f86-590df8bb5409" style="Column header" mode="Transparent" x="240" y="0" width="200" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 					<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
-						<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<font size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252"/>
 						<paragraph lineSpacing="Single" rightIndent="2"/>
 					</textElement>
 					<text><![CDATA[Descrição]]></text>
@@ -58,7 +58,7 @@
 				<staticText>
 					<reportElement uuid="28baf45c-d823-4c05-8dfa-cf8e62ebadda" style="Column header" mode="Transparent" x="100" y="0" width="140" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 					<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
-						<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<font size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252"/>
 						<paragraph lineSpacing="Single" rightIndent="2"/>
 					</textElement>
 					<text><![CDATA[Tipo]]></text>
@@ -66,7 +66,7 @@
 				<staticText>
 					<reportElement uuid="df674c34-6125-467d-ab8d-3b9673008d2e" style="Column header" mode="Transparent" x="440" y="0" width="145" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 					<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
-						<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<font size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252"/>
 						<paragraph lineSpacing="Single" rightIndent="2"/>
 					</textElement>
 					<text><![CDATA[Cidade]]></text>
@@ -74,7 +74,7 @@
 				<staticText>
 					<reportElement uuid="5cc1c874-7249-478f-933c-20977624612a" style="Column header" mode="Transparent" x="585" y="0" width="117" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 					<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
-						<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<font size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252"/>
 						<paragraph lineSpacing="Single" rightIndent="2"/>
 					</textElement>
 					<text><![CDATA[Entregue por]]></text>
@@ -82,7 +82,7 @@
 				<staticText>
 					<reportElement uuid="3f81fd4a-d45d-4aa2-b5cd-53eba4c62347" style="Column header" mode="Transparent" x="702" y="0" width="100" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
 					<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" markup="none">
-						<font fontName="Arial" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<font size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252"/>
 						<paragraph lineSpacing="Single" rightIndent="2"/>
 					</textElement>
 					<text><![CDATA[Localização]]></text>
