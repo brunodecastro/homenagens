@@ -14,6 +14,7 @@ object ApplicationBuild extends Build {
         "commons-io" % "commons-io" % "2.3", 
         "org.apache.commons" % "commons-email" % "1.1",
         "net.sf.jasperreports" % "jasperreports" % "5.0.4",
+        "net.sf.jasperreports" % "jasperreports-fonts" % "4.0.0",
         "postgresql" % "postgresql" % "9.1-901.jdbc4",
     javaCore,
     javaJdbc,
