@@ -5563,7 +5563,7 @@ INSERT INTO cidade (id, nome, estado_id ) VALUES
 (5508, 'Nova Olinda', 27),
 (5509, 'Nova Rosalândia', 27),
 (5510, 'Novo Acordo', 27),
-(5511, 'Novo Alegre', 27),
+(5511, 'Novo Alegre', 27), 
 (5512, 'Novo Jardim', 27),
 (5513, 'Oliveira de Fátima', 27),
 (5514, 'Palmas', 27),
