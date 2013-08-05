@@ -8,7 +8,7 @@
 	<style name="Row" fontName="SansSerif">
 		<conditionalStyle>
 			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
-			<style mode="Opaque" backcolor="#F0EFEF" fontName="Helvetica"/>
+			<style mode="Opaque" backcolor="#F0EFEF" fontName="SansSerif"/>
 		</conditionalStyle>
 	</style>
 	<parameter name="REPORT_TITLE" class="java.lang.String"/>
