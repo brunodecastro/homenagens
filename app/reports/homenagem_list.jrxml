@@ -93,21 +93,21 @@
 		<band height="20">
 			<frame>
 				<reportElement uuid="61a5bb26-dad7-4c4b-af5f-0397ff23fae7" style="Row" stretchType="RelativeToBandHeight" x="0" y="0" width="802" height="20"/>
-				<textField isStretchWithOverflow="true">
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 					<reportElement uuid="7e11c801-fe9a-4f5f-be25-63404437a071" stretchType="RelativeToBandHeight" x="240" y="2" width="200" height="16" isPrintWhenDetailOverflows="true"/>
 					<textElement>
 						<paragraph rightIndent="2"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{descricao}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="true">
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 					<reportElement uuid="e2fd1066-f8ba-4603-b8ab-47816241c95b" stretchType="RelativeToBandHeight" x="0" y="2" width="100" height="16" isPrintWhenDetailOverflows="true"/>
 					<textElement>
 						<paragraph leftIndent="2" rightIndent="2"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{numeroRegistro}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="false">
+				<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
 					<reportElement uuid="7f799cb7-0585-459e-bca7-0e47df75db1e" stretchType="RelativeToBandHeight" mode="Transparent" x="100" y="2" width="140" height="16" isPrintWhenDetailOverflows="true" forecolor="#000000" backcolor="#FFFFFF"/>
 					<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
 						<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
@@ -115,7 +115,7 @@
 					</textElement>
 					<textFieldExpression><![CDATA[$F{tipoHomenagem.name}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="false">
+				<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
 					<reportElement uuid="587a9f2c-fca4-4085-af0d-db4cc90e770d" stretchType="RelativeToBandHeight" mode="Transparent" x="440" y="2" width="145" height="16" isPrintWhenDetailOverflows="true" forecolor="#000000" backcolor="#FFFFFF"/>
 					<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
 						<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
@@ -123,7 +123,7 @@
 					</textElement>
 					<textFieldExpression><![CDATA[$F{cidadeCompleto}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="false">
+				<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
 					<reportElement uuid="a23857e1-8484-4dce-ad73-11f562a0b1c6" stretchType="RelativeToBandHeight" mode="Transparent" x="585" y="2" width="117" height="16" isPrintWhenDetailOverflows="true" forecolor="#000000" backcolor="#FFFFFF"/>
 					<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
 						<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
@@ -131,7 +131,7 @@
 					</textElement>
 					<textFieldExpression><![CDATA[$F{quemEntregou}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="false">
+				<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
 					<reportElement uuid="c1d6a838-7115-4ef1-819d-b83859d65db0" stretchType="RelativeToBandHeight" mode="Transparent" x="702" y="2" width="100" height="16" isPrintWhenDetailOverflows="true" forecolor="#000000" backcolor="#FFFFFF"/>
 					<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
 						<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
