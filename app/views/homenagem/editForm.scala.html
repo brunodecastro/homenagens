@@ -11,12 +11,8 @@
 }
 
 @main(usuarioLogado, Messages("homenagem.edit.title"), "homenagem", Messages("homenagem.edit.lead")){
-
 	
 	<script type="text/javascript" src="@routes.Assets.at("js/views/homenagens.js")"></script>
-	<!-- The main application script -->
-	<script type="text/javascript" src="@routes.Assets.at("js/fileupload/main.js")"></script>
-
 
 	<div class="well">
 	
@@ -298,6 +294,20 @@
 					imageMaxHeight: 600,
 					acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i
 			});
+
+			$('#fileupload').addClass('fileupload-processing');
+	        $.ajax({
+	            // Uncomment the following to send cross-domain cookies:
+	            //xhrFields: {withCredentials: true},
+	            url: $('#fileupload').fileupload('option', 'url'),
+	            dataType: 'json',
+	            context: $('#fileupload')[0]
+	        }).always(function (result) {
+	            $(this).removeClass('fileupload-processing');
+	        }).done(function (result) {
+	            $(this).fileupload('option', 'done')
+	                .call(this, null, {result: result});
+	        });
 			
 		    // Show the blueimp Gallery as lightbox when clicking on image links:
 		    $('#fileupload .files').on('click', '.gallery', function (event) {
