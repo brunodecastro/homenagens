@@ -206,7 +206,7 @@
                 @for(homenagem <- currentPage.getList) {
                     <tr>
                         <td><a href="@routes.Homenagens.edit(homenagem.id)">@homenagem.numeroRegistro</a></td>
-                        <td><a href="@routes.Homenagens.edit(homenagem.id)">@homenagem.descricao</a></td>
+                        <td><a href="@routes.Homenagens.edit(homenagem.id)">@homenagem.getDescricao(70)</a></td>
                         <td><a href="@routes.Homenagens.edit(homenagem.id)">@homenagem.getCidadeCompleto()</a></td>
                     </tr>
                 }
