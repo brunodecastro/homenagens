@@ -32,17 +32,18 @@ POST	/tipoHomenagens/$parentId<[0-9]+>/sub/$id<[0-9]+>		controllers.TipoHomenage
 POST	/tipoHomenagens/sub/$id<[0-9]+>/delete					controllers.TipoHomenagens.deleteSub(id:Long)
 
 # Homenagens
-GET		/homenagens							controllers.Homenagens.list(p:Int ?= 0, s ?= "descricao", o ?= "asc", homenageado ?= "MARCONI", numeroRegistro ?= "", descricao ?= "", resumo ?= "", quemEntregou ?= "", dataRecebimentoInicio ?= "", dataRecebimentoFim ?= "")
-GET		/homenagens/new						controllers.Homenagens.create()
-GET		/homenagens/print					controllers.Homenagens.print(s ?= "descricao", o ?= "asc", homenageado ?= "MARCONI", numeroRegistro ?= "", descricao ?= "", resumo ?= "", quemEntregou ?= "", dataRecebimentoInicio ?= "", dataRecebimentoFim ?= "")
-POST	/homenagens							controllers.Homenagens.save()
-GET		/homenagens/$id<[0-9]+>				controllers.Homenagens.edit(id:Long)
-POST	/homenagens/$id<[0-9]+>				controllers.Homenagens.update(id:Long)
-POST	/homenagens/$id<[0-9]+>/delete		controllers.Homenagens.delete(id:Long)
-GET     /homenagens/estados/$id<[0-9]+>		controllers.Homenagens.listarEstados(id: Long)
-GET     /homenagens/cidades/$id<[0-9]+>		controllers.Homenagens.listarCidades(id: Long)
-GET     /homenagens/images/$id<[0-9]+>		controllers.Homenagens.getAllImages(id: Long)
-POST	/homenagens/images/$id<[0-9]+>		controllers.Homenagens.uploadImage(id: Long)
+GET		/homenagens								controllers.Homenagens.list(p:Int ?= 0, s ?= "descricao", o ?= "asc", homenageado ?= "MARCONI", numeroRegistro ?= "", descricao ?= "", resumo ?= "", quemEntregou ?= "", dataRecebimentoInicio ?= "", dataRecebimentoFim ?= "")
+GET		/homenagens/new							controllers.Homenagens.create()
+GET		/homenagens/print						controllers.Homenagens.print(s ?= "descricao", o ?= "asc", homenageado ?= "MARCONI", numeroRegistro ?= "", descricao ?= "", resumo ?= "", quemEntregou ?= "", dataRecebimentoInicio ?= "", dataRecebimentoFim ?= "")
+POST	/homenagens								controllers.Homenagens.save()
+GET		/homenagens/$id<[0-9]+>					controllers.Homenagens.edit(id:Long)
+POST	/homenagens/$id<[0-9]+>					controllers.Homenagens.update(id:Long)
+POST	/homenagens/$id<[0-9]+>/delete			controllers.Homenagens.delete(id:Long)
+GET		/homenagens/$id<[0-9]+>/print/:tipo		controllers.Homenagens.printSingle(id: Long, tipo: String)
+GET     /homenagens/estados/$id<[0-9]+>			controllers.Homenagens.listarEstados(id: Long)
+GET     /homenagens/cidades/$id<[0-9]+>			controllers.Homenagens.listarCidades(id: Long)
+GET     /homenagens/images/$id<[0-9]+>			controllers.Homenagens.getAllImages(id: Long)
+POST	/homenagens/images/$id<[0-9]+>			controllers.Homenagens.uploadImage(id: Long)
 
 
 # Image Upload

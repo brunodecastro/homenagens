@@ -110,6 +110,9 @@ homenagem.list.lead={0,choice,0#Nenhuma homenagem encontrada|1#Uma homenagem enc
 
 homenagem.create.success=A Homenagem "{0}" foi criada
 
+homenagem.print.simple=Simples
+homenagem.print.complete=Completo
+
 # Usuario
 usuario=Usuário
 usuario.plural=Usuários

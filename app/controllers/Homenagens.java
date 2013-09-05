@@ -3,6 +3,7 @@ package controllers;
 import static play.data.Form.form;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -190,6 +191,19 @@ public class Homenagens extends Controller {
     	reportParams.put("REPORT_TITLE", "Homenagens - "+ homenageadoObj.getNomeComTratamento());
     	
         return ReportController.jasperDocument("homenagem_list", reportParams, new
+    			JRBeanCollectionDataSource(homenagemList));
+    }
+    
+    public static Result printSingle(Long id, String tipo) {
+    	List<Homenagem> homenagemList = new ArrayList<Homenagem>();
+    	Homenagem homenagem = Homenagem.find.byId(id);
+    	homenagemList.add(homenagem);
+    	
+    	Map<String, Object> reportParams = new HashMap<String, Object>();
+    	
+    	reportParams.put("REPORT_TITLE", "Homenagem - "+ homenagem.homenageado.getNomeComTratamento());
+    	
+        return ReportController.jasperDocument(tipo, reportParams, new
     			JRBeanCollectionDataSource(homenagemList));
     }
     

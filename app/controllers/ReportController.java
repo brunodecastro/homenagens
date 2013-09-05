@@ -29,7 +29,6 @@ public class ReportController {
 				reportParams = new HashMap<String, Object>();
 			}
 			reportParams.put(JRParameter.REPORT_LOCALE, localeBR);
-			System.out.println(			java.text.DateFormat.getDateTimeInstance(java.text.DateFormat.FULL, java.text.DateFormat.LONG, localeBR).format(new java.util.Date()) );
 			
 			String compiledFile = REPORT_DEFINITION_PATH + reportFile + ".jasper";
 			JasperCompileManager.compileReportToFile(REPORT_DEFINITION_PATH + reportFile + ".jrxml", compiledFile);
@@ -37,6 +36,7 @@ public class ReportController {
 			JasperExportManager.exportReportToPdfStream(jasperPrint, os);
 		} catch (Exception e) {
 			e.printStackTrace();
+			return Results.internalServerError();
 		}
 
 		return Results.ok(new ByteArrayInputStream(((ByteArrayOutputStream) os).toByteArray())).as("application/pdf");
