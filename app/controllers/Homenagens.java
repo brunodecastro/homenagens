@@ -153,7 +153,13 @@ public class Homenagens extends Controller {
     	
     	boolean isValid = true; 
     	
+    	String numeroRegistro = form().bindFromRequest().get("numeroRegistro");
     	String tipoHomenagem = form().bindFromRequest().get("tipoHomenagem.id");
+    	
+    	if(numeroRegistro.equals("")) {
+    		homenagemForm.reject("numeroRegistro", "");
+    		isValid = false;
+    	}
     	
     	if(tipoHomenagem.equals("")) {
     		homenagemForm.reject("tipoHomenagem.id", "");
