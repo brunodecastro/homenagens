@@ -152,7 +152,7 @@
 					</textElement>
 					<text><![CDATA[Recebido em]]></text>
 				</staticText>
-				<textField pattern="" isBlankWhenNull="true">
+				<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
 					<reportElement uuid="5cf7f768-32d5-447b-b6b0-6fe6ff30d1c2" mode="Transparent" x="100" y="0" width="455" height="13" forecolor="#000000" backcolor="#FFFFFF"/>
 					<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
 						<font fontName="SansSerif" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
