@@ -36,6 +36,7 @@ import play.mvc.Http.MultipartFormData;
 import play.mvc.Http.MultipartFormData.FilePart;
 import views.html.homenagem.createForm;
 import views.html.homenagem.editForm;
+import views.html.homenagem.labelForm;
 import views.html.homenagem.list;
 
 @Security.Authenticated(Secured.class)
@@ -96,6 +97,20 @@ public class Homenagens extends Controller {
      *
      * @param id Id of the homenagem to edit
      */
+    public static Result viewLabel(Long id) {
+    	Homenagem homenagem = Homenagem.find.byId(id);
+        Form<Homenagem> homenagemForm = form(Homenagem.class).fill(homenagem
+        );
+        return ok(
+            labelForm.render(Usuario.consultarPorEmail(request().username()), id, homenagemForm)
+        );
+    }
+    
+    /**
+     * Display the 'edit form' of a existing Homenagem.
+     *
+     * @param id Id of the homenagem to edit
+     */
     public static Result edit(Long id) {
     	Homenagem homenagem = Homenagem.find.byId(id);
         Form<Homenagem> homenagemForm = form(Homenagem.class).fill(
@@ -118,7 +133,7 @@ public class Homenagens extends Controller {
         }
         homenagemForm.get().update(id);
         flash("success", "A Homenagem \"" + homenagemForm.get().numeroRegistro + "\" foi atualizada");
-        return goHome(homenagemForm.get() != null ? homenagemForm.get().homenageado : null);
+        return viewLabel(homenagemForm.get().id);
     }
     
     /**
@@ -141,7 +156,7 @@ public class Homenagens extends Controller {
         }
         homenagemForm.get().save();
         flash("success", Messages.get("homenagem.create.success", homenagemForm.get().numeroRegistro));
-        return goHome(homenagemForm.get() != null ? homenagemForm.get().homenageado : null);
+        return viewLabel(homenagemForm.get().id);
     }
     
     /**
@@ -208,9 +223,8 @@ public class Homenagens extends Controller {
     	Map<String, Object> reportParams = new HashMap<String, Object>();
     	
     	reportParams.put("REPORT_TITLE", "Homenagem - "+ homenagem.homenageado.getNomeComTratamento());
-    	reportParams.put("REPORT_TYPE", tipo);
     	
-        return ReportController.jasperDocument("homenagem_simple", reportParams, new
+        return ReportController.jasperDocument(tipo, reportParams, new
     			JRBeanCollectionDataSource(homenagemList));
     }
     

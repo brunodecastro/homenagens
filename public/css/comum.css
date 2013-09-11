@@ -1,5 +1,6 @@
 html, body {
 	background: #ffffff;
+	letter-spacing: 0.4px;
 }
 
 
@@ -46,5 +47,13 @@ input, textarea, select, .uneditable-input {
 .user dd {
 	position: absolute;
     right: 0;
+}
+
+.control-label {
+	color: #5a5a5a;
+}
+
+.labelValue {
+	padding-top: 5px;
 }
 
