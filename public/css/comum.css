@@ -8,6 +8,10 @@ a:hover {
 	text-decoration: none;
 }
 
+form {
+    margin-bottom: 30px;
+}
+
 input, textarea, select, .uneditable-input {
 /* 	height: 28px !important; */
 }
