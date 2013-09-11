@@ -206,8 +206,8 @@
                 @for(homenagem <- currentPage.getList) {
                     <tr>
                         <td><a href="@routes.Homenagens.viewLabel(homenagem.id)">@homenagem.numeroRegistro</a></td>
-                        <td><a href="@routes.Homenagens.edit(homenagem.id)">@homenagem.descricao</a></td>
-                        <td><a href="@routes.Homenagens.edit(homenagem.id)">@homenagem.getCidadeCompleto()</a></td>
+                        <td><a href="@routes.Homenagens.viewLabel(homenagem.id)">@homenagem.descricao</a></td>
+                        <td><a href="@routes.Homenagens.viewLabel(homenagem.id)">@homenagem.getCidadeCompleto()</a></td>
                     </tr>
                 }
 
