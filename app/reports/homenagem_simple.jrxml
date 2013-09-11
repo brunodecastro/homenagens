@@ -16,9 +16,6 @@
 	<parameter name="REPORT_TITLE" class="java.lang.String"/>
 	<parameter name="HOMENAGEADO_NOME" class="java.lang.String"/>
 	<parameter name="REPORT_TYPE" class="java.lang.String"/>
-	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
-		<defaultValueExpression><![CDATA["/Users/helder.alves/Documents/homenagens/app/reports/"]]></defaultValueExpression>
-	</parameter>
 	<field name="numeroRegistro" class="java.lang.String"/>
 	<field name="tipoHomenagem.name" class="java.lang.String"/>
 	<field name="descricao" class="java.lang.String"/>
@@ -382,7 +379,7 @@
 					<subreportParameterExpression><![CDATA[$F{numeroRegistro}]]></subreportParameterExpression>
 				</subreportParameter>
 				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{imagens})]]></dataSourceExpression>
-				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "homenagem_image_subreport.jasper"]]></subreportExpression>
+				<subreportExpression><![CDATA["homenagem_image_subreport.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
 	</detail>
