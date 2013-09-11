@@ -1,5 +1,10 @@
 package models;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -70,4 +75,11 @@ public class HomenagemImagem extends Model {
 	// -- Queries
 	public static Finder<Long, HomenagemImagem> find = new Finder<Long, HomenagemImagem>(Long.class, HomenagemImagem.class);
 
+	public InputStream getImageInputStream() {
+		if (getImage() != null && getImage().getImage() != null && getImage().getImage().length > 0) {
+			return new ByteArrayInputStream(getImage().getImage());
+		}
+
+		return null;
+	}
 }

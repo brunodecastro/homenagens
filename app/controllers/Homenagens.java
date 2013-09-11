@@ -222,8 +222,9 @@ public class Homenagens extends Controller {
     	Map<String, Object> reportParams = new HashMap<String, Object>();
     	
     	reportParams.put("REPORT_TITLE", "Homenagem - "+ homenagem.homenageado.getNomeComTratamento());
+    	reportParams.put("REPORT_TYPE", tipo);
     	
-        return ReportController.jasperDocument(tipo, reportParams, new
+        return ReportController.jasperDocument("homenagem_simple", reportParams, new
     			JRBeanCollectionDataSource(homenagemList));
     }
     

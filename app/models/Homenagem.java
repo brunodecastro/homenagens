@@ -1,5 +1,8 @@
 package models;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -102,6 +105,13 @@ public class Homenagem extends Model {
 	@Valid
 	@OneToMany(mappedBy = "homenagem", cascade = CascadeType.REMOVE)
 	public List<HomenagemImagem> imagens;
+	
+	public String getDescricao(Integer maxLength) {
+		if(maxLength != null && descricao != null && descricao.length() > maxLength) {
+			return descricao.substring(0, maxLength) + "\u2026";
+		}
+		return descricao;
+	}
 	
 	public String getCidadeCompleto() {
 		String cidadeCompleto = null;

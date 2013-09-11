@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="homenagem_simple" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="53c62d11-eb74-4d78-8751-69ccfe5d3c5e">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="57"/>
 	<style name="Title" fontName="SansSerif" fontSize="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false"/>
 	<style name="Column header" hAlign="Right" fontName="SansSerif" fontSize="10" isBold="true">
 		<paragraph leftIndent="2" rightIndent="2"/>
@@ -13,10 +13,12 @@
 			<style mode="Opaque" backcolor="#F0EFEF" fontName="SansSerif"/>
 		</conditionalStyle>
 	</style>
-	<subDataset name="dataset1" uuid="b1a9dec7-4582-4068-b20a-54bd301ed540"/>
-	<subDataset name="dataset2" uuid="071892d4-37af-4549-ad9f-51e106c6464d"/>
 	<parameter name="REPORT_TITLE" class="java.lang.String"/>
 	<parameter name="HOMENAGEADO_NOME" class="java.lang.String"/>
+	<parameter name="REPORT_TYPE" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/Users/helder.alves/Documents/homenagens/app/reports/"]]></defaultValueExpression>
+	</parameter>
 	<field name="numeroRegistro" class="java.lang.String"/>
 	<field name="tipoHomenagem.name" class="java.lang.String"/>
 	<field name="descricao" class="java.lang.String"/>
@@ -34,8 +36,9 @@
 	<field name="largura" class="java.lang.String"/>
 	<field name="comprimento" class="java.lang.String"/>
 	<field name="profundidade" class="java.lang.String"/>
+	<field name="imagens" class="java.util.List"/>
 	<pageHeader>
-		<band height="20">
+		<band height="44">
 			<textField isBlankWhenNull="true">
 				<reportElement uuid="10aacf21-22e0-4257-a962-8e5b758b9209" style="Title" x="0" y="0" width="555" height="20" isRemoveLineWhenBlank="true">
 					<property name="net.sf.jasperreports.export.pdf.tag.h1" value="full"/>
@@ -370,6 +373,17 @@
 					<textFieldExpression><![CDATA[$F{profundidade}]]></textFieldExpression>
 				</textField>
 			</frame>
+		</band>
+		<band height="26">
+			<printWhenExpression><![CDATA["homenagem_complete".equals( $P{REPORT_TYPE} )]]></printWhenExpression>
+			<subreport>
+				<reportElement uuid="d063df73-112c-4bfd-9a3c-2ccfadc3f9cb" positionType="Float" x="0" y="0" width="555" height="26"/>
+				<subreportParameter name="HOMENAGEM_NUM_REGISTRO">
+					<subreportParameterExpression><![CDATA[$F{numeroRegistro}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{imagens})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "homenagem_image_subreport.jasper"]]></subreportExpression>
+			</subreport>
 		</band>
 	</detail>
 	<pageFooter>
