@@ -34,56 +34,30 @@
 			        
 			        <div class="control-group">  
 			        
-						@inputText(homenagemForm("numeroRegistro"), '_label -> Messages("homenagem.numeroRegistro.label"))
-						@select(
-							homenagemForm("homenageado"), 
-							Homenageado.values().toList.map(v => (v.toString, v.getLabel)),
-							'_label -> Messages("homenagem.homenageado.label"),
-							'_error -> homenagemForm("homenageado").error.map(_.withMessage("Selecione o Homenageado."))
-						)
-						@select(
-							homenagemForm("tipoHomenagem.id"), 
-							options = options(TipoHomenagem.allOptions),
-							'_default -> "--- Tipo de homenagem ---",
-							'_label -> "Tipo de homenagem",
-							'_error -> homenagemForm("tipoHomenagem.id").error.map(_.withMessage("Selecione o tipo de homenagem."))
-						)
-						@textarea(homenagemForm("descricao"), args = 'rows -> 3, 'cols -> 50, '_label -> Messages("homenagem.descricao.label"), 'class -> "input-xxlarge")
-						@textarea(homenagemForm("resumo"), args = 'rows -> 3, 'cols -> 50, '_label -> Messages("homenagem.resumo.label"), 'class -> "input-xxlarge")
-						@inputText(homenagemForm("quemEntregou"), '_label -> Messages("homenagem.quemEntregou.label"), 'class -> "input-xxlarge")
-						@campoData(homenagemForm("dataRecebimento"), '_label -> Messages("homenagem.dataRecebimento.label"))
-						@select(
-							field = homenagemForm("pais.id"), 
-							options = Pais.find.all.map(v => (v.id.toString, v.nome)),
-							'_default -> Messages("homenagem.pais.select.default.label"),
-							'_label -> Messages("homenagem.pais.label")
-						)
-						@select(
-							field = homenagemForm("estado.id"), 
-							options = Estado.listarPorPais(homenagemForm("pais.id").value).map(v => (v.id.toString, v.nome)),
-							'_default -> Messages("homenagem.estado.select.default.label"),
-							'_label -> Messages("homenagem.estado.label")
-						)
-						@select(
-							field = homenagemForm("cidade.id"), 
-							options = Cidade.listarPorEstado(homenagemForm("estado.id").value).map(v => (v.id.toString, v.nome)),
-							'_default -> Messages("homenagem.cidade.select.default.label"),
-							'_label -> Messages("homenagem.cidade.label")
-						)
-						@inputText(homenagemForm("outraCidade"), '_label -> Messages("homenagem.outraCidade.label"), 'class -> "input-xxlarge")
-						@inputText(homenagemForm("local"), '_label -> Messages("homenagem.local.label"), 'class -> "input-xxlarge")
-						@inputText(homenagemForm("localizacao"), '_label -> Messages("homenagem.localizacao.label"), 'class -> "input-xxlarge")
-						@inputText(homenagemForm("precedencia"), '_label -> Messages("homenagem.precedencia.label"), 'class -> "input-xxlarge")
-						@inputText(homenagemForm("objeto"), '_label -> Messages("homenagem.objeto.label"), 'class -> "input-xxlarge")
-						@inputText(homenagemForm("prateleira"), '_label -> Messages("homenagem.prateleira.label"), 'class -> "input-xxlarge")
-						@inputText(homenagemForm("material"), '_label -> Messages("homenagem.material.label"), 'class -> "input-xxlarge")
-						@inputText(homenagemForm("altura"), '_label -> Messages("homenagem.altura.label"))
-						@inputText(homenagemForm("largura"), '_label -> Messages("homenagem.largura.label"))
-						@inputText(homenagemForm("comprimento"), '_label -> Messages("homenagem.comprimento.label"))
-						@inputText(homenagemForm("profundidade"), '_label -> Messages("homenagem.profundidade.label"))
+						@inputLabel(homenagemForm("numeroRegistro"), '_label -> Messages("homenagem.numeroRegistro.label"))
+						@inputLabel(homenagemForm("homenageado"), '_label -> Messages("homenagem.homenageado.label"))
+						@inputLabel(homenagemForm("tipoHomenagem.name"), '_label -> "Tipo de homenagem")
+						@inputLabel(homenagemForm("descricao"), '_label -> Messages("homenagem.descricao.label"))
+						@inputLabel(homenagemForm("resumo"), '_label -> Messages("homenagem.resumo.label"))
+						@inputLabel(homenagemForm("quemEntregou"), '_label -> Messages("homenagem.quemEntregou.label"))
+						@inputLabel(homenagemForm("dataRecebimento"), '_label -> Messages("homenagem.dataRecebimento.label"))
+						@inputLabel(homenagemForm("pais.nome"), '_label -> Messages("homenagem.pais.label"))
+						@inputLabel(homenagemForm("estado.nome"), '_label -> Messages("homenagem.estado.label"))
+						@inputLabel(homenagemForm("cidade.nome"), '_label -> Messages("homenagem.cidade.label"))
+						@inputLabel(homenagemForm("outraCidade"), '_label -> Messages("homenagem.outraCidade.label"))
+						@inputLabel(homenagemForm("local"), '_label -> Messages("homenagem.local.label"))
+						@inputLabel(homenagemForm("localizacao"), '_label -> Messages("homenagem.localizacao.label"))
+						@inputLabel(homenagemForm("precedencia"), '_label -> Messages("homenagem.precedencia.label"))
+						@inputLabel(homenagemForm("objeto"), '_label -> Messages("homenagem.objeto.label"))
+						@inputLabel(homenagemForm("prateleira"), '_label -> Messages("homenagem.prateleira.label"))
+						@inputLabel(homenagemForm("material"), '_label -> Messages("homenagem.material.label"))
+						@inputLabel(homenagemForm("altura"), '_label -> Messages("homenagem.altura.label"))
+						@inputLabel(homenagemForm("largura"), '_label -> Messages("homenagem.largura.label"))
+						@inputLabel(homenagemForm("comprimento"), '_label -> Messages("homenagem.comprimento.label"))
+						@inputLabel(homenagemForm("profundidade"), '_label -> Messages("homenagem.profundidade.label"))
 						
 						<div class="form-actions">
-							<button type="submit" class="btn btn-primary">@Messages("save")</button>
+							<a href="@routes.Homenagens.edit(id)" class="btn btn-primary">@Messages("edit")</a>
 							<button type="button" data-toggle="modal" data-target="#modalDelete" class="btn btn-danger">
 								<i class="icon-trash icon-white"></i> @Messages("delete")
 							</button>
@@ -98,7 +72,7 @@
 								</ul>
 							</div>
 							
-							<a href="@routes.Homenagens.viewLabel(id)" class="btn">@Messages("cancel")</a>
+							<a href="@routes.Homenagens.list()" class="btn">@Messages("cancel")</a>
 						</div>
 					</div>
 				}
@@ -106,40 +80,7 @@
 			<div class="tab-pane" id="images">
 				
 				@helper.form(action = routes.Homenagens.uploadImage(id), 'id -> "fileupload", 'enctype -> "multipart/form-data") {
-					<div class="row fileupload-buttonbar">
-						<div class="span6">
-							<span class="btn btn-success fileinput-button">
-								<i class="icon-plus icon-white"></i>
-								<span>Adicionar imagens...</span>
-								<input type="file" name="files[]" multiple>
-							</span>
-							<button type="submit" class="btn btn-primary start">
-								<i class="icon-upload icon-white"></i>
-								<span>Iniciar envio</span>
-							</button>
-							<button type="reset" class="btn btn-warning cancel">
-								<i class="icon-ban-circle icon-white"></i>
-								<span>Cancelar envio</span>
-							</button>
-							<button type="button" class="btn btn-danger delete">
-								<i class="icon-trash icon-white"></i>
-								<span>Excluir</span>
-							</button>
-							<input type="checkbox" class="toggle">
-						</div>
-						<!-- The global progress information -->
-						<div class="span5 fileupload-progress fade">
-							<!-- The global progress bar -->
-							<div class="progress progress-success progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
-								<div class="bar" style="width:0%;"></div>
-							</div>
-							<!-- The extended global progress information -->
-							<div class="progress-extended">&nbsp;</div>
-						</div>
-					</div>
-					<!-- The loading indicator is shown during file processing -->
-					<div class="fileupload-loading"></div>
-					<br>
+					
 					<!-- The table listing the files available for upload/download -->
 					<table role="presentation" class="table table-striped"><tbody class="files" data-toggle="modal-gallery" data-target="#modal-gallery"></tbody></table>
 				}
@@ -239,13 +180,6 @@
 							</td>
 							<td>
 								<span class="size">{%=o.formatFileSize(file.size)%}</span>
-							</td>
-							<td>
-								<button class="btn btn-danger delete" data-type="{%=file.delete_type%}" data-url="{%=file.delete_url%}"{% if (file.delete_with_credentials) { %} data-xhr-fields='{"withCredentials":true}'{% } %}>
-									<i class="icon-trash icon-white"></i>
-									<span>Excluir</span>
-								</button>
-								<input type="checkbox" name="delete" value="1" class="toggle">
 							</td>
 						</tr>
 					{% } %}

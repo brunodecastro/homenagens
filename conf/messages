@@ -32,6 +32,7 @@ error.pattern=Deve atender {0}
 
 # Messages
 
+edit=Editar
 save=Salvar
 cancel=Cancelar
 delete=Excluir
